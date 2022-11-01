@@ -20,4 +20,10 @@ public class FreeAppointmentEntity {
     private Long id;
     private LocalDateTime date;
     private Integer duration;
+    @ManyToOne
+    @JoinColumn(name = "center_id")
+    private CenterEntity center;
+    @ManyToOne
+    @JoinColumn(name = "medical_staff_id")
+    private MedicalStaffEntity medicalStaff;
 }

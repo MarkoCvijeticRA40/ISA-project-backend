@@ -11,13 +11,13 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "blood")
-public class BloodEntity {
+@Entity(name = "complaints")
+public class ComplaintEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "quantity_in_liters")
-    private Double quantityInLiters;
-    private BloodType bloodType;
-
+    private String text;
+    @ManyToOne
+    @JoinColumn(name = "registered_user_id")
+    private RegisteredUserEntity registeredUser;
 }

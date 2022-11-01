@@ -14,16 +14,11 @@ import javax.persistence.Id;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "addresses")
-public class AddressEntity {
+@Entity(name = "user_categories")
+public class UserCategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String street;
-    private String number;
-    private String city;
-    private String state;
-    private Double longitude;
-    private Double latitude;
-
+    private String name;
+    private String benefit;
 }
