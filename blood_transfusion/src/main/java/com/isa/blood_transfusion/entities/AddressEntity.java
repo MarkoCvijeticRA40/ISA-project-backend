@@ -21,7 +21,9 @@ public class AddressEntity {
     private String number;
     private String city;
     private String state;
-    @OneToMany(mappedBy="address")
+    private Double longitude;
+    private Double latitude;
+    @OneToMany(mappedBy = "address")
     private Collection<UserEntity> users;
 
 }

@@ -6,19 +6,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "roles")
-public class RoleEntity {
+@DiscriminatorColumn(name = "appointment_type")
+@Entity(name = "free_appointments")
+public class FreeAppointmentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    @OneToMany(mappedBy = "role")
-    private Collection<UserEntity> users;
+    private LocalDateTime date;
+    private Integer duration;
 }
-

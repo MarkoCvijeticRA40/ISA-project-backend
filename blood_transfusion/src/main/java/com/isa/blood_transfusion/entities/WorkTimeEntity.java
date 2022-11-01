@@ -6,19 +6,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.time.LocalTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "roles")
-public class RoleEntity {
+@Entity(name = "work_times")
+public class WorkTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    @OneToMany(mappedBy = "role")
-    private Collection<UserEntity> users;
+    @Column(name = "start_time")
+    private LocalTime startTime;
+    @Column(name = "end_time")
+    private LocalTime endTime;
 }
-

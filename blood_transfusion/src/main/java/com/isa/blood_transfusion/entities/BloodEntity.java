@@ -6,19 +6,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "roles")
-public class RoleEntity {
+@Entity(name = "blood")
+public class BloodEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    @OneToMany(mappedBy = "role")
-    private Collection<UserEntity> users;
+    @Column(name = "quantity_in_liters")
+    private Double quantityInLiters;
 }
-
