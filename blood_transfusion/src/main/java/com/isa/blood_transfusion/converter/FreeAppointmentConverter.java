@@ -2,8 +2,6 @@ package com.isa.blood_transfusion.converter;
 
 import com.isa.blood_transfusion.entity.FreeAppointmentEntity;
 import com.isa.blood_transfusion.model.FreeAppointment;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -41,5 +39,26 @@ public class FreeAppointmentConverter {
         }
 
         return freeAppointments;
+    }
+
+    public FreeAppointmentEntity toEntity(FreeAppointment freeAppointment) {
+        return new FreeAppointmentEntity(freeAppointment.getId(),
+                freeAppointment.getDate(),
+                freeAppointment.getDuration(),
+                centerConverter.toEntity(freeAppointment.getCenter()),
+                medicalStaffConverter.toEntity(freeAppointment.getMedicalStaff()));
+    }
+
+    public Set<FreeAppointmentEntity> toEntity(Set<FreeAppointment> freeAppointments) {
+        Set<FreeAppointmentEntity> freeAppointmentEntities = new HashSet<>();
+        for (var f : freeAppointments) {
+            freeAppointmentEntities.add(new FreeAppointmentEntity(f.getId(),
+                    f.getDate(),
+                    f.getDuration(),
+                    centerConverter.toEntity(f.getCenter()),
+                    medicalStaffConverter.toEntity(f.getMedicalStaff())));
+        }
+
+        return freeAppointmentEntities;
     }
 }

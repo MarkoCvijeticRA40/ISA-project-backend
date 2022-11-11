@@ -2,7 +2,6 @@ package com.isa.blood_transfusion.converter;
 
 import com.isa.blood_transfusion.entity.PerformedAppointmentEntity;
 import com.isa.blood_transfusion.model.PerformedAppointment;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -51,5 +50,33 @@ public class PerformedAppointmentConverter {
         }
 
         return performedAppointments;
+    }
+
+    public PerformedAppointmentEntity toEntity(PerformedAppointment performedAppointment) {
+        return new PerformedAppointmentEntity(performedAppointment.getId(),
+                performedAppointment.getDate(),
+                performedAppointment.getDuration(),
+                centerConverter.toEntity(performedAppointment.getCenter()),
+                medicalStaffConverter.toEntity(performedAppointment.getMedicalStaff()),
+                bloodDonorInfoConverter.toEntity(performedAppointment.getBloodDonorInfo()),
+                registeredUserConverter.toEntity(performedAppointment.getRegisteredUser()),
+                performedAppointment.getInfo()
+        );
+    }
+
+    public Set<PerformedAppointmentEntity> toEntity(Set<PerformedAppointment> performedAppointments) {
+        Set<PerformedAppointmentEntity> performedAppointmentEntities = new HashSet<>();
+        for (var p : performedAppointments) {
+            performedAppointmentEntities.add(new PerformedAppointmentEntity(p.getId(),
+                    p.getDate(),
+                    p.getDuration(),
+                    centerConverter.toEntity(p.getCenter()),
+                    medicalStaffConverter.toEntity(p.getMedicalStaff()),
+                    bloodDonorInfoConverter.toEntity(p.getBloodDonorInfo()),
+                    registeredUserConverter.toEntity(p.getRegisteredUser()),
+                    p.getInfo()));
+        }
+
+        return performedAppointmentEntities;
     }
 }

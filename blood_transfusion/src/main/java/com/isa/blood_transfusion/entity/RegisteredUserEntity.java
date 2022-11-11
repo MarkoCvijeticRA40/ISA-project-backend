@@ -33,4 +33,14 @@ public class RegisteredUserEntity extends AppUserEntity {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "registered_user_id")
     private Set<PerformedAppointmentEntity> performedAppointments;
+
+    public RegisteredUserEntity(Long id, String email, String password, String name, String surname, String phoneNum, String identityNumber, String profession, String facilityInfo, RoleEntity role, AddressEntity address, Gender gender, Integer points, Integer numOfPenalties, UserCategoryEntity userCategory, Set<CenterEntity> visitedCenters, Set<ScheduledAppointmentEntity> scheduledAppointments, Set<PerformedAppointmentEntity> performedAppointments) {
+        super(id, email, password, name, surname, phoneNum, identityNumber, profession, facilityInfo, role, address, gender);
+        this.points = points;
+        this.numOfPenalties = numOfPenalties;
+        this.userCategory = userCategory;
+        this.visitedCenters = visitedCenters;
+        this.scheduledAppointments = scheduledAppointments;
+        this.performedAppointments = performedAppointments;
+    }
 }

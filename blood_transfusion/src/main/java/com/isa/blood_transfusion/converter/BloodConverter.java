@@ -22,4 +22,17 @@ public class BloodConverter {
 
         return blood;
     }
+
+    public BloodEntity toEntity(Blood blood) {
+        return new BloodEntity(blood.getId(), blood.getQuantityInLiters(), blood.getBloodType());
+    }
+
+    public Set<BloodEntity> toEntity(Set<Blood> blood) {
+        Set<BloodEntity> bloodEntities = new HashSet<>();
+        for (var b : blood) {
+            bloodEntities.add(new BloodEntity(b.getId(), b.getQuantityInLiters(), b.getBloodType()));
+        }
+
+        return bloodEntities;
+    }
 }

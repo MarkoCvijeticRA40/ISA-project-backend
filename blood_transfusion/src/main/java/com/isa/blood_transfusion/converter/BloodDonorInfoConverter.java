@@ -47,4 +47,39 @@ public class BloodDonorInfoConverter {
 
         return bloodDonorInfo;
     }
+
+    public BloodDonorInfoEntity toEntity(BloodDonorInfo bloodDonorInfo) {
+        return new BloodDonorInfoEntity(bloodDonorInfo.getId(),
+                bloodDonorInfo.getName(),
+                bloodDonorInfo.getSurname(),
+                bloodDonorInfo.getNameOfFather(),
+                bloodDonorInfo.getIdentityNumber(),
+                bloodDonorInfo.getDateOfBirth(),
+                bloodDonorInfo.getPhoneNum(),
+                bloodDonorInfo.getFacility(),
+                bloodDonorInfo.getProfession(),
+                bloodDonorInfo.getNumberOfBloodDonations(),
+                addressConverter.toEntity(bloodDonorInfo.getAddress()),
+                bloodDonorInfo.getGender());
+    }
+
+    public Set<BloodDonorInfoEntity> toEntity(Set<BloodDonorInfo> bloodDonorInfos) {
+        Set<BloodDonorInfoEntity> bloodDonorInfoEntities = new HashSet<>();
+        for (var b : bloodDonorInfos) {
+            bloodDonorInfoEntities.add(new BloodDonorInfoEntity(b.getId(),
+                    b.getName(),
+                    b.getSurname(),
+                    b.getNameOfFather(),
+                    b.getIdentityNumber(),
+                    b.getDateOfBirth(),
+                    b.getPhoneNum(),
+                    b.getFacility(),
+                    b.getProfession(),
+                    b.getNumberOfBloodDonations(),
+                    addressConverter.toEntity(b.getAddress()),
+                    b.getGender()));
+        }
+
+        return bloodDonorInfoEntities;
+    }
 }

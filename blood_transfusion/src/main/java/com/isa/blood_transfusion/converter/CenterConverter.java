@@ -3,9 +3,6 @@ package com.isa.blood_transfusion.converter;
 import com.isa.blood_transfusion.entity.CenterEntity;
 import com.isa.blood_transfusion.model.Center;
 import lombok.AllArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -52,5 +49,36 @@ public class CenterConverter {
         }
 
         return centers;
+    }
+
+    public CenterEntity toEntity(Center center) {
+        return new CenterEntity(center.getId(),
+                center.getName(),
+                center.getDescription(),
+                center.getAvgGrade(),
+                addressConverter.toEntity(center.getAddress()),
+                workTimeConverter.toEntity(center.getWorkTime()),
+                bloodConverter.toEntity(center.getBlood()),
+                equipmentConverter.toEntity(center.getEquipments()),
+                freeAppointmentConverter.toEntity(center.getFreeAppointments()),
+                medicalStaffConverter.toEntity(center.getMedicalStaff()));
+    }
+
+    public Set<CenterEntity> toEntity(Set<Center> centers) {
+        Set<CenterEntity> centerEntities = new HashSet<>();
+        for (var c : centers) {
+            centerEntities.add(new CenterEntity(c.getId(),
+                    c.getName(),
+                    c.getDescription(),
+                    c.getAvgGrade(),
+                    addressConverter.toEntity(c.getAddress()),
+                    workTimeConverter.toEntity(c.getWorkTime()),
+                    bloodConverter.toEntity(c.getBlood()),
+                    equipmentConverter.toEntity(c.getEquipments()),
+                    freeAppointmentConverter.toEntity(c.getFreeAppointments()),
+                    medicalStaffConverter.toEntity(c.getMedicalStaff())));
+        }
+
+        return centerEntities;
     }
 }

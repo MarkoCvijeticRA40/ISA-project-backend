@@ -22,4 +22,17 @@ public class EquipmentConverter {
 
         return equipments;
     }
+
+    public EquipmentEntity toEntity(Equipment equipment) {
+        return new EquipmentEntity(equipment.getId(), equipment.getName(), equipment.getQuantity());
+    }
+
+    public Set<EquipmentEntity> toEntity(Set<Equipment> equipments) {
+        Set<EquipmentEntity> equipmentEntities = new HashSet<>();
+        for (var e : equipments) {
+            equipmentEntities.add(new EquipmentEntity(e.getId(), e.getName(), e.getQuantity()));
+        }
+
+        return equipmentEntities;
+    }
 }

@@ -9,6 +9,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -23,4 +24,10 @@ public class ScheduledAppointmentEntity extends FreeAppointmentEntity {
     @ManyToOne
     @JoinColumn(name = "registered_user_id")
     private RegisteredUserEntity registeredUser;
+
+    public ScheduledAppointmentEntity(Long id, LocalDateTime date, Integer duration, CenterEntity centerEntity, MedicalStaffEntity medicalStaffEntity, BloodDonorInfoEntity bloodDonorInfoEntity, RegisteredUserEntity registeredUserEntity) {
+        super(id, date, duration, centerEntity, medicalStaffEntity);
+        this.bloodDonorInfo = bloodDonorInfoEntity;
+        this.registeredUser = registeredUserEntity;
+    }
 }

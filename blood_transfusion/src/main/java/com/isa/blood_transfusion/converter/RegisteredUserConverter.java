@@ -67,5 +67,53 @@ public class RegisteredUserConverter {
         return registeredUsers;
     }
 
+    public RegisteredUserEntity toEntity(RegisteredUser registeredUser) {
+        return new RegisteredUserEntity(registeredUser.getId(),
+                registeredUser.getEmail(),
+                registeredUser.getPassword(),
+                registeredUser.getName(),
+                registeredUser.getSurname(),
+                registeredUser.getPhoneNum(),
+                registeredUser.getIdentityNumber(),
+                registeredUser.getProfession(),
+                registeredUser.getFacilityInfo(),
+                roleConverter.toEntity(registeredUser.getRole()),
+                addressConverter.toEntity(registeredUser.getAddress()),
+                registeredUser.getGender(),
+                registeredUser.getPoints(),
+                registeredUser.getNumOfPenalties(),
+                userCategoryConverter.toEntity(registeredUser.getUserCategory()),
+                centerConverter.toEntity(registeredUser.getVisitedCenters()),
+                scheduledAppointmentConverter.toEntity(registeredUser.getScheduledAppointments()),
+                performedAppointmentConverter.toEntity(registeredUser.getPerformedAppointments())
+        );
+    }
+
+    public Set<RegisteredUserEntity> toEntity(Set<RegisteredUser> registeredUsers) {
+        Set<RegisteredUserEntity> registeredUserEntities = new HashSet<>();
+        for (var r : registeredUsers) {
+            registeredUserEntities.add(new RegisteredUserEntity(r.getId(),
+                    r.getEmail(),
+                    r.getPassword(),
+                    r.getName(),
+                    r.getSurname(),
+                    r.getPhoneNum(),
+                    r.getIdentityNumber(),
+                    r.getProfession(),
+                    r.getFacilityInfo(),
+                    roleConverter.toEntity(r.getRole()),
+                    addressConverter.toEntity(r.getAddress()),
+                    r.getGender(),
+                    r.getPoints(),
+                    r.getNumOfPenalties(),
+                    userCategoryConverter.toEntity(r.getUserCategory()),
+                    centerConverter.toEntity(r.getVisitedCenters()),
+                    scheduledAppointmentConverter.toEntity(r.getScheduledAppointments()),
+                    performedAppointmentConverter.toEntity(r.getPerformedAppointments())
+            ));
+        }
+
+        return registeredUserEntities;
+    }
 
 }

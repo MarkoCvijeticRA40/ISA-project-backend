@@ -47,4 +47,39 @@ public class MedicalStaffConverter {
 
         return medicalStaff;
     }
+
+    public MedicalStaffEntity toEntity(MedicalStaff medicalStaff) {
+        return new MedicalStaffEntity(medicalStaff.getId(),
+                medicalStaff.getEmail(),
+                medicalStaff.getPassword(),
+                medicalStaff.getName(),
+                medicalStaff.getSurname(),
+                medicalStaff.getPhoneNum(),
+                medicalStaff.getIdentityNumber(),
+                medicalStaff.getProfession(),
+                medicalStaff.getFacilityInfo(),
+                roleConverter.toEntity(medicalStaff.getRole()),
+                addressConverter.toEntity(medicalStaff.getAddress()),
+                medicalStaff.getGender());
+    }
+
+    public Set<MedicalStaffEntity> toEntity(Set<MedicalStaff> medicalStaff) {
+        Set<MedicalStaffEntity> medicalStaffEntities = new HashSet<>();
+        for (var m : medicalStaff) {
+            medicalStaffEntities.add(new MedicalStaffEntity(m.getId(),
+                    m.getEmail(),
+                    m.getPassword(),
+                    m.getName(),
+                    m.getSurname(),
+                    m.getPhoneNum(),
+                    m.getIdentityNumber(),
+                    m.getProfession(),
+                    m.getFacilityInfo(),
+                    roleConverter.toEntity(m.getRole()),
+                    addressConverter.toEntity(m.getAddress()),
+                    m.getGender()));
+        }
+
+        return medicalStaffEntities;
+    }
 }
