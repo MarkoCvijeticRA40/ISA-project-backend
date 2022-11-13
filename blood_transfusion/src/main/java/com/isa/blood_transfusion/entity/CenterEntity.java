@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -29,16 +30,16 @@ public class CenterEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "work_time_id", referencedColumnName = "id")
     private WorkTimeEntity workTime;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "center_id")
-    private Set<BloodEntity> blood;
-    @OneToMany(fetch = FetchType.LAZY)
+    private Set<BloodEntity> blood = new HashSet<BloodEntity>();
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "center_id")
-    private Set<EquipmentEntity> equipments;
-    @OneToMany(mappedBy = "center", fetch = FetchType.LAZY)
-    private Set<FreeAppointmentEntity> freeAppointments;
-    @OneToMany(fetch = FetchType.LAZY)
+    private Set<EquipmentEntity> equipments = new HashSet<EquipmentEntity>();
+    @OneToMany(mappedBy = "center", fetch = FetchType.EAGER)
+    private Set<FreeAppointmentEntity> freeAppointments = new HashSet<FreeAppointmentEntity>();
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "center_id")
-    private Set<MedicalStaffEntity> medicalStaff;
+    private Set<MedicalStaffEntity> medicalStaff = new HashSet<MedicalStaffEntity>();
 
 }
