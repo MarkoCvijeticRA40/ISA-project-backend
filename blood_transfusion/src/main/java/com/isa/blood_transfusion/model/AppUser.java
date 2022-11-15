@@ -23,4 +23,5 @@ public class AppUser {
     private Role role;
     private Address address;
     private Gender gender;
+
 }
