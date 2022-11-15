@@ -19,18 +19,18 @@ public class RegisteredUserEntity extends AppUserEntity {
     private Integer points;
     @Column(name = "num_of_penalties", nullable = false)
     private Integer numOfPenalties;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_category_id", referencedColumnName = "id")
     private UserCategoryEntity userCategory;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "registered_users_centers",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "center_id"))
     private Set<CenterEntity> visitedCenters;
-    @OneToMany(mappedBy = "registeredUser", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "registeredUser", fetch = FetchType.EAGER)
     private Set<ScheduledAppointmentEntity> scheduledAppointments;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "registered_user_id")
     private Set<PerformedAppointmentEntity> performedAppointments;
 

@@ -37,9 +37,10 @@ public class AppUserEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private RoleEntity role;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private AddressEntity address;
     @Column(name = "gender", nullable = false)
     private Gender gender;
+
 }
