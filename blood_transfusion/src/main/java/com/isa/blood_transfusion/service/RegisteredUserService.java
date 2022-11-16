@@ -11,4 +11,5 @@ public interface RegisteredUserService {
     List<RegisteredUser> findAll();
     List<RegisteredUser> findAll(Pageable pageable);
     RegisteredUser find(String email);
+    RegisteredUser saveChanges(RegisteredUser user);
 }

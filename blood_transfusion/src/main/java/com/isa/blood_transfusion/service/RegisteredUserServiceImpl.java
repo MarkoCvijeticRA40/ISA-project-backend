@@ -34,6 +34,11 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
     }
 
     @Override
+    public RegisteredUser saveChanges(RegisteredUser user) {
+        return store.save(user);
+    }
+
+    @Override
     public List<RegisteredUser> findAll() {
         return store.findAll();
     }

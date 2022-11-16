@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface RegisteredUserRepository extends JpaRepository<RegisteredUserEntity, Long> {
     Page<RegisteredUserEntity> findAll(Pageable pageable);
     RegisteredUserEntity findByEmail(String email);
+
+
 }
