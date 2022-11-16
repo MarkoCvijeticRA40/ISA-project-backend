@@ -1,5 +1,6 @@
 package com.isa.blood_transfusion.service;
 
+import com.isa.blood_transfusion.model.AppUser;
 import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.store.RegisteredUserStore;
 import com.isa.blood_transfusion.store.RoleStore;
@@ -40,5 +41,10 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
     @Override
     public List<RegisteredUser> findAll(Pageable pageable) {
         return store.findAll(pageable);
+    }
+
+    @Override
+    public RegisteredUser find(String email) {
+        return store.find(email);
     }
 }

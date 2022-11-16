@@ -40,4 +40,10 @@ public class AppUserController {
         return new ResponseEntity<>(registeredUserService.save(user), HttpStatus.CREATED);
     }
 
+    @GetMapping("/{email}")
+    public ResponseEntity<RegisteredUser> find(@PathVariable String email) {
+        return new ResponseEntity<>(registeredUserService.find(email), HttpStatus.OK);
+    }
+
+
 }
