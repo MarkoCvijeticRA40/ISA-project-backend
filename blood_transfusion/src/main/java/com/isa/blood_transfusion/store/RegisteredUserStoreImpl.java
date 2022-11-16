@@ -1,6 +1,7 @@
 package com.isa.blood_transfusion.store;
 
 import com.isa.blood_transfusion.converter.RegisteredUserConverter;
+import com.isa.blood_transfusion.model.AppUser;
 import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.repository.RegisteredUserRepository;
 import lombok.AllArgsConstructor;
@@ -33,5 +34,10 @@ public class RegisteredUserStoreImpl implements RegisteredUserStore {
     @Override
     public List<RegisteredUser> findAll(Pageable pageable) {
         return converter.toModel(repository.findAll(pageable).toSet()).stream().toList();
+    }
+
+    @Override
+    public List<RegisteredUser> getByNameAndSurname(String name,String surname ,Pageable pageable) {
+        return converter.toModel(repository.findByNameAndSurname(name,surname , pageable).toSet()).stream().toList();
     }
 }
