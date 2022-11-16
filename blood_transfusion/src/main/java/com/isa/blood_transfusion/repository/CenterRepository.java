@@ -9,4 +9,7 @@ import java.util.Optional;
 
 public interface CenterRepository extends JpaRepository<CenterEntity, Long> {
     default CenterEntity getById(Long id) { return findById(id).orElse(null); }
+
+    default CenterEntity getByName(Long id) { return findById(id).orElse(null); }
+
 }

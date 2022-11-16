@@ -41,4 +41,11 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
     public List<RegisteredUser> findAll(Pageable pageable) {
         return store.findAll(pageable);
     }
+
+    @Override
+    public List<RegisteredUser> getByNameAndSurname(String name, String surname, Pageable pageable) {
+        return store.getByNameAndSurname(name,surname, pageable);
+    }
+
+
 }
