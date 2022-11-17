@@ -64,6 +64,17 @@ public class AppUserController {
         return new ResponseEntity<>(registeredUserService.save(user), HttpStatus.CREATED);
     }
 
+    @GetMapping("/{email}")
+    public ResponseEntity<RegisteredUser> find(@PathVariable String email) {
+        return new ResponseEntity<>(registeredUserService.find(email), HttpStatus.OK);
+    }
+
+    @PutMapping("/saveChanges")
+    public ResponseEntity<RegisteredUser> saveChanges(@RequestBody RegisteredUser user) {
+        return new ResponseEntity<>(registeredUserService.saveChanges(user), HttpStatus.OK);
+    }
+
+
 
 
 }

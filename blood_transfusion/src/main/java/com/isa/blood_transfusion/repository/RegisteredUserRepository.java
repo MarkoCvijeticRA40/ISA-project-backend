@@ -1,5 +1,6 @@
 package com.isa.blood_transfusion.repository;
 
+import com.isa.blood_transfusion.entity.AppUserEntity;
 import com.isa.blood_transfusion.entity.RegisteredUserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,7 @@ public interface RegisteredUserRepository extends JpaRepository<RegisteredUserEn
 
 
 //where LOWER(u.name) like %:name% and LOWER(surname) like %:surname%"
+    RegisteredUserEntity findByEmail(String email);
 
 
 }

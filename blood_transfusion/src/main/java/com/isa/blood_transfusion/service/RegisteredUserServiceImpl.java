@@ -1,5 +1,6 @@
 package com.isa.blood_transfusion.service;
 
+import com.isa.blood_transfusion.model.AppUser;
 import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.store.RegisteredUserStore;
 import com.isa.blood_transfusion.store.RoleStore;
@@ -33,6 +34,11 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
     }
 
     @Override
+    public RegisteredUser saveChanges(RegisteredUser user) {
+        return store.save(user);
+    }
+
+    @Override
     public List<RegisteredUser> findAll() {
         return store.findAll();
     }
@@ -60,4 +66,7 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
     }
 
 
+    public RegisteredUser find(String email) {
+        return store.find(email);
+    }
 }

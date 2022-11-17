@@ -26,6 +26,11 @@ public class RegisteredUserStoreImpl implements RegisteredUserStore {
         return user;
     }
 
+    public RegisteredUser saveChanges(RegisteredUser user) {
+        repository.save(converter.toEntity(user));
+        return user;
+    }
+
     @Override
     public List<RegisteredUser> findAll() {
         return converter.toModel(repository.findAll().stream().collect(Collectors.toSet())).stream().toList();
@@ -39,5 +44,7 @@ public class RegisteredUserStoreImpl implements RegisteredUserStore {
     @Override
     public List<RegisteredUser> getByNameAndSurname(String name,String surname ,Pageable pageable) {
         return converter.toModel(repository.findByNameAndSurname(name,surname , pageable).toSet()).stream().toList();
+    public RegisteredUser find(String email) {
+        return converter.toModel(repository.findByEmail(email));
     }
 }
