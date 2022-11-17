@@ -25,4 +25,9 @@ public class SystemAdministratorServiceImpl implements SystemAdministratorServic
     public SystemAdministrator find(String email) {
         return store.find(email);
     }
+
+    @Override
+    public SystemAdministrator save(SystemAdministrator systemAdministrator) {
+        return store.save(systemAdministrator);
+    }
 }

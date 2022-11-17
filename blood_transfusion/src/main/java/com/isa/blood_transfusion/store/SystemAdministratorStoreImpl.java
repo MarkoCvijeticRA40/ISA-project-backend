@@ -21,4 +21,10 @@ public class SystemAdministratorStoreImpl implements SystemAdministratorStore {
     public SystemAdministrator find(String email) {
         return converter.toModel(repository.findByEmail(email));
     }
+
+    @Override
+    public SystemAdministrator save(SystemAdministrator systemAdministrator) {
+        repository.save(converter.toEntity(systemAdministrator));
+        return systemAdministrator;
+    }
 }

@@ -32,6 +32,11 @@ public class SystemAdministratorController {
         return new ResponseEntity<>(systemAdministratorService.find(email), HttpStatus.OK);
     }
 
+    @PutMapping("/saveChanges")
+    public ResponseEntity<SystemAdministrator> saveChanges(@RequestBody SystemAdministrator systemAdministrator) {
+        return new ResponseEntity<>(systemAdministratorService.save(systemAdministrator), HttpStatus.OK);
+    }
+
 
 
 }
