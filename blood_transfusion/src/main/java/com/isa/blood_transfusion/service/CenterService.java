@@ -5,6 +5,8 @@ import com.isa.blood_transfusion.model.Center;
 import java.util.List;
 
 public interface CenterService {
+
+    Center save(Center center);
     List<Center> findAll();
     Center getById(Long id);
 }

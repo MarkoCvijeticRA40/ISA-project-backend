@@ -1,6 +1,7 @@
 package com.isa.blood_transfusion.controller;
 
 import com.isa.blood_transfusion.model.Center;
+import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.service.CenterService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,5 +30,10 @@ public class CenterController {
     @GetMapping("/{id}")
     public ResponseEntity<Center> getById(@PathVariable Long id) {
         return new ResponseEntity<>(centerService.getById(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/registerCenter")
+    public ResponseEntity<Center> registerCenter(@RequestBody Center center) {
+        return new ResponseEntity<>(centerService.save(center), HttpStatus.CREATED);
     }
 }
