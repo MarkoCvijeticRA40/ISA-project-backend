@@ -17,6 +17,11 @@ public class CenterServiceImpl implements CenterService{
     private final CenterStore store;
 
     @Override
+    public Center save(Center center) {
+        return store.save(center);
+    }
+
+    @Override
     public List<Center> findAll() {
         return store.findAll();
     }

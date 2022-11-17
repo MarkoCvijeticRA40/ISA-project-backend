@@ -16,6 +16,12 @@ public class CenterStoreImpl implements CenterStore{
     private final CenterConverter converter;
 
     @Override
+    public Center save(Center center) {
+        repository.save(converter.toEntity(center));
+        return center;
+    }
+
+    @Override
     public List<Center> findAll() {
         return converter.toModel(repository.findAll().stream().collect(Collectors.toSet())).stream().toList();
     }
