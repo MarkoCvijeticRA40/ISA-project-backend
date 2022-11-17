@@ -18,4 +18,5 @@ public class BloodTransfusionApplication {
         return new BCryptPasswordEncoder();
     }
 
+
 }

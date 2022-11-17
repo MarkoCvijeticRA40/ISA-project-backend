@@ -25,7 +25,14 @@ public class BloodDonorInfoConverter {
                 bloodDonorInfoEntity.getProfession(),
                 bloodDonorInfoEntity.getNumberOfBloodDonations(),
                 addressConverter.toModel(bloodDonorInfoEntity.getAddress()),
-                bloodDonorInfoEntity.getGender());
+                bloodDonorInfoEntity.getGender(),
+                bloodDonorInfoEntity.getHasAlreadyDonatedBlood(),
+                bloodDonorInfoEntity.getIsProfessionDangerous(),
+                bloodDonorInfoEntity.getWasRejectedToDonateBlood(),
+                bloodDonorInfoEntity.getIsTakingAnyMedicines(),
+                bloodDonorInfoEntity.getHasSomeAllergies(),
+                bloodDonorInfoEntity.getHasChronicDisease(),
+                bloodDonorInfoEntity.getIsFeelingHealthy());
     }
 
     public Set<BloodDonorInfo> toModel(Set<BloodDonorInfoEntity> bloodDonorInfoEntities) {
@@ -42,7 +49,14 @@ public class BloodDonorInfoConverter {
                     b.getProfession(),
                     b.getNumberOfBloodDonations(),
                     addressConverter.toModel(b.getAddress()),
-                    b.getGender()));
+                    b.getGender(),
+                    b.getHasAlreadyDonatedBlood(),
+                    b.getIsProfessionDangerous(),
+                    b.getWasRejectedToDonateBlood(),
+                    b.getIsTakingAnyMedicines(),
+                    b.getHasSomeAllergies(),
+                    b.getHasChronicDisease(),
+                    b.getIsFeelingHealthy()));
         }
 
         return bloodDonorInfo;
@@ -60,7 +74,14 @@ public class BloodDonorInfoConverter {
                 bloodDonorInfo.getProfession(),
                 bloodDonorInfo.getNumberOfBloodDonations(),
                 addressConverter.toEntity(bloodDonorInfo.getAddress()),
-                bloodDonorInfo.getGender());
+                bloodDonorInfo.getGender(),
+                bloodDonorInfo.getHasAlreadyDonatedBlood(),
+                bloodDonorInfo.getIsProfessionDangerous(),
+                bloodDonorInfo.getWasRejectedToDonateBlood(),
+                bloodDonorInfo.getIsTakingAnyMedicines(),
+                bloodDonorInfo.getHasSomeAllergies(),
+                bloodDonorInfo.getHasChronicDisease(),
+                bloodDonorInfo.getIsFeelingHealthy());
     }
 
     public Set<BloodDonorInfoEntity> toEntity(Set<BloodDonorInfo> bloodDonorInfos) {
@@ -77,7 +98,14 @@ public class BloodDonorInfoConverter {
                     b.getProfession(),
                     b.getNumberOfBloodDonations(),
                     addressConverter.toEntity(b.getAddress()),
-                    b.getGender()));
+                    b.getGender(),
+                    b.getHasAlreadyDonatedBlood(),
+                    b.getIsProfessionDangerous(),
+                    b.getWasRejectedToDonateBlood(),
+                    b.getIsTakingAnyMedicines(),
+                    b.getHasSomeAllergies(),
+                    b.getHasChronicDisease(),
+                    b.getIsFeelingHealthy()));
         }
 
         return bloodDonorInfoEntities;
