@@ -46,6 +46,19 @@ public class AppUserController {
     }
 
 
+    @GetMapping("/searchSurname/{surname}")
+    public ResponseEntity<List<RegisteredUser>> getBySurname( @PathVariable String surname , Pageable pageable) {
+        return new ResponseEntity<>(registeredUserService.getBySurname(surname , pageable), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/searchName/{name}")
+    public ResponseEntity<List<RegisteredUser>> getByName(@PathVariable String name, Pageable pageable) {
+        return new ResponseEntity<>(registeredUserService.getByName(name , pageable), HttpStatus.OK);
+    }
+
+
+
     @PostMapping("/registerUser")
     public ResponseEntity<RegisteredUser> registerUser(@RequestBody RegisteredUser user) {
         return new ResponseEntity<>(registeredUserService.save(user), HttpStatus.CREATED);

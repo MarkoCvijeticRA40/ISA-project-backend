@@ -44,7 +44,19 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
 
     @Override
     public List<RegisteredUser> getByNameAndSurname(String name, String surname, Pageable pageable) {
-        return store.getByNameAndSurname(name,surname, pageable);
+        return store.getByNameAndSurname(name.toLowerCase(),surname.toLowerCase(), pageable);
+    }
+
+    @Override
+    public List<RegisteredUser> getByName(String name, Pageable pageable) {
+        String surname = "";
+        return store.getByNameAndSurname(name.toLowerCase(),surname.toLowerCase(), pageable);
+    }
+
+    @Override
+    public List<RegisteredUser> getBySurname(String surname, Pageable pageable) {
+        String name = "";
+        return store.getByNameAndSurname(name.toLowerCase(),surname.toLowerCase(), pageable);
     }
 
 
