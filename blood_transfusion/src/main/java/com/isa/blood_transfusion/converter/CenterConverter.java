@@ -2,7 +2,8 @@ package com.isa.blood_transfusion.converter;
 
 import com.isa.blood_transfusion.entity.CenterEntity;
 import com.isa.blood_transfusion.model.Center;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -10,16 +11,24 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@AllArgsConstructor
+
 @Component
 public class CenterConverter {
     private EquipmentConverter equipmentConverter;
     private FreeAppointmentConverter freeAppointmentConverter;
-    private MedicalStaffConverter medicalStaffConverter;
     private WorkTimeConverter workTimeConverter;
     private AddressConverter addressConverter;
     private BloodConverter bloodConverter;
-
+    private MedicalStaffConverter medicalStaffConverter;
+    @Autowired
+    public CenterConverter(EquipmentConverter equipmentConverter, FreeAppointmentConverter freeAppointmentConverter, WorkTimeConverter workTimeConverter, AddressConverter addressConverter, BloodConverter bloodConverter, @Lazy MedicalStaffConverter medicalStaffConverter) {
+        this.equipmentConverter = equipmentConverter;
+        this.freeAppointmentConverter = freeAppointmentConverter;
+        this.workTimeConverter = workTimeConverter;
+        this.addressConverter = addressConverter;
+        this.bloodConverter = bloodConverter;
+        this.medicalStaffConverter = medicalStaffConverter;
+    }
 
     public Center toModel(CenterEntity centerEntity) {
         return new Center(centerEntity.getId(),
