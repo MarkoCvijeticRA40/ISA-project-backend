@@ -1,5 +1,6 @@
 package com.isa.blood_transfusion.service;
 
+import com.isa.blood_transfusion.dto.CenterDto;
 import com.isa.blood_transfusion.dto.SearchInput;
 import com.isa.blood_transfusion.model.Center;
 
@@ -10,5 +11,6 @@ public interface CenterService {
     Center getById(Long id);
     List<Center> search(String name, String place);
     List<Center> filter(String name, String place, Double gradeFrom, Double gradeTo);
-
+    Center getCenterByMedicalStaffId(Long id);
+    Center updateCenter(CenterDto centerDto, Long id);
 }

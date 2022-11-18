@@ -54,4 +54,7 @@ public interface CenterRepository extends JpaRepository<CenterEntity, Long> {
     @Query(value = "select * from centers c inner join addresses a on c.address_id = a.id where (lower(c.name) like lower(concat('%', ?1,'%')) or lower(a.city) like lower(concat('%', ?2,'%')) " +
             "or lower(a.street) like lower(concat('%', ?2,'%')) or lower(a.state) like lower(concat('%', ?2,'%'))) and c.average_grade >= ?3 and c.average_grade <= 4", nativeQuery = true)
     List<CenterEntity> findByNameAndPlaceAndGradeFromAndGradeTo(String name, String place, Double gradeFrom, Double gradeTo);
+
+    @Query(value = "select c.* from centers c inner join users u on u.center_id = c.id where u.id = ?1", nativeQuery = true)
+    CenterEntity findCenterByMedicalStaffId(Long id);
 }

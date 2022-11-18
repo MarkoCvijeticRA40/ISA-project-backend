@@ -1,13 +1,17 @@
 package com.isa.blood_transfusion.service;
 
+import com.isa.blood_transfusion.dto.CenterDto;
 import com.isa.blood_transfusion.dto.SearchInput;
+import com.isa.blood_transfusion.model.Address;
 import com.isa.blood_transfusion.model.Center;
+import com.isa.blood_transfusion.model.WorkTime;
 import com.isa.blood_transfusion.store.CenterStore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,5 +72,19 @@ public class CenterServiceImpl implements CenterService{
             return store.filterByNameAndPlaceAndGradeFromAndGradeTo(name, place, gradeFrom, gradeTo);
         }
         return search(name, place);
+    }
+
+    @Override
+    public Center getCenterByMedicalStaffId(Long id) {
+        return store.getCenterByMedicalStaffId(id);
+    }
+
+    @Override
+    public Center updateCenter(CenterDto centerDto, Long id) {
+        Center center = new Center(centerDto.getId(), centerDto.getName(), centerDto.getDescription(), centerDto.getAvgGrade(),
+                new Address(centerDto.getAddress().getId(), centerDto.getAddress().getStreet(), centerDto.getAddress().getNumber(), centerDto.getAddress().getCity(), centerDto.getAddress().getState(), centerDto.getAddress().getLongitude(), centerDto.getAddress().getLatitude()),
+                new WorkTime(centerDto.getWorkTime().getId(), LocalTime.parse(centerDto.getWorkTime().getStartTime()), LocalTime.parse(centerDto.getWorkTime().getEndTime())),
+                centerDto.getBlood(), centerDto.getEquipments(), centerDto.getFreeAppointments(), centerDto.getMedicalStaff());
+        return store.updateCenter(center, id);
     }
 }

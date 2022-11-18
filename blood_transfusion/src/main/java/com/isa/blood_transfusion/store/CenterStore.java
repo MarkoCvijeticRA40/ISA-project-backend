@@ -23,5 +23,7 @@ public interface CenterStore {
     List<Center> filterByNameAndPlaceAndGradeFrom(String name, String place, Double gradeFrom);
     List<Center> filterByNameAndPlaceAndGradeTo(String name, String place, Double gradeTo);
     List<Center> filterByNameAndPlaceAndGradeFromAndGradeTo(String name, String place, Double gradeFrom, Double gradeTo);
+    Center getCenterByMedicalStaffId(Long id);
+    Center updateCenter(Center center, Long id);
 
 }

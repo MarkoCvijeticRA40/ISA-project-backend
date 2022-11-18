@@ -1,15 +1,10 @@
 package com.isa.blood_transfusion.store;
 
 import com.isa.blood_transfusion.converter.CenterConverter;
-import com.isa.blood_transfusion.dto.SearchCriteria;
-import com.isa.blood_transfusion.dto.SearchInput;
-import com.isa.blood_transfusion.dto.SearchParameter;
 import com.isa.blood_transfusion.entity.CenterEntity;
 import com.isa.blood_transfusion.model.Center;
 import com.isa.blood_transfusion.repository.CenterRepository;
 import lombok.AllArgsConstructor;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
 
@@ -21,7 +16,6 @@ import java.util.stream.Collectors;
 public class CenterStoreImpl implements CenterStore{
     private final CenterRepository repository;
     private final CenterConverter converter;
-    private final SessionFactory factory;
 
     @Override
     public List<Center> findAll() {
@@ -110,5 +104,22 @@ public class CenterStoreImpl implements CenterStore{
     @Override
     public List<Center> filterByNameAndPlaceAndGradeFromAndGradeTo(String name, String place, Double gradeFrom, Double gradeTo) {
         return converter.toModel(repository.findByNameAndPlaceAndGradeFromAndGradeTo(name, place, gradeFrom, gradeTo).stream().collect(Collectors.toSet())).stream().toList();
+    }
+
+    @Override
+    public Center getCenterByMedicalStaffId(Long id) {
+        return converter.toModel(repository.findCenterByMedicalStaffId(id));
+    }
+
+    @Override
+    public Center updateCenter(Center center, Long id) {
+        CenterEntity centerEntity = converter.toEntity(center);
+        CenterEntity centerEntityUpdate = repository.getById(id);
+        centerEntityUpdate.setName(centerEntity.getName());
+        centerEntityUpdate.setDescription(centerEntity.getDescription());
+        centerEntityUpdate.setAddress(centerEntity.getAddress());
+        centerEntityUpdate.setWorkTime(centerEntity.getWorkTime());
+        repository.save(centerEntityUpdate);
+        return converter.toModel(centerEntityUpdate);
     }
 }
