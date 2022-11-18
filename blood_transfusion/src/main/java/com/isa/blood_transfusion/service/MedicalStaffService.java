@@ -8,4 +8,6 @@ public interface MedicalStaffService {
     MedicalStaff find(String email);
 
     MedicalStaff save(MedicalStaff medicalStaff);
+    MedicalStaff saveStaff(MedicalStaff medicalStaff);
+
 }

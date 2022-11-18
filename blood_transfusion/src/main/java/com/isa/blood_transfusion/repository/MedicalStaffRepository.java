@@ -10,6 +10,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MedicalStaffRepository extends JpaRepository<MedicalStaffEntity, Long> {
     MedicalStaffEntity findByEmail(String email);
-
-
 }
