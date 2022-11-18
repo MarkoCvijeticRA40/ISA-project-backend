@@ -5,7 +5,9 @@ import com.isa.blood_transfusion.model.Center;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -80,5 +82,23 @@ public class CenterConverter {
         }
 
         return centerEntities;
+    }
+
+    public List<Center> toModel(List<CenterEntity> centerEntities) {
+        List<Center> centers = new ArrayList<>();
+        for (var c : centerEntities) {
+            centers.add(new Center(c.getId(),
+                    c.getName(),
+                    c.getDescription(),
+                    c.getAvgGrade(),
+                    addressConverter.toModel(c.getAddress()),
+                    workTimeConverter.toModel(c.getWorkTime()),
+                    bloodConverter.toModel(c.getBlood()),
+                    equipmentConverter.toModel(c.getEquipments()),
+                    freeAppointmentConverter.toModel(c.getFreeAppointments()),
+                    medicalStaffConverter.toModel(c.getMedicalStaff())));
+        }
+
+        return centers;
     }
 }
