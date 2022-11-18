@@ -1,6 +1,9 @@
 package com.isa.blood_transfusion.dto;
 
-import com.isa.blood_transfusion.model.*;
+import com.isa.blood_transfusion.model.Blood;
+import com.isa.blood_transfusion.model.Equipment;
+import com.isa.blood_transfusion.model.FreeAppointment;
+import com.isa.blood_transfusion.model.MedicalStaff;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +11,7 @@ import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor

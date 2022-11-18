@@ -1,6 +1,5 @@
 package com.isa.blood_transfusion.service;
 
-import com.isa.blood_transfusion.model.Center;
 import com.isa.blood_transfusion.model.MedicalStaff;
 import com.isa.blood_transfusion.store.MedicalStaffStore;
 import lombok.AllArgsConstructor;
@@ -12,8 +11,9 @@ import org.springframework.stereotype.Service;
 @Setter
 @AllArgsConstructor
 @Service
-public class MedicalStaffServiceImpl implements MedicalStaffService{
+public class MedicalStaffServiceImpl implements MedicalStaffService {
     private MedicalStaffStore store;
+
     @Override
     public MedicalStaff getById(Long id) {
         return store.getById(id);

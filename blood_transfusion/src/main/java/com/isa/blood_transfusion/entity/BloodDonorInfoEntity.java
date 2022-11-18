@@ -56,5 +56,4 @@ public class BloodDonorInfoEntity {
     private Boolean isFeelingHealthy;
 
 
-
 }

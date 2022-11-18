@@ -1,7 +1,5 @@
 package com.isa.blood_transfusion.model;
 
-import com.isa.blood_transfusion.dto.AddressDto;
-import com.isa.blood_transfusion.dto.CenterDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

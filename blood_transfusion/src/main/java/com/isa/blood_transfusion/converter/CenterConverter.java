@@ -20,6 +20,7 @@ public class CenterConverter {
     private AddressConverter addressConverter;
     private BloodConverter bloodConverter;
     private MedicalStaffConverter medicalStaffConverter;
+
     @Autowired
     public CenterConverter(EquipmentConverter equipmentConverter, FreeAppointmentConverter freeAppointmentConverter, WorkTimeConverter workTimeConverter, AddressConverter addressConverter, BloodConverter bloodConverter, @Lazy MedicalStaffConverter medicalStaffConverter) {
         this.equipmentConverter = equipmentConverter;

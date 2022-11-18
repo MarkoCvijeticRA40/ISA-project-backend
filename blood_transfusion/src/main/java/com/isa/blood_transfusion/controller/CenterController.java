@@ -1,9 +1,7 @@
 package com.isa.blood_transfusion.controller;
 
 import com.isa.blood_transfusion.dto.CenterDto;
-import com.isa.blood_transfusion.dto.SearchInput;
 import com.isa.blood_transfusion.model.Center;
-import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.service.CenterService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,13 +34,13 @@ public class CenterController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Center>> search(@RequestParam(name = "searchByName") String searchByName, @RequestParam(name = "searchByPlace") String searchByPlace){
+    public ResponseEntity<List<Center>> search(@RequestParam(name = "searchByName") String searchByName, @RequestParam(name = "searchByPlace") String searchByPlace) {
         return new ResponseEntity<>(centerService.search(searchByName, searchByPlace), HttpStatus.OK);
     }
 
     @GetMapping("/filter")
     public ResponseEntity<List<Center>> filter(@RequestParam(name = "searchByName") String searchByName, @RequestParam(name = "searchByPlace") String searchByPlace,
-                                               @RequestParam(name = "gradeFrom") Double filterByGradeFrom, @RequestParam(name = "gradeTo") Double filterByGradeTo){
+                                               @RequestParam(name = "gradeFrom") Double filterByGradeFrom, @RequestParam(name = "gradeTo") Double filterByGradeTo) {
         return new ResponseEntity<>(centerService.filter(searchByName, searchByPlace, filterByGradeFrom, filterByGradeTo), HttpStatus.OK);
     }
 

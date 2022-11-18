@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface AppUserStore {
     AppUser save(AppUser appUser);
+
     AppUser find(String email);
+
     List<AppUser> findAll();
 }

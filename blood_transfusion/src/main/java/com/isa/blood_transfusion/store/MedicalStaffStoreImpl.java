@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @AllArgsConstructor
 @Component
-public class MedicalStaffStoreImpl implements MedicalStaffStore{
+public class MedicalStaffStoreImpl implements MedicalStaffStore {
     private MedicalStaffRepository repository;
     private MedicalStaffConverter medicalStaffConverter;
 

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BloodDonorInfoServiceImpl implements BloodDonorInfoService {
     private final BloodDonorInfoStore store;
+
     @Override
     public BloodDonorInfo save(BloodDonorInfo bloodDonorInfo) {
         return store.save(bloodDonorInfo);

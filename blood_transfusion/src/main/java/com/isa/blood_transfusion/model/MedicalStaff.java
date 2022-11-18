@@ -1,6 +1,5 @@
 package com.isa.blood_transfusion.model;
 
-import com.isa.blood_transfusion.entity.CenterEntity;
 import com.isa.blood_transfusion.entity.Gender;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
