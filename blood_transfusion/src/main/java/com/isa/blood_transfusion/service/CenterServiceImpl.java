@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @Service
-public class CenterServiceImpl implements CenterService{
+public class CenterServiceImpl implements CenterService {
     private final CenterStore store;
 
     @Override
@@ -29,5 +29,25 @@ public class CenterServiceImpl implements CenterService{
     @Override
     public Center getById(Long id) {
         return store.getById(id);
+    }
+
+    @Override
+    public List<Center> getSortedByNameAsc() {
+        return store.getSortedByNameAsc();
+    }
+
+    @Override
+    public List<Center> getSortedByNameDesc() {
+        return store.getSortedByNameDesc();
+    }
+
+    @Override
+    public List<Center> getSortedByAvgGradeAsc() {
+        return store.getSortedByAvgGradeAsc();
+    }
+
+    @Override
+    public List<Center> getSortedByAvgGradeDesc() {
+        return store.getSortedByAvgGradeDesc();
     }
 }

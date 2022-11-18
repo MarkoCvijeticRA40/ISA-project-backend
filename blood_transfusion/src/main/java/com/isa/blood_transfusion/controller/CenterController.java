@@ -37,6 +37,25 @@ public class CenterController {
         return new ResponseEntity<>(centerService.save(center), HttpStatus.CREATED);
     }
 
+    @GetMapping("/name/asc")
+    public ResponseEntity<List<Center>> getSortedByNameAsc() {
+        return new ResponseEntity<>(centerService.getSortedByNameAsc(), HttpStatus.OK);
+    }
+
+    @GetMapping("/name/desc")
+    public ResponseEntity<List<Center>> getSortedByNameDesc() {
+        return new ResponseEntity<>(centerService.getSortedByNameDesc(), HttpStatus.OK);
+    }
+
+    @GetMapping("/grade/asc")
+    public ResponseEntity<List<Center>> getSortedByAvgGradeAsc() {
+        return new ResponseEntity<>(centerService.getSortedByAvgGradeAsc(), HttpStatus.OK);
+    }
+
+    @GetMapping("/grade/desc")
+    public ResponseEntity<List<Center>> getSortedByAvgGradeDesc() {
+        return new ResponseEntity<>(centerService.getSortedByAvgGradeDesc(), HttpStatus.OK);
+    }
 
 
 }
