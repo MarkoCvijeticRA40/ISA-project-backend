@@ -3,6 +3,7 @@ package com.isa.blood_transfusion.controller;
 import com.isa.blood_transfusion.dto.CenterDto;
 import com.isa.blood_transfusion.dto.SearchInput;
 import com.isa.blood_transfusion.model.Center;
+import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.service.CenterService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -56,4 +57,31 @@ public class CenterController {
         System.out.println(LocalTime.parse(centerDto.getWorkTime().getStartTime()));
         return new ResponseEntity<>(centerService.updateCenter(centerDto, id), HttpStatus.OK);
     }
+
+    @PostMapping("/registerCenter")
+    public ResponseEntity<Center> registerCenter(@RequestBody Center center) {
+        return new ResponseEntity<>(centerService.save(center), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/name/asc")
+    public ResponseEntity<List<Center>> getSortedByNameAsc() {
+        return new ResponseEntity<>(centerService.getSortedByNameAsc(), HttpStatus.OK);
+    }
+
+    @GetMapping("/name/desc")
+    public ResponseEntity<List<Center>> getSortedByNameDesc() {
+        return new ResponseEntity<>(centerService.getSortedByNameDesc(), HttpStatus.OK);
+    }
+
+    @GetMapping("/grade/asc")
+    public ResponseEntity<List<Center>> getSortedByAvgGradeAsc() {
+        return new ResponseEntity<>(centerService.getSortedByAvgGradeAsc(), HttpStatus.OK);
+    }
+
+    @GetMapping("/grade/desc")
+    public ResponseEntity<List<Center>> getSortedByAvgGradeDesc() {
+        return new ResponseEntity<>(centerService.getSortedByAvgGradeDesc(), HttpStatus.OK);
+    }
+
+
 }

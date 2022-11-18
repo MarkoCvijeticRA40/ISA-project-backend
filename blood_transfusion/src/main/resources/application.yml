@@ -7,7 +7,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/ISADb
     username: postgres
-    password: postgres
+    password: andjela
   jpa:
     hibernate:
       ddl-auto: update

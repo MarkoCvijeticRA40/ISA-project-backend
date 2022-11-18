@@ -2,10 +2,13 @@ package com.isa.blood_transfusion.store;
 
 import com.isa.blood_transfusion.dto.SearchInput;
 import com.isa.blood_transfusion.model.Center;
+import com.isa.blood_transfusion.model.RegisteredUser;
 
 import java.util.List;
 
 public interface CenterStore {
+
+    Center save(Center center);
     List<Center> findAll();
     Center getById(Long id);
     List<Center> searchByName(String name);
@@ -25,5 +28,8 @@ public interface CenterStore {
     List<Center> filterByNameAndPlaceAndGradeFromAndGradeTo(String name, String place, Double gradeFrom, Double gradeTo);
     Center getCenterByMedicalStaffId(Long id);
     Center updateCenter(Center center, Long id);
-
+    List<Center> getSortedByNameAsc();
+    List<Center> getSortedByNameDesc();
+    List<Center> getSortedByAvgGradeAsc();
+    List<Center> getSortedByAvgGradeDesc();
 }

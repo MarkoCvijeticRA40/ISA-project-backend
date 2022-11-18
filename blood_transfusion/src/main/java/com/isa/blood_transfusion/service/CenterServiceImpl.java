@@ -19,8 +19,13 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @Service
-public class CenterServiceImpl implements CenterService{
+public class CenterServiceImpl implements CenterService {
     private final CenterStore store;
+
+    @Override
+    public Center save(Center center) {
+        return store.save(center);
+    }
 
     @Override
     public List<Center> findAll() {
@@ -86,5 +91,25 @@ public class CenterServiceImpl implements CenterService{
                 new WorkTime(centerDto.getWorkTime().getId(), LocalTime.parse(centerDto.getWorkTime().getStartTime()), LocalTime.parse(centerDto.getWorkTime().getEndTime())),
                 centerDto.getBlood(), centerDto.getEquipments(), centerDto.getFreeAppointments(), centerDto.getMedicalStaff());
         return store.updateCenter(center, id);
+    }
+
+    @Override
+    public List<Center> getSortedByNameAsc() {
+        return store.getSortedByNameAsc();
+    }
+
+    @Override
+    public List<Center> getSortedByNameDesc() {
+        return store.getSortedByNameDesc();
+    }
+
+    @Override
+    public List<Center> getSortedByAvgGradeAsc() {
+        return store.getSortedByAvgGradeAsc();
+    }
+
+    @Override
+    public List<Center> getSortedByAvgGradeDesc() {
+        return store.getSortedByAvgGradeDesc();
     }
 }
