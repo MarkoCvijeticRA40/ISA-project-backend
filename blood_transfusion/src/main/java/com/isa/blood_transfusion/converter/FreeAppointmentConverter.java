@@ -43,7 +43,7 @@ public class FreeAppointmentConverter {
 
     public FreeAppointmentEntity toEntity(FreeAppointment freeAppointment) {
         return new FreeAppointmentEntity(freeAppointment.getId(),
-                freeAppointment.getDate(),
+                freeAppointment.getDate().plusHours(1),
                 freeAppointment.getDuration(),
                 centerConverter.toEntity(freeAppointment.getCenter()),
                 medicalStaffConverter.toEntity(freeAppointment.getMedicalStaff()));
