@@ -1,23 +1,25 @@
 package com.isa.blood_transfusion.converter;
 
 import com.isa.blood_transfusion.entity.MedicalStaffEntity;
-import com.isa.blood_transfusion.entity.RegisteredUserEntity;
-import com.isa.blood_transfusion.entity.SystemAdministratorEntity;
 import com.isa.blood_transfusion.model.MedicalStaff;
-import com.isa.blood_transfusion.model.RegisteredUser;
-import com.isa.blood_transfusion.model.SystemAdministrator;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.HashSet;
 import java.util.Set;
 
-@AllArgsConstructor
 @Component
 public class MedicalStaffConverter {
     private RoleConverter roleConverter;
     private AddressConverter addressConverter;
 
+    private CenterConverter centerConverter;
+
+    @Autowired
+    public MedicalStaffConverter(RoleConverter roleConverter, AddressConverter addressConverter, CenterConverter centerConverter) {
+        this.roleConverter = roleConverter;
+        this.addressConverter = addressConverter;
+        this.centerConverter = centerConverter;
+    }
 
     public MedicalStaff toModel(MedicalStaffEntity medicalStaffEntity) {
         return new MedicalStaff(medicalStaffEntity.getId(),
@@ -93,3 +95,4 @@ public class MedicalStaffConverter {
     }
 
 }
+

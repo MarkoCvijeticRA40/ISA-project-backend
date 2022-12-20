@@ -1,10 +1,8 @@
 package com.isa.blood_transfusion.store;
+
 import com.isa.blood_transfusion.converter.MedicalStaffConverter;
-import com.isa.blood_transfusion.converter.SystemAdministratorConverter;
 import com.isa.blood_transfusion.model.MedicalStaff;
-import com.isa.blood_transfusion.model.SystemAdministrator;
 import com.isa.blood_transfusion.repository.MedicalStaffRepository;
-import com.isa.blood_transfusion.repository.SystemAdministratorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -24,5 +22,14 @@ public class MedicalStaffStoreImpl implements MedicalStaffStore {
     public MedicalStaff save(MedicalStaff medicalStaff) {
         repository.save(converter.toEntity(medicalStaff));
         return medicalStaff;
+    }
+
+    @Override
+    public MedicalStaff getById(Long id) {
+        if (repository.getById(id) == null) {
+            return null;
+        } else {
+            return converter.toModel(repository.getById(id));
+        }
     }
 }

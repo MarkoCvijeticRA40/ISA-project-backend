@@ -25,4 +25,11 @@ public class BloodDonorInfo {
     private Integer numberOfBloodDonations;
     private Address address;
     private Gender gender;
+    private Boolean hasAlreadyDonatedBlood;
+    private Boolean isProfessionDangerous;
+    private Boolean wasRejectedToDonateBlood;
+    private Boolean isTakingAnyMedicines;
+    private Boolean hasSomeAllergies;
+    private Boolean hasChronicDisease;
+    private Boolean isFeelingHealthy;
 }

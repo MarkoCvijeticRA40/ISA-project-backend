@@ -1,6 +1,5 @@
 package com.isa.blood_transfusion.store;
 
-import com.isa.blood_transfusion.model.AppUser;
 import com.isa.blood_transfusion.model.RegisteredUser;
 import org.springframework.data.domain.Pageable;
 
@@ -12,4 +11,5 @@ public interface RegisteredUserStore {
     List<RegisteredUser> findAll(Pageable pageable);
     RegisteredUser find(String email);
     RegisteredUser saveChanges(RegisteredUser user);
+
 }
