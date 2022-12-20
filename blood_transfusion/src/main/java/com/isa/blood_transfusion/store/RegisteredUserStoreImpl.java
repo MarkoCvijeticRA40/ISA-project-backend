@@ -40,6 +40,7 @@ public class RegisteredUserStoreImpl implements RegisteredUserStore {
     public RegisteredUser find(String email) {
         return converter.toModel(repository.findByEmail(email));
     }
+
     @Override
     public List<RegisteredUser> getByNameAndSurname(String name,String surname ,Pageable pageable) {
         return converter.toModel(repository.findByNameAndSurname(name,surname , pageable).toSet()).stream().toList();
