@@ -1,4 +1,5 @@
 package com.isa.blood_transfusion.controller;
+import com.isa.blood_transfusion.model.Center;
 import com.isa.blood_transfusion.model.FreeAppointment;
 import com.isa.blood_transfusion.service.FreeAppointmentService;
 import com.isa.blood_transfusion.store.RoleStore;
