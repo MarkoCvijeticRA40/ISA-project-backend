@@ -12,4 +12,5 @@ public interface RegisteredUserStore {
     RegisteredUser find(String email);
     RegisteredUser saveChanges(RegisteredUser user);
 
+    List<RegisteredUser> getByNameAndSurname(String name, String surname, Pageable pageable);
 }
