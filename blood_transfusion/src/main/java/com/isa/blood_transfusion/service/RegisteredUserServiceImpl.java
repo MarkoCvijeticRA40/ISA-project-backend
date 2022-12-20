@@ -33,6 +33,11 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
     }
 
     @Override
+    public RegisteredUser saveChanges(RegisteredUser user) {
+        return store.save(user);
+    }
+
+    @Override
     public List<RegisteredUser> findAll() {
         return store.findAll();
     }
@@ -43,6 +48,9 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
     }
 
     @Override
+    public RegisteredUser find(String email) {
+        return store.find(email);
+    }
     public List<RegisteredUser> getByNameAndSurname(String name, String surname, Pageable pageable) {
         return store.getByNameAndSurname(name.toLowerCase(),surname.toLowerCase(), pageable);
     }
@@ -58,6 +66,4 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
         String name = "";
         return store.getByNameAndSurname(name.toLowerCase(),surname.toLowerCase(), pageable);
     }
-
-
 }
