@@ -16,4 +16,17 @@ public interface RegisteredUserRepository extends JpaRepository<RegisteredUserEn
     @Query("select distinct u from users u where LOWER(u.name) like %:name% and LOWER(surname) like %:surname%")
     Page<RegisteredUserEntity> findByNameAndSurname(String name, String surname,Pageable pageable);
     //where LOWER(u.name) like %:name% and LOWER(surname) like %:surname%"
+
+    @Query("select distinct u from users u where LOWER(u.name) like %:name% and LOWER(surname) like %:surname%")
+    Page<RegisteredUserEntity> findByNameAndSurname(String name, String surname,Pageable pageable);
+
+
+
+
+
+
+//where LOWER(u.name) like %:name% and LOWER(surname) like %:surname%"
+    RegisteredUserEntity findByEmail(String email);
+
+
 }

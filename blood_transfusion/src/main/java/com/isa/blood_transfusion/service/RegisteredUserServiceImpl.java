@@ -66,4 +66,9 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
         String name = "";
         return store.getByNameAndSurname(name.toLowerCase(),surname.toLowerCase(), pageable);
     }
+
+
+    public RegisteredUser find(String email) {
+        return store.find(email);
+    }
 }
