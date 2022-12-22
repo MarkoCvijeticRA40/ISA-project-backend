@@ -10,9 +10,16 @@ public interface RegisteredUserService {
     RegisteredUser save(RegisteredUser user);
     List<RegisteredUser> findAll();
     List<RegisteredUser> findAll(Pageable pageable);
+    /*
     RegisteredUser find(String email);
     RegisteredUser saveChanges(RegisteredUser user);
+ */
     List<RegisteredUser> getByNameAndSurname(String name, String surname, Pageable pageable);
+
     List<RegisteredUser> getByName(String name,  Pageable pageable);
     List<RegisteredUser> getBySurname( String surname, Pageable pageable);
+
+
+    RegisteredUser find(String email);
+    RegisteredUser saveChanges(RegisteredUser user);
 }

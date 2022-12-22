@@ -34,5 +34,13 @@ public class MedicalStaffController {
     }
 
 
+    @PostMapping("/registerStaff")
+    public ResponseEntity<MedicalStaff> registerMedicalStaff(@RequestBody MedicalStaff medicalStaff) {
+        return new ResponseEntity<>(medicalStaffService.saveStaff(medicalStaff), HttpStatus.OK);
+    }
+
+
+
+
 
 }

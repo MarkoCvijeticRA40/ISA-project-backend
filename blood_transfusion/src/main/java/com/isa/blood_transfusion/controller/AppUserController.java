@@ -67,4 +67,8 @@ public class AppUserController {
     public ResponseEntity<RegisteredUser> saveChanges(@RequestBody RegisteredUser user) {
         return new ResponseEntity<>(registeredUserService.saveChanges(user), HttpStatus.OK);
     }
+
+
+
+
 }

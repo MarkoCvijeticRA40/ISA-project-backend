@@ -11,5 +11,6 @@ public interface MedicalStaffService {
     MedicalStaff save(MedicalStaff medicalStaff);
     
     MedicalStaff getById(Long id);
+    MedicalStaff saveStaff(MedicalStaff medicalStaff);
 
 }
