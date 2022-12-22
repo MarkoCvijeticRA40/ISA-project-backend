@@ -14,6 +14,7 @@ public class MedicalStaffConverter {
     private RoleConverter roleConverter;
     private AddressConverter addressConverter;
 
+    private CenterConverter centerConverter;
 
     public MedicalStaff toModel(MedicalStaffEntity medicalStaffEntity) {
         return new MedicalStaff(medicalStaffEntity.getId(),
@@ -27,7 +28,10 @@ public class MedicalStaffConverter {
                 medicalStaffEntity.getFacilityInfo(),
                 roleConverter.toModel(medicalStaffEntity.getRole()),
                 addressConverter.toModel(medicalStaffEntity.getAddress()),
-                medicalStaffEntity.getGender());
+                medicalStaffEntity.getGender(),
+                medicalStaffEntity.isEnabled(),
+                medicalStaffEntity.getLastPasswordResetDate()
+        );
     }
 
     public Set<MedicalStaff> toModel(Set<MedicalStaffEntity> medicalStaffEntities) {
@@ -44,7 +48,10 @@ public class MedicalStaffConverter {
                     m.getFacilityInfo(),
                     roleConverter.toModel(m.getRole()),
                     addressConverter.toModel(m.getAddress()),
-                    m.getGender()));
+                    m.getGender(),
+                    m.isEnabled(),
+                    m.getLastPasswordResetDate()
+            ));
         }
 
         return medicalStaff;
@@ -62,7 +69,10 @@ public class MedicalStaffConverter {
                 medicalStaff.getFacilityInfo(),
                 roleConverter.toEntity(medicalStaff.getRole()),
                 addressConverter.toEntity(medicalStaff.getAddress()),
-                medicalStaff.getGender());
+                medicalStaff.getGender(),
+                medicalStaff.isEnabled(),
+                medicalStaff.getLastPasswordResetDate()
+        );
     }
 
     public Set<MedicalStaffEntity> toEntity(Set<MedicalStaff> medicalStaff) {
@@ -79,9 +89,12 @@ public class MedicalStaffConverter {
                     m.getFacilityInfo(),
                     roleConverter.toEntity(m.getRole()),
                     addressConverter.toEntity(m.getAddress()),
-                    m.getGender()));
+                    m.getGender(),
+                    m.isEnabled(),
+                    m.getLastPasswordResetDate()
+            ));
         }
-
         return medicalStaffEntities;
     }
+
 }

@@ -13,12 +13,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class AppUserController {
@@ -48,10 +49,20 @@ public class AppUserController {
         return new ResponseEntity<>(registeredUserService.getBySurname(surname, pageable), HttpStatus.OK);
     }
 
-
     @GetMapping("/searchName/{name}")
     public ResponseEntity<List<RegisteredUser>> getByName(@PathVariable String name, Pageable pageable) {
         return new ResponseEntity<>(registeredUserService.getByName(name, pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/whoami")
+    public AppUser user(Principal user) {
+        return appUserService.find(user.getName());
+    }
+
+
+    @GetMapping("activate/ru/{email}")
+    public ResponseEntity<RegisteredUser> activateAccount(@PathVariable String email) {
+        return new ResponseEntity<>(registeredUserService.activate(email), HttpStatus.OK);
     }
 
 
@@ -60,5 +71,14 @@ public class AppUserController {
         return new ResponseEntity<>(registeredUserService.save(user), HttpStatus.CREATED);
     }
 
+    @GetMapping("/{email}")
+    public ResponseEntity<RegisteredUser> find(@PathVariable String email) {
+        return new ResponseEntity<>(registeredUserService.find(email), HttpStatus.OK);
+    }
+
+    @PutMapping("/saveChanges")
+    public ResponseEntity<RegisteredUser> saveChanges(@RequestBody RegisteredUser user) {
+        return new ResponseEntity<>(registeredUserService.saveChanges(user), HttpStatus.OK);
+    }
 
 }

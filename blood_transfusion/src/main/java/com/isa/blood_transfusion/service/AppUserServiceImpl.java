@@ -41,4 +41,5 @@ public class AppUserServiceImpl implements AppUserService {
         appUser.setRole(role);
         store.save(appUser);
     }
+
 }

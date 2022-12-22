@@ -4,20 +4,14 @@ import com.isa.blood_transfusion.converter.AppUserConverter;
 import com.isa.blood_transfusion.model.AppUser;
 import com.isa.blood_transfusion.repository.AppUserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Component
-public class AppUserStoreImpl implements AppUserStore, UserDetailsService {
+public class AppUserStoreImpl implements AppUserStore {
     private final AppUserRepository repository;
     private final AppUserConverter converter;
 
@@ -37,15 +31,5 @@ public class AppUserStoreImpl implements AppUserStore, UserDetailsService {
         return converter.toModel(repository.findAll().stream().collect(Collectors.toSet())).stream().toList();
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AppUser user = converter.toModel(repository.findByEmail(username));
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
 
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
-    }
 }

@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 @Getter
@@ -29,6 +31,12 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
         user.setRole(roleStore.find("REGISTERED_USER"));
         user.setUserCategory(userCategoryStore.find("Regular"));
         user.setNumOfPenalties(0);
+        user.setLastPasswordResetDate(new Timestamp(Calendar.getInstance().getTime().getTime()));
+        return store.save(user);
+    }
+
+    @Override
+    public RegisteredUser saveChanges(RegisteredUser user) {
         return store.save(user);
     }
 
@@ -42,7 +50,11 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
         return store.findAll(pageable);
     }
 
+    /*
     @Override
+    public RegisteredUser find(String email) {
+        return store.find(email);
+    }*/
     public List<RegisteredUser> getByNameAndSurname(String name, String surname, Pageable pageable) {
         return store.getByNameAndSurname(name.toLowerCase(), surname.toLowerCase(), pageable);
     }
@@ -59,5 +71,15 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
         return store.getByNameAndSurname(name.toLowerCase(), surname.toLowerCase(), pageable);
     }
 
+    @Override
+    public RegisteredUser activate(String email) {
+        RegisteredUser user = store.find(email);
+        user.setEnabled(true);
+        return store.update(user);
+    }
 
+
+    public RegisteredUser find(String email) {
+        return store.find(email);
+    }
 }

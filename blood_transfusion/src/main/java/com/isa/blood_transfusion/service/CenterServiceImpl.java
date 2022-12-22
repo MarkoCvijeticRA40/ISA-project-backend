@@ -5,6 +5,7 @@ import com.isa.blood_transfusion.model.Address;
 import com.isa.blood_transfusion.model.Center;
 import com.isa.blood_transfusion.model.WorkTime;
 import com.isa.blood_transfusion.store.CenterStore;
+import com.isa.blood_transfusion.store.MedicalStaffStore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,9 +20,12 @@ import java.util.List;
 @Service
 public class CenterServiceImpl implements CenterService {
     private final CenterStore store;
+    private final MedicalStaffStore msStore;
 
     @Override
     public Center save(Center center) {
+
+
         return store.save(center);
     }
 

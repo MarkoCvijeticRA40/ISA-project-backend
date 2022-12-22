@@ -19,4 +19,10 @@ public interface RegisteredUserService {
     List<RegisteredUser> getBySurname(String surname, Pageable pageable);
 
 
+    RegisteredUser activate(String email);
+
+
+    RegisteredUser find(String email);
+
+    RegisteredUser saveChanges(RegisteredUser user);
 }

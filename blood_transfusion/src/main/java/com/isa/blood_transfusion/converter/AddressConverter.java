@@ -12,13 +12,17 @@ import java.util.Set;
 public class AddressConverter {
 
     public Address toModel(AddressEntity addressEntity) {
-        return new Address(addressEntity.getId(),
-                addressEntity.getStreet(),
-                addressEntity.getNumber(),
-                addressEntity.getCity(),
-                addressEntity.getState(),
-                addressEntity.getLongitude(),
-                addressEntity.getLatitude());
+        if (addressEntity == null) {
+            return null;
+        } else {
+            return new Address(addressEntity.getId(),
+                    addressEntity.getStreet(),
+                    addressEntity.getNumber(),
+                    addressEntity.getCity(),
+                    addressEntity.getState(),
+                    addressEntity.getLongitude(),
+                    addressEntity.getLatitude());
+        }
     }
 
     public Set<Address> toModel(Set<AddressEntity> addressEntities) {
