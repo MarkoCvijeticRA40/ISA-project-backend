@@ -1,5 +1,6 @@
 package com.isa.blood_transfusion.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

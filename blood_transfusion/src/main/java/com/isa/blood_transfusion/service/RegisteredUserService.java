@@ -1,5 +1,6 @@
 package com.isa.blood_transfusion.service;
 
+import com.isa.blood_transfusion.model.AppUser;
 import com.isa.blood_transfusion.model.RegisteredUser;
 import org.springframework.data.domain.Pageable;
 
@@ -21,4 +22,6 @@ public interface RegisteredUserService {
     RegisteredUser activate(String email);
 
 
+    RegisteredUser find(String email);
+    RegisteredUser saveChanges(RegisteredUser user);
 }

@@ -4,15 +4,14 @@ import com.isa.blood_transfusion.entity.MedicalStaffEntity;
 import com.isa.blood_transfusion.model.MedicalStaff;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.HashSet;
 import java.util.Set;
-
 
 @Component
 public class MedicalStaffConverter {
     private RoleConverter roleConverter;
     private AddressConverter addressConverter;
+
     private CenterConverter centerConverter;
 
     @Autowired
@@ -60,7 +59,7 @@ public class MedicalStaffConverter {
             ));
         }
 
-        return medicalStaff;
+        return medicalStaffs;
     }
 
     public MedicalStaffEntity toEntity(MedicalStaff medicalStaff) {
@@ -81,7 +80,7 @@ public class MedicalStaffConverter {
         );
     }
 
-    public Set<MedicalStaffEntity> toEntity(Set<MedicalStaff> medicalStaff) {
+    public Set<MedicalStaffEntity> toEntity(Set<MedicalStaff> medicalStaffs) {
         Set<MedicalStaffEntity> medicalStaffEntities = new HashSet<>();
         for (var m : medicalStaff) {
             medicalStaffEntities.add(new MedicalStaffEntity(m.getId(),
@@ -100,7 +99,8 @@ public class MedicalStaffConverter {
                     m.getLastPasswordResetDate()
             ));
         }
-
         return medicalStaffEntities;
     }
+
 }
+
