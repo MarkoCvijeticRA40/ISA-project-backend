@@ -23,6 +23,5 @@ public class Center {
     private WorkTime workTime;
     private Set<Blood> blood = new HashSet<Blood>();
     private Set<Equipment> equipments = new HashSet<Equipment>();
-    private Set<FreeAppointment> freeAppointments = new HashSet<FreeAppointment>();
     private Set<MedicalStaff> medicalStaff = new HashSet<MedicalStaff>();
 }

@@ -36,8 +36,6 @@ public class CenterEntity {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "center_id")
     private Set<EquipmentEntity> equipments = new HashSet<EquipmentEntity>();
-    @OneToMany(mappedBy = "center", fetch = FetchType.EAGER)
-    private Set<FreeAppointmentEntity> freeAppointments = new HashSet<FreeAppointmentEntity>();
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "center_id")
     private Set<MedicalStaffEntity> medicalStaff = new HashSet<MedicalStaffEntity>();

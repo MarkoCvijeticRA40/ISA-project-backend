@@ -20,6 +20,7 @@ public class CenterConverter {
     private AddressConverter addressConverter;
     private BloodConverter bloodConverter;
     private MedicalStaffConverter medicalStaffConverter;
+
     @Autowired
     public CenterConverter(EquipmentConverter equipmentConverter, FreeAppointmentConverter freeAppointmentConverter, WorkTimeConverter workTimeConverter, AddressConverter addressConverter, BloodConverter bloodConverter, @Lazy MedicalStaffConverter medicalStaffConverter) {
         this.equipmentConverter = equipmentConverter;
@@ -39,7 +40,6 @@ public class CenterConverter {
                 workTimeConverter.toModel(centerEntity.getWorkTime()),
                 bloodConverter.toModel(centerEntity.getBlood()),
                 equipmentConverter.toModel(centerEntity.getEquipments()),
-                freeAppointmentConverter.toModel(centerEntity.getFreeAppointments()),
                 medicalStaffConverter.toModel(centerEntity.getMedicalStaff()));
     }
 
@@ -55,7 +55,6 @@ public class CenterConverter {
                     workTimeConverter.toModel(c.getWorkTime()),
                     bloodConverter.toModel(c.getBlood()),
                     equipmentConverter.toModel(c.getEquipments()),
-                    freeAppointmentConverter.toModel(c.getFreeAppointments()),
                     medicalStaffConverter.toModel(c.getMedicalStaff())));
         }
 
@@ -71,7 +70,6 @@ public class CenterConverter {
                 workTimeConverter.toEntity(center.getWorkTime()),
                 bloodConverter.toEntity(center.getBlood()),
                 equipmentConverter.toEntity(center.getEquipments()),
-                freeAppointmentConverter.toEntity(center.getFreeAppointments()),
                 medicalStaffConverter.toEntity(center.getMedicalStaff()));
     }
 
@@ -86,7 +84,6 @@ public class CenterConverter {
                     workTimeConverter.toEntity(c.getWorkTime()),
                     bloodConverter.toEntity(c.getBlood()),
                     equipmentConverter.toEntity(c.getEquipments()),
-                    freeAppointmentConverter.toEntity(c.getFreeAppointments()),
                     medicalStaffConverter.toEntity(c.getMedicalStaff())));
         }
 
@@ -104,7 +101,6 @@ public class CenterConverter {
                     workTimeConverter.toModel(c.getWorkTime()),
                     bloodConverter.toModel(c.getBlood()),
                     equipmentConverter.toModel(c.getEquipments()),
-                    freeAppointmentConverter.toModel(c.getFreeAppointments()),
                     medicalStaffConverter.toModel(c.getMedicalStaff())));
         }
 
