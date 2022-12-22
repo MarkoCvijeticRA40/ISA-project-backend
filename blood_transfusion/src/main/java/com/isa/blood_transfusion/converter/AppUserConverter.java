@@ -15,19 +15,25 @@ public class AppUserConverter {
     private AddressConverter addressConverter;
 
     public AppUser toModel(AppUserEntity appUserEntity) {
-        return new AppUser(appUserEntity.getId(),
-                appUserEntity.getEmail(),
-                appUserEntity.getPassword(),
-                appUserEntity.getName(),
-                appUserEntity.getSurname(),
-                appUserEntity.getPhoneNum(),
-                appUserEntity.getIdentityNumber(),
-                appUserEntity.getProfession(),
-                appUserEntity.getFacilityInfo(),
-                roleConverter.toModel(appUserEntity.getRole()),
-                addressConverter.toModel(appUserEntity.getAddress()),
-                appUserEntity.getGender()
-        );
+        if (appUserEntity == null) {
+            return null;
+        } else {
+            return new AppUser(appUserEntity.getId(),
+                    appUserEntity.getEmail(),
+                    appUserEntity.getPassword(),
+                    appUserEntity.getName(),
+                    appUserEntity.getSurname(),
+                    appUserEntity.getPhoneNum(),
+                    appUserEntity.getIdentityNumber(),
+                    appUserEntity.getProfession(),
+                    appUserEntity.getFacilityInfo(),
+                    roleConverter.toModel(appUserEntity.getRole()),
+                    addressConverter.toModel(appUserEntity.getAddress()),
+                    appUserEntity.getGender(),
+                    appUserEntity.isEnabled(),
+                    appUserEntity.getLastPasswordResetDate()
+            );
+        }
     }
 
     public Set<AppUser> toModel(Set<AppUserEntity> appUserEntities) {
@@ -44,7 +50,9 @@ public class AppUserConverter {
                     r.getFacilityInfo(),
                     roleConverter.toModel(r.getRole()),
                     addressConverter.toModel(r.getAddress()),
-                    r.getGender()
+                    r.getGender(),
+                    r.isEnabled(),
+                    r.getLastPasswordResetDate()
             ));
         }
 
@@ -63,7 +71,9 @@ public class AppUserConverter {
                 appUser.getFacilityInfo(),
                 roleConverter.toEntity(appUser.getRole()),
                 addressConverter.toEntity(appUser.getAddress()),
-                appUser.getGender()
+                appUser.getGender(),
+                appUser.isEnabled(),
+                appUser.getLastPasswordResetDate()
         );
     }
 
@@ -81,7 +91,9 @@ public class AppUserConverter {
                     r.getFacilityInfo(),
                     roleConverter.toEntity(r.getRole()),
                     addressConverter.toEntity(r.getAddress()),
-                    r.getGender()
+                    r.getGender(),
+                    r.isEnabled(),
+                    r.getLastPasswordResetDate()
             ));
         }
 

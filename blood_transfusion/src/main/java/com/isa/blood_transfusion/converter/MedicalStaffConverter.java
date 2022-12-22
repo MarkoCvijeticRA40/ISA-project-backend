@@ -33,25 +33,29 @@ public class MedicalStaffConverter {
                 medicalStaffEntity.getFacilityInfo(),
                 roleConverter.toModel(medicalStaffEntity.getRole()),
                 addressConverter.toModel(medicalStaffEntity.getAddress()),
-                medicalStaffEntity.getGender()
+                medicalStaffEntity.getGender(),
+                medicalStaffEntity.isEnabled(),
+                medicalStaffEntity.getLastPasswordResetDate()
         );
     }
 
     public Set<MedicalStaff> toModel(Set<MedicalStaffEntity> medicalStaffEntities) {
-        Set<MedicalStaff>medicalStaffs = new HashSet<>();
-        for (var r : medicalStaffEntities) {
-            medicalStaffs.add(new MedicalStaff(r.getId(),
-                    r.getEmail(),
-                    r.getPassword(),
-                    r.getName(),
-                    r.getSurname(),
-                    r.getPhoneNum(),
-                    r.getIdentityNumber(),
-                    r.getProfession(),
-                    r.getFacilityInfo(),
-                    roleConverter.toModel(r.getRole()),
-                    addressConverter.toModel(r.getAddress()),
-                    r.getGender()
+        Set<MedicalStaff> medicalStaff = new HashSet<>();
+        for (var m : medicalStaffEntities) {
+            medicalStaff.add(new MedicalStaff(m.getId(),
+                    m.getEmail(),
+                    m.getPassword(),
+                    m.getName(),
+                    m.getSurname(),
+                    m.getPhoneNum(),
+                    m.getIdentityNumber(),
+                    m.getProfession(),
+                    m.getFacilityInfo(),
+                    roleConverter.toModel(m.getRole()),
+                    addressConverter.toModel(m.getAddress()),
+                    m.getGender(),
+                    m.isEnabled(),
+                    m.getLastPasswordResetDate()
             ));
         }
 
@@ -70,25 +74,29 @@ public class MedicalStaffConverter {
                 medicalStaff.getFacilityInfo(),
                 roleConverter.toEntity(medicalStaff.getRole()),
                 addressConverter.toEntity(medicalStaff.getAddress()),
-                medicalStaff.getGender()
+                medicalStaff.getGender(),
+                medicalStaff.isEnabled(),
+                medicalStaff.getLastPasswordResetDate()
         );
     }
 
     public Set<MedicalStaffEntity> toEntity(Set<MedicalStaff> medicalStaffs) {
         Set<MedicalStaffEntity> medicalStaffEntities = new HashSet<>();
-        for (var r : medicalStaffs) {
-            medicalStaffEntities.add(new MedicalStaffEntity(r.getId(),
-                    r.getEmail(),
-                    r.getPassword(),
-                    r.getName(),
-                    r.getSurname(),
-                    r.getPhoneNum(),
-                    r.getIdentityNumber(),
-                    r.getProfession(),
-                    r.getFacilityInfo(),
-                    roleConverter.toEntity(r.getRole()),
-                    addressConverter.toEntity(r.getAddress()),
-                    r.getGender()
+        for (var m : medicalStaff) {
+            medicalStaffEntities.add(new MedicalStaffEntity(m.getId(),
+                    m.getEmail(),
+                    m.getPassword(),
+                    m.getName(),
+                    m.getSurname(),
+                    m.getPhoneNum(),
+                    m.getIdentityNumber(),
+                    m.getProfession(),
+                    m.getFacilityInfo(),
+                    roleConverter.toEntity(m.getRole()),
+                    addressConverter.toEntity(m.getAddress()),
+                    m.getGender(),
+                    m.isEnabled(),
+                    m.getLastPasswordResetDate()
             ));
         }
         return medicalStaffEntities;

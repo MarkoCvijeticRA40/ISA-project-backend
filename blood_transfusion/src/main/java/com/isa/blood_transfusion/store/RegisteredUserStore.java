@@ -7,7 +7,11 @@ import java.util.List;
 
 public interface RegisteredUserStore {
     RegisteredUser save(RegisteredUser user);
+
+    RegisteredUser find(String email);
+
     List<RegisteredUser> findAll();
+
     List<RegisteredUser> findAll(Pageable pageable);
     /*
     RegisteredUser find(String email);
@@ -20,7 +24,7 @@ public interface RegisteredUserStore {
 
 
     List<RegisteredUser> getByNameAndSurname(String name, String surname, Pageable pageable);
-
+    RegisteredUser update(RegisteredUser registeredUser);
     RegisteredUser find(String email);
     RegisteredUser saveChanges(RegisteredUser user);
 }

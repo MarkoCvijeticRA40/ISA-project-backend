@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,7 +14,7 @@ public interface RegisteredUserRepository extends JpaRepository<RegisteredUserEn
     Page<RegisteredUserEntity> findAll(Pageable pageable);
 
 
-   // RegisteredUserEntity findByEmail(String email);
+    RegisteredUserEntity findByEmail(String email);
 
 
    // @Query("select distinct u from users u where LOWER(u.name) like %:name% and LOWER(surname) like %:surname%")
@@ -27,7 +26,8 @@ public interface RegisteredUserRepository extends JpaRepository<RegisteredUserEn
 
 
 
-
+    @Query("select distinct u from users u where LOWER(u.name) like %:name% and LOWER(surname) like %:surname%")
+    Page<RegisteredUserEntity> findByNameAndSurname(String name, String surname, Pageable pageable);
 
 //where LOWER(u.name) like %:name% and LOWER(surname) like %:surname%"
     RegisteredUserEntity findByEmail(String email);

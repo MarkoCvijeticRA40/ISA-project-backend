@@ -2,7 +2,6 @@ package com.isa.blood_transfusion.converter;
 
 import com.isa.blood_transfusion.entity.FreeAppointmentEntity;
 import com.isa.blood_transfusion.model.FreeAppointment;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;

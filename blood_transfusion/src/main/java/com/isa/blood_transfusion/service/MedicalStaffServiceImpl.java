@@ -18,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Setter
 @AllArgsConstructor
 @Service
-
 public class MedicalStaffServiceImpl implements MedicalStaffService {
     private final MedicalStaffStore store;
     private final RoleStore roleStore;
