@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @AllArgsConstructor
 @Component
-public class UserCategoryStoreImpl implements UserCategoryStore{
+public class UserCategoryStoreImpl implements UserCategoryStore {
     private final UserCategoryRepository repository;
     private final UserCategoryConverter converter;
 

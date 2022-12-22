@@ -1,7 +1,6 @@
 package com.isa.blood_transfusion.controller;
 
 import com.isa.blood_transfusion.model.BloodDonorInfo;
-import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.service.BloodDonorInfoService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

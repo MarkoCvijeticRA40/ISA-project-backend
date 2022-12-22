@@ -2,9 +2,7 @@ package com.isa.blood_transfusion.converter;
 
 import com.isa.blood_transfusion.entity.MedicalStaffEntity;
 import com.isa.blood_transfusion.model.MedicalStaff;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -16,6 +14,7 @@ public class MedicalStaffConverter {
     private RoleConverter roleConverter;
     private AddressConverter addressConverter;
     private CenterConverter centerConverter;
+
     @Autowired
     public MedicalStaffConverter(RoleConverter roleConverter, AddressConverter addressConverter, CenterConverter centerConverter) {
         this.roleConverter = roleConverter;
@@ -25,17 +24,20 @@ public class MedicalStaffConverter {
 
     public MedicalStaff toModel(MedicalStaffEntity medicalStaffEntity) {
         return new MedicalStaff(medicalStaffEntity.getId(),
-                        medicalStaffEntity.getEmail(),
-                        medicalStaffEntity.getPassword(),
-                        medicalStaffEntity.getName(),
-                        medicalStaffEntity.getSurname(),
-                        medicalStaffEntity.getPhoneNum(),
-                        medicalStaffEntity.getIdentityNumber(),
-                        medicalStaffEntity.getProfession(),
-                        medicalStaffEntity.getFacilityInfo(),
-                        roleConverter.toModel(medicalStaffEntity.getRole()),
-                        addressConverter.toModel(medicalStaffEntity.getAddress()),
-                        medicalStaffEntity.getGender());
+                medicalStaffEntity.getEmail(),
+                medicalStaffEntity.getPassword(),
+                medicalStaffEntity.getName(),
+                medicalStaffEntity.getSurname(),
+                medicalStaffEntity.getPhoneNum(),
+                medicalStaffEntity.getIdentityNumber(),
+                medicalStaffEntity.getProfession(),
+                medicalStaffEntity.getFacilityInfo(),
+                roleConverter.toModel(medicalStaffEntity.getRole()),
+                addressConverter.toModel(medicalStaffEntity.getAddress()),
+                medicalStaffEntity.getGender(),
+                medicalStaffEntity.isEnabled(),
+                medicalStaffEntity.getLastPasswordResetDate()
+        );
     }
 
     public Set<MedicalStaff> toModel(Set<MedicalStaffEntity> medicalStaffEntities) {
@@ -52,7 +54,10 @@ public class MedicalStaffConverter {
                     m.getFacilityInfo(),
                     roleConverter.toModel(m.getRole()),
                     addressConverter.toModel(m.getAddress()),
-                    m.getGender()));
+                    m.getGender(),
+                    m.isEnabled(),
+                    m.getLastPasswordResetDate()
+            ));
         }
 
         return medicalStaff;
@@ -60,17 +65,20 @@ public class MedicalStaffConverter {
 
     public MedicalStaffEntity toEntity(MedicalStaff medicalStaff) {
         return new MedicalStaffEntity(medicalStaff.getId(),
-                        medicalStaff.getEmail(),
-                        medicalStaff.getPassword(),
-                        medicalStaff.getName(),
-                        medicalStaff.getSurname(),
-                        medicalStaff.getPhoneNum(),
-                        medicalStaff.getIdentityNumber(),
-                        medicalStaff.getProfession(),
-                        medicalStaff.getFacilityInfo(),
-                        roleConverter.toEntity(medicalStaff.getRole()),
-                        addressConverter.toEntity(medicalStaff.getAddress()),
-                        medicalStaff.getGender());
+                medicalStaff.getEmail(),
+                medicalStaff.getPassword(),
+                medicalStaff.getName(),
+                medicalStaff.getSurname(),
+                medicalStaff.getPhoneNum(),
+                medicalStaff.getIdentityNumber(),
+                medicalStaff.getProfession(),
+                medicalStaff.getFacilityInfo(),
+                roleConverter.toEntity(medicalStaff.getRole()),
+                addressConverter.toEntity(medicalStaff.getAddress()),
+                medicalStaff.getGender(),
+                medicalStaff.isEnabled(),
+                medicalStaff.getLastPasswordResetDate()
+        );
     }
 
     public Set<MedicalStaffEntity> toEntity(Set<MedicalStaff> medicalStaff) {
@@ -87,7 +95,10 @@ public class MedicalStaffConverter {
                     m.getFacilityInfo(),
                     roleConverter.toEntity(m.getRole()),
                     addressConverter.toEntity(m.getAddress()),
-                    m.getGender()));
+                    m.getGender(),
+                    m.isEnabled(),
+                    m.getLastPasswordResetDate()
+            ));
         }
 
         return medicalStaffEntities;
