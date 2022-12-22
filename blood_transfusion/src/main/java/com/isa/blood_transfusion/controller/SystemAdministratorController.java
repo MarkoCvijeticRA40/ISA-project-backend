@@ -33,6 +33,15 @@ public class SystemAdministratorController {
         return new ResponseEntity<>(systemAdministratorService.find(email), HttpStatus.OK);
     }
 
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<SystemAdministrator> findNyId(@PathVariable Long id) {
+        return new ResponseEntity<>(systemAdministratorService.findById(id), HttpStatus.OK);
+    }
+
+
+
+
     @PutMapping("/saveChanges")
     public ResponseEntity<SystemAdministrator> saveChanges(@RequestBody SystemAdministrator systemAdministrator) {
         return new ResponseEntity<>(systemAdministratorService.save(systemAdministrator), HttpStatus.OK);

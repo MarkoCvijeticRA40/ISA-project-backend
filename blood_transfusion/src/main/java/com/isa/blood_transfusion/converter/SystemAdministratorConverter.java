@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -19,6 +20,7 @@ public class SystemAdministratorConverter {
     private CenterConverter centerConverter;
     private ScheduledAppointmentConverter scheduledAppointmentConverter;
     private PerformedAppointmentConverter performedAppointmentConverter;
+
 
     public SystemAdministrator toModel(SystemAdministratorEntity systemAdministratorEntity) {
         return new SystemAdministrator(systemAdministratorEntity.getId(),
@@ -32,7 +34,8 @@ public class SystemAdministratorConverter {
                 systemAdministratorEntity.getFacilityInfo(),
                 roleConverter.toModel(systemAdministratorEntity.getRole()),
                 addressConverter.toModel(systemAdministratorEntity.getAddress()),
-                systemAdministratorEntity.getGender()
+                systemAdministratorEntity.getGender(),
+                systemAdministratorEntity.getIsFirstLogin()
         );
     }
 
@@ -50,7 +53,8 @@ public class SystemAdministratorConverter {
                     r.getFacilityInfo(),
                     roleConverter.toModel(r.getRole()),
                     addressConverter.toModel(r.getAddress()),
-                    r.getGender()
+                    r.getGender(),
+                    r.getIsFirstLogin()
             ));
         }
 
@@ -69,7 +73,10 @@ public class SystemAdministratorConverter {
                 systemAdministrator.getFacilityInfo(),
                 roleConverter.toEntity(systemAdministrator.getRole()),
                 addressConverter.toEntity(systemAdministrator.getAddress()),
-                systemAdministrator.getGender()
+                systemAdministrator.getGender(),
+                systemAdministrator.getIsFirstLogin()
+
+
         );
     }
 
@@ -87,10 +94,13 @@ public class SystemAdministratorConverter {
                     r.getFacilityInfo(),
                     roleConverter.toEntity(r.getRole()),
                     addressConverter.toEntity(r.getAddress()),
-                    r.getGender()
+                    r.getGender(),
+                    r.getIsFirstLogin()
             ));
         }
         return systemAdministratorEntities;
     }
+
+
 
 }

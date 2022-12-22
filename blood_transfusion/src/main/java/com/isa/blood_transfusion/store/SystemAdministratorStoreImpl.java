@@ -23,6 +23,15 @@ public class SystemAdministratorStoreImpl implements SystemAdministratorStore {
     }
 
     @Override
+    public SystemAdministrator findById(Long id) {
+        if (repository.getById(id) == null) {
+            return null;
+        } else {
+            return converter.toModel(repository.getById(id));
+        }
+    }
+
+    @Override
     public SystemAdministrator save(SystemAdministrator systemAdministrator) {
         repository.save(converter.toEntity(systemAdministrator));
         return systemAdministrator;
