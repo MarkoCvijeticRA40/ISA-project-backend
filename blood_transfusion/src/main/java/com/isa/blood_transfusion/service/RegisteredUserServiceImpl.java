@@ -47,10 +47,11 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
         return store.findAll(pageable);
     }
 
+    /*
     @Override
     public RegisteredUser find(String email) {
         return store.find(email);
-    }
+    }*/
     public List<RegisteredUser> getByNameAndSurname(String name, String surname, Pageable pageable) {
         return store.getByNameAndSurname(name.toLowerCase(),surname.toLowerCase(), pageable);
     }

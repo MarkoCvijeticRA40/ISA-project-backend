@@ -35,6 +35,7 @@ public class RegisteredUserStoreImpl implements RegisteredUserStore {
     public List<RegisteredUser> findAll(Pageable pageable) {
         return converter.toModel(repository.findAll(pageable).toSet()).stream().toList();
     }
+    /*
 
     @Override
     public RegisteredUser find(String email) {
@@ -46,6 +47,7 @@ public class RegisteredUserStoreImpl implements RegisteredUserStore {
         return converter.toModel(repository.findByNameAndSurname(name,surname , pageable).toSet()).stream().toList();
         }
     }
+    */
     public List<RegisteredUser> getByNameAndSurname(String name,String surname ,Pageable pageable) {
         return converter.toModel(repository.findByNameAndSurname(name, surname, pageable).toSet()).stream().toList();
     }

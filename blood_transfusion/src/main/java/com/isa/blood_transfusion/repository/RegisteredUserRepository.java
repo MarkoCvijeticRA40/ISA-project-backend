@@ -11,10 +11,13 @@ import java.util.List;
 
 public interface RegisteredUserRepository extends JpaRepository<RegisteredUserEntity, Long> {
     Page<RegisteredUserEntity> findAll(Pageable pageable);
-    RegisteredUserEntity findByEmail(String email);
 
-    @Query("select distinct u from users u where LOWER(u.name) like %:name% and LOWER(surname) like %:surname%")
-    Page<RegisteredUserEntity> findByNameAndSurname(String name, String surname,Pageable pageable);
+
+   // RegisteredUserEntity findByEmail(String email);
+
+
+   // @Query("select distinct u from users u where LOWER(u.name) like %:name% and LOWER(surname) like %:surname%")
+   // Page<RegisteredUserEntity> findByNameAndSurname(String name, String surname,Pageable pageable);
     //where LOWER(u.name) like %:name% and LOWER(surname) like %:surname%"
 
     @Query("select distinct u from users u where LOWER(u.name) like %:name% and LOWER(surname) like %:surname%")

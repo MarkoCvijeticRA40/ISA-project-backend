@@ -1,6 +1,7 @@
 package com.isa.blood_transfusion.controller;
 
 import com.isa.blood_transfusion.model.AppUser;
+import com.isa.blood_transfusion.model.MedicalStaff;
 import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.model.SystemAdministrator;
 import com.isa.blood_transfusion.service.AppUserService;
@@ -38,5 +39,9 @@ public class SystemAdministratorController {
     }
 
 
+    @PostMapping("/registerSystemAdministrator")
+    public ResponseEntity<SystemAdministrator> registerSystemAdministrator(@RequestBody SystemAdministrator systemAdministrator) {
+        return new ResponseEntity<>(systemAdministratorService.save(systemAdministrator), HttpStatus.OK);
+    }
 
 }
