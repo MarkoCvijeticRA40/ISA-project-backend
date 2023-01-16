@@ -91,7 +91,7 @@ public class CenterServiceImpl implements CenterService {
         Center center = new Center(centerDto.getId(), centerDto.getName(), centerDto.getDescription(), centerDto.getAvgGrade(),
                 new Address(centerDto.getAddress().getId(), centerDto.getAddress().getStreet(), centerDto.getAddress().getNumber(), centerDto.getAddress().getCity(), centerDto.getAddress().getState(), centerDto.getAddress().getLongitude(), centerDto.getAddress().getLatitude()),
                 new WorkTime(centerDto.getWorkTime().getId(), LocalTime.parse(centerDto.getWorkTime().getStartTime()), LocalTime.parse(centerDto.getWorkTime().getEndTime())),
-                centerDto.getBlood(), centerDto.getEquipments(), centerDto.getFreeAppointments(), centerDto.getMedicalStaff());
+                centerDto.getBlood(), centerDto.getEquipments(), centerDto.getMedicalStaff());
         return store.updateCenter(center, id);
     }
 

@@ -17,4 +17,5 @@ public class FreeAppointment {
     private Integer duration;
     private Center center;
     private MedicalStaff medicalStaff;
+    
 }
