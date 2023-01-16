@@ -1,4 +1,5 @@
 package com.isa.blood_transfusion.repository;
+
 import com.isa.blood_transfusion.entity.FreeAppointmentEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

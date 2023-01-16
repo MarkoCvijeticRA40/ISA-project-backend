@@ -11,7 +11,11 @@ import java.util.Set;
 public class UserCategoryConverter {
 
     public UserCategory toModel(UserCategoryEntity userCategoryEntity) {
-        return new UserCategory(userCategoryEntity.getId(), userCategoryEntity.getName(), userCategoryEntity.getBenefit());
+        if (userCategoryEntity == null) {
+            return null;
+        } else {
+            return new UserCategory(userCategoryEntity.getId(), userCategoryEntity.getName(), userCategoryEntity.getBenefit());
+        }
     }
 
     public Set<UserCategory> toModel(Set<UserCategoryEntity> userCategoryEntities) {

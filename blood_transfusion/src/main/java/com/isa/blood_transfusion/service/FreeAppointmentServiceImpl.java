@@ -1,5 +1,5 @@
 package com.isa.blood_transfusion.service;
-import com.isa.blood_transfusion.model.AppUser;
+
 import com.isa.blood_transfusion.model.FreeAppointment;
 import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.store.FreeAppointmentStore;
@@ -21,8 +21,9 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @Service
-public class FreeAppointmentServiceImpl implements  FreeAppointmentService{
+public class FreeAppointmentServiceImpl implements FreeAppointmentService {
     private final FreeAppointmentStore store;
+
     @Override
     public FreeAppointment save(FreeAppointment freeAppointment) {
         return store.save(freeAppointment);

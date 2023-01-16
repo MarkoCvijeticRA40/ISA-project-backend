@@ -1,7 +1,6 @@
 package com.isa.blood_transfusion.store;
 
 import com.isa.blood_transfusion.converter.FreeAppointmentConverter;
-import com.isa.blood_transfusion.model.AppUser;
 import com.isa.blood_transfusion.model.FreeAppointment;
 import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.repository.FreeAppointmentRepository;
@@ -15,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
-public class FreeAppointmentStoreImpl implements FreeAppointmentStore{
+public class FreeAppointmentStoreImpl implements FreeAppointmentStore {
 
     private final FreeAppointmentRepository repository;
     private final FreeAppointmentConverter converter;

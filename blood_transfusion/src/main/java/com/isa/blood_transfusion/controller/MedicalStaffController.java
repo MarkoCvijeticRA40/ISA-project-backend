@@ -1,11 +1,8 @@
 package com.isa.blood_transfusion.controller;
 
-import com.isa.blood_transfusion.entity.MedicalStaffEntity;
-import com.isa.blood_transfusion.model.AppUser;
 import com.isa.blood_transfusion.model.MedicalStaff;
-import com.isa.blood_transfusion.model.RegisteredUser;
-import com.isa.blood_transfusion.model.SystemAdministrator;
-import com.isa.blood_transfusion.service.*;
+import com.isa.blood_transfusion.service.MedicalStaffService;
+import com.isa.blood_transfusion.service.RoleService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,6 +30,11 @@ public class MedicalStaffController {
         return new ResponseEntity<>(medicalStaffService.save(medicalStaff), HttpStatus.OK);
     }
 
+
+    @PostMapping("/registerStaff")
+    public ResponseEntity<MedicalStaff> registerMedicalStaff(@RequestBody MedicalStaff medicalStaff) {
+        return new ResponseEntity<>(medicalStaffService.saveStaff(medicalStaff), HttpStatus.OK);
+    }
 
 
 }

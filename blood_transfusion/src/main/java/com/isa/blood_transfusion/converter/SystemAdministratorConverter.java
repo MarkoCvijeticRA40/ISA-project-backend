@@ -1,8 +1,6 @@
 package com.isa.blood_transfusion.converter;
 
-import com.isa.blood_transfusion.entity.RegisteredUserEntity;
 import com.isa.blood_transfusion.entity.SystemAdministratorEntity;
-import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.model.SystemAdministrator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -20,6 +18,7 @@ public class SystemAdministratorConverter {
     private ScheduledAppointmentConverter scheduledAppointmentConverter;
     private PerformedAppointmentConverter performedAppointmentConverter;
 
+
     public SystemAdministrator toModel(SystemAdministratorEntity systemAdministratorEntity) {
         return new SystemAdministrator(systemAdministratorEntity.getId(),
                 systemAdministratorEntity.getEmail(),
@@ -32,12 +31,15 @@ public class SystemAdministratorConverter {
                 systemAdministratorEntity.getFacilityInfo(),
                 roleConverter.toModel(systemAdministratorEntity.getRole()),
                 addressConverter.toModel(systemAdministratorEntity.getAddress()),
-                systemAdministratorEntity.getGender()
+                systemAdministratorEntity.getGender(),
+                systemAdministratorEntity.isEnabled(),
+                systemAdministratorEntity.getLastPasswordResetDate(),
+                systemAdministratorEntity.getIsFirstLogin()
         );
     }
 
     public Set<SystemAdministrator> toModel(Set<SystemAdministratorEntity> systemAdministratorEntities) {
-        Set<SystemAdministrator>systemAdministrators = new HashSet<>();
+        Set<SystemAdministrator> systemAdministrators = new HashSet<>();
         for (var r : systemAdministratorEntities) {
             systemAdministrators.add(new SystemAdministrator(r.getId(),
                     r.getEmail(),
@@ -50,7 +52,10 @@ public class SystemAdministratorConverter {
                     r.getFacilityInfo(),
                     roleConverter.toModel(r.getRole()),
                     addressConverter.toModel(r.getAddress()),
-                    r.getGender()
+                    r.getGender(),
+                    r.isEnabled(),
+                    r.getLastPasswordResetDate(),
+                    r.getIsFirstLogin()
             ));
         }
 
@@ -69,7 +74,12 @@ public class SystemAdministratorConverter {
                 systemAdministrator.getFacilityInfo(),
                 roleConverter.toEntity(systemAdministrator.getRole()),
                 addressConverter.toEntity(systemAdministrator.getAddress()),
-                systemAdministrator.getGender()
+                systemAdministrator.getGender(),
+                systemAdministrator.isEnabled(),
+                systemAdministrator.getLastPasswordResetDate(),
+                systemAdministrator.getIsFirstLogin()
+
+
         );
     }
 
@@ -87,10 +97,14 @@ public class SystemAdministratorConverter {
                     r.getFacilityInfo(),
                     roleConverter.toEntity(r.getRole()),
                     addressConverter.toEntity(r.getAddress()),
-                    r.getGender()
+                    r.getGender(),
+                    r.isEnabled(),
+                    r.getLastPasswordResetDate(),
+                    r.getIsFirstLogin()
             ));
         }
         return systemAdministratorEntities;
     }
+
 
 }

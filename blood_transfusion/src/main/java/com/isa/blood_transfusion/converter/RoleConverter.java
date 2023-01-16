@@ -11,7 +11,11 @@ import java.util.Set;
 public class RoleConverter {
 
     public Role toModel(RoleEntity roleEntity) {
-        return new Role(roleEntity.getId(), roleEntity.getName());
+        if (roleEntity == null) {
+            return null;
+        } else {
+            return new Role(roleEntity.getId(), roleEntity.getName());
+        }
     }
 
     public Set<Role> toModel(Set<RoleEntity> roleEntities) {

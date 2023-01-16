@@ -1,10 +1,9 @@
 package com.isa.blood_transfusion.controller;
 
 import com.isa.blood_transfusion.dto.CenterDto;
-import com.isa.blood_transfusion.dto.SearchInput;
 import com.isa.blood_transfusion.model.Center;
-import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.service.CenterService;
+import com.isa.blood_transfusion.service.MedicalStaffService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +23,7 @@ import java.util.List;
 public class CenterController {
 
     private final CenterService centerService;
+    private final MedicalStaffService msService;
 
     @GetMapping
     public ResponseEntity<List<Center>> findAll() {
@@ -36,13 +36,13 @@ public class CenterController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Center>> search(@RequestParam(name = "searchByName") String searchByName, @RequestParam(name = "searchByPlace") String searchByPlace){
+    public ResponseEntity<List<Center>> search(@RequestParam(name = "searchByName") String searchByName, @RequestParam(name = "searchByPlace") String searchByPlace) {
         return new ResponseEntity<>(centerService.search(searchByName, searchByPlace), HttpStatus.OK);
     }
 
     @GetMapping("/filter")
     public ResponseEntity<List<Center>> filter(@RequestParam(name = "searchByName") String searchByName, @RequestParam(name = "searchByPlace") String searchByPlace,
-                                               @RequestParam(name = "gradeFrom") Double filterByGradeFrom, @RequestParam(name = "gradeTo") Double filterByGradeTo){
+                                               @RequestParam(name = "gradeFrom") Double filterByGradeFrom, @RequestParam(name = "gradeTo") Double filterByGradeTo) {
         return new ResponseEntity<>(centerService.filter(searchByName, searchByPlace, filterByGradeFrom, filterByGradeTo), HttpStatus.OK);
     }
 
@@ -60,6 +60,7 @@ public class CenterController {
 
     @PostMapping("/registerCenter")
     public ResponseEntity<Center> registerCenter(@RequestBody Center center) {
+        // msService.saveStaff(center.getMedicalStaff().iterator().next());
         return new ResponseEntity<>(centerService.save(center), HttpStatus.CREATED);
     }
 

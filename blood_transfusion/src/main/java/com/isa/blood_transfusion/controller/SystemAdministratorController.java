@@ -1,9 +1,6 @@
 package com.isa.blood_transfusion.controller;
 
-import com.isa.blood_transfusion.model.AppUser;
-import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.model.SystemAdministrator;
-import com.isa.blood_transfusion.service.AppUserService;
 import com.isa.blood_transfusion.service.RegisteredUserService;
 import com.isa.blood_transfusion.service.RoleService;
 import com.isa.blood_transfusion.service.SystemAdministratorService;
@@ -13,8 +10,6 @@ import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -32,11 +27,22 @@ public class SystemAdministratorController {
         return new ResponseEntity<>(systemAdministratorService.find(email), HttpStatus.OK);
     }
 
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<SystemAdministrator> findNyId(@PathVariable Long id) {
+        return new ResponseEntity<>(systemAdministratorService.findById(id), HttpStatus.OK);
+    }
+
+
     @PutMapping("/saveChanges")
     public ResponseEntity<SystemAdministrator> saveChanges(@RequestBody SystemAdministrator systemAdministrator) {
         return new ResponseEntity<>(systemAdministratorService.save(systemAdministrator), HttpStatus.OK);
     }
 
 
+    @PostMapping("/registerSystemAdministrator")
+    public ResponseEntity<SystemAdministrator> registerSystemAdministrator(@RequestBody SystemAdministrator systemAdministrator) {
+        return new ResponseEntity<>(systemAdministratorService.save(systemAdministrator), HttpStatus.OK);
+    }
 
 }
