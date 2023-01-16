@@ -59,6 +59,7 @@ public class ScheduledAppointmentConverter {
                 bloodDonorInfoConverter.toEntity(scheduledAppointment.getBloodDonorInfo()),
                 registeredUserConverter.toEntity(scheduledAppointment.getRegisteredUser())
         );
+
     }
 
     public Set<ScheduledAppointmentEntity> toEntity(Set<ScheduledAppointment> scheduledAppointments) {
