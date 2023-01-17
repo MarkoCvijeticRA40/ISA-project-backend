@@ -35,7 +35,8 @@ public class AppUserEntity {
     private String profession;
     @Column(name = "facility_info")
     private String facilityInfo;
-    @ManyToOne(fetch = FetchType.EAGER)
+    //@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
     private RoleEntity role;
     @OneToOne(cascade = CascadeType.ALL)

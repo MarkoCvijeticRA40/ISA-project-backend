@@ -67,7 +67,9 @@ public class WebSecurityConfig {
         http.exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint);
         http.authorizeRequests().antMatchers("/auth/**").permitAll()        // /auth/**
                 .antMatchers("/users/activate/**").permitAll()
-                .antMatchers("/users/whoami").hasAuthority("REGISTERED_USER")
+                //.antMatchers("/users/whoami").hasAuthority("REGISTERED_USER")
+                .antMatchers("/medicalstaff/**").permitAll()
+                .antMatchers("/registeredusers/**").permitAll()
                 .anyRequest().authenticated().and()
                 // za development svrhe ukljuci konfiguraciju za CORS iz WebConfig klase
                 .cors().and()
