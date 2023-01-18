@@ -18,5 +18,4 @@ public interface RegisteredUserStore {
 
     RegisteredUser find(String email);
 
-    RegisteredUser saveChanges(RegisteredUser user);
 }

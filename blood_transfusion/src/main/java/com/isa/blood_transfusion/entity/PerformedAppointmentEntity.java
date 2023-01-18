@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @DiscriminatorValue("PA")
 @Entity
 public class PerformedAppointmentEntity extends ScheduledAppointmentEntity {
-    @Column(name = "info", nullable = true)
+    @Column(name = "info")
     private String info;
 
     public PerformedAppointmentEntity(Long id, LocalDateTime date, Integer duration, CenterEntity centerEntity, MedicalStaffEntity medicalStaffEntity, BloodDonorInfoEntity bloodDonorInfoEntity, RegisteredUserEntity registeredUserEntity, String info) {

@@ -22,11 +22,6 @@ public class RegisteredUserStoreImpl implements RegisteredUserStore {
         return user;
     }
 
-    public RegisteredUser saveChanges(RegisteredUser user) {
-        repository.save(converter.toEntity(user));
-        return user;
-    }
-
 
     @Override
     public List<RegisteredUser> findAll() {

@@ -70,6 +70,9 @@ public class WebSecurityConfig {
                 //.antMatchers("/users/whoami").hasAuthority("REGISTERED_USER")
                 .antMatchers("/medicalstaff/**").permitAll()
                 .antMatchers("/registeredusers/**").permitAll()
+                .antMatchers("/centers/**").permitAll()
+                .antMatchers("/info/**").permitAll()
+                .antMatchers("/freeapp/**").permitAll()
                 .anyRequest().authenticated().and()
                 // za development svrhe ukljuci konfiguraciju za CORS iz WebConfig klase
                 .cors().and()
