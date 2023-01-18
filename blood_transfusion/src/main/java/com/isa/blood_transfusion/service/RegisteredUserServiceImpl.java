@@ -37,6 +37,7 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
 
     @Override
     public RegisteredUser saveChanges(RegisteredUser user) {
+        user.setRole(roleStore.find("REGISTERED_USER"));
         return store.save(user);
     }
 
