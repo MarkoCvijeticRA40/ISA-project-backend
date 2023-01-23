@@ -1,4 +1,4 @@
-package com.isa.blood_transfusion.store;
+package com.isa.blood_transfusion.repository.store;
 
 import com.isa.blood_transfusion.converter.BloodDonorInfoConverter;
 import com.isa.blood_transfusion.entity.BloodDonorInfoEntity;

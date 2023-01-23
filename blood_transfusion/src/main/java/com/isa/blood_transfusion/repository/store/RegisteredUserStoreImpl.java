@@ -1,4 +1,4 @@
-package com.isa.blood_transfusion.store;
+package com.isa.blood_transfusion.repository.store;
 
 import com.isa.blood_transfusion.converter.RegisteredUserConverter;
 import com.isa.blood_transfusion.model.RegisteredUser;

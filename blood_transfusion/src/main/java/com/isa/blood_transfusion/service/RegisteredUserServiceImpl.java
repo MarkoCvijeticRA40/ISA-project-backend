@@ -1,11 +1,10 @@
 package com.isa.blood_transfusion.service;
 
-import com.isa.blood_transfusion.entity.RegisteredUserEntity;
 import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.repository.RegisteredUserRepository;
-import com.isa.blood_transfusion.store.RegisteredUserStore;
-import com.isa.blood_transfusion.store.RoleStore;
-import com.isa.blood_transfusion.store.UserCategoryStore;
+import com.isa.blood_transfusion.repository.store.RegisteredUserStore;
+import com.isa.blood_transfusion.repository.store.RoleStore;
+import com.isa.blood_transfusion.repository.store.UserCategoryStore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,7 +29,9 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
 
     @Override
     public RegisteredUser save(RegisteredUser user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if(isPasswordChanged(user.getEmail(), user.getPassword()) == true) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         user.setRole(roleStore.find("REGISTERED_USER"));
         user.setUserCategory(userCategoryStore.find("Regular"));
         user.setNumOfPenalties(0);
@@ -41,6 +42,17 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
     @Override
     public RegisteredUser saveChanges(RegisteredUser user) {
         return store.save(user);
+    }
+
+    @Override
+    public boolean isPasswordChanged(String email,String password) {
+
+        RegisteredUser registeredUser = store.find(email);
+
+        if (registeredUser.getPassword().equals(password)){
+            return false;
+        }
+        return true;
     }
 
     @Override

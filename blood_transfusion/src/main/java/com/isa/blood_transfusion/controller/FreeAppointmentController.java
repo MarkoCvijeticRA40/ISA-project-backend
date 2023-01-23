@@ -1,20 +1,17 @@
 package com.isa.blood_transfusion.controller;
 
 import com.isa.blood_transfusion.model.FreeAppointment;
-import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.service.FreeAppointmentService;
-import com.isa.blood_transfusion.store.RoleStore;
+import com.isa.blood_transfusion.repository.store.RoleStore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import net.bytebuddy.asm.Advice;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Getter

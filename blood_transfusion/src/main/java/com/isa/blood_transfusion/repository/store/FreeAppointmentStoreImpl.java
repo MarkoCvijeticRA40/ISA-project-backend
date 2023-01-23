@@ -1,8 +1,7 @@
-package com.isa.blood_transfusion.store;
+package com.isa.blood_transfusion.repository.store;
 
 import com.isa.blood_transfusion.converter.FreeAppointmentConverter;
 import com.isa.blood_transfusion.model.FreeAppointment;
-import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.repository.FreeAppointmentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
