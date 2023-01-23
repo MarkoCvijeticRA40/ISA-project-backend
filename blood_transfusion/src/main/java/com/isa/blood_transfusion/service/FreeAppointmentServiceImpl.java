@@ -1,7 +1,7 @@
 package com.isa.blood_transfusion.service;
 
 import com.isa.blood_transfusion.model.FreeAppointment;
-import com.isa.blood_transfusion.repository.store.FreeAppointmentStore;
+import com.isa.blood_transfusion.store.FreeAppointmentStore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

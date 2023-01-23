@@ -2,9 +2,9 @@ package com.isa.blood_transfusion.service;
 
 import com.isa.blood_transfusion.model.RegisteredUser;
 import com.isa.blood_transfusion.repository.RegisteredUserRepository;
-import com.isa.blood_transfusion.repository.store.RegisteredUserStore;
-import com.isa.blood_transfusion.repository.store.RoleStore;
-import com.isa.blood_transfusion.repository.store.UserCategoryStore;
+import com.isa.blood_transfusion.store.RegisteredUserStore;
+import com.isa.blood_transfusion.store.RoleStore;
+import com.isa.blood_transfusion.store.UserCategoryStore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
