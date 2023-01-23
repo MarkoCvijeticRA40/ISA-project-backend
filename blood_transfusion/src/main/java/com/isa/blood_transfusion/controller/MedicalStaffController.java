@@ -27,7 +27,7 @@ public class MedicalStaffController {
 
     @PutMapping("/saveChanges")
     public ResponseEntity<MedicalStaff> saveChanges(@RequestBody MedicalStaff medicalStaff) {
-        return new ResponseEntity<>(medicalStaffService.save(medicalStaff), HttpStatus.OK);
+        return new ResponseEntity<>(medicalStaffService.saveStaff(medicalStaff), HttpStatus.OK);
     }
 
 
