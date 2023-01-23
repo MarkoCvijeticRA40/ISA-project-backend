@@ -38,4 +38,19 @@ public class FreeAppointmentStoreImpl implements FreeAppointmentStore {
     public List<FreeAppointment> getByDate(LocalDateTime date, Pageable pageable) {
         return converter.toModel(repository.findByDate(date, pageable).toSet()).stream().toList();
     }
+
+    @Override
+    public List<FreeAppointment> get(Long centerId) {
+        return converter.toModel(repository.findFreeAppointmentEntityByCenterId(centerId).stream().collect(Collectors.toSet())).stream().toList();
+    }
+
+    @Override
+    public FreeAppointment getById(Long id) {
+        return converter.toModel(repository.getById(id));
+    }
+
+    @Override
+    public void delete(FreeAppointment freeAppointment) {
+        repository.delete(converter.toEntity(freeAppointment));
+    }
 }

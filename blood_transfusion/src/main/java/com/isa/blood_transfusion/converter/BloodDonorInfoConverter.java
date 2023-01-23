@@ -1,7 +1,9 @@
 package com.isa.blood_transfusion.converter;
 
 import com.isa.blood_transfusion.entity.BloodDonorInfoEntity;
+import com.isa.blood_transfusion.entity.RegisteredUserEntity;
 import com.isa.blood_transfusion.model.BloodDonorInfo;
+import com.isa.blood_transfusion.repository.RegisteredUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,7 @@ import java.util.Set;
 @Component
 public class BloodDonorInfoConverter {
     private AddressConverter addressConverter;
+    private final RegisteredUserRepository registeredUserRepository;
 
     public BloodDonorInfo toModel(BloodDonorInfoEntity bloodDonorInfoEntity) {
         return new BloodDonorInfo(bloodDonorInfoEntity.getId(),
@@ -32,7 +35,9 @@ public class BloodDonorInfoConverter {
                 bloodDonorInfoEntity.getIsTakingAnyMedicines(),
                 bloodDonorInfoEntity.getHasSomeAllergies(),
                 bloodDonorInfoEntity.getHasChronicDisease(),
-                bloodDonorInfoEntity.getIsFeelingHealthy());
+                bloodDonorInfoEntity.getIsFeelingHealthy(),
+                bloodDonorInfoEntity.getRegisteredUser().getId()
+                );
     }
 
     public Set<BloodDonorInfo> toModel(Set<BloodDonorInfoEntity> bloodDonorInfoEntities) {
@@ -56,7 +61,9 @@ public class BloodDonorInfoConverter {
                     b.getIsTakingAnyMedicines(),
                     b.getHasSomeAllergies(),
                     b.getHasChronicDisease(),
-                    b.getIsFeelingHealthy()));
+                    b.getIsFeelingHealthy(),
+                    b.getRegisteredUser().getId()
+                    ));
         }
 
         return bloodDonorInfo;
@@ -81,7 +88,8 @@ public class BloodDonorInfoConverter {
                 bloodDonorInfo.getIsTakingAnyMedicines(),
                 bloodDonorInfo.getHasSomeAllergies(),
                 bloodDonorInfo.getHasChronicDisease(),
-                bloodDonorInfo.getIsFeelingHealthy());
+                bloodDonorInfo.getIsFeelingHealthy(),
+                registeredUserRepository.getById(bloodDonorInfo.getRegisteredUserId()));
     }
 
     public Set<BloodDonorInfoEntity> toEntity(Set<BloodDonorInfo> bloodDonorInfos) {
@@ -105,7 +113,8 @@ public class BloodDonorInfoConverter {
                     b.getIsTakingAnyMedicines(),
                     b.getHasSomeAllergies(),
                     b.getHasChronicDisease(),
-                    b.getIsFeelingHealthy()));
+                    b.getIsFeelingHealthy(),
+                    registeredUserRepository.getById(b.getId())));
         }
 
         return bloodDonorInfoEntities;

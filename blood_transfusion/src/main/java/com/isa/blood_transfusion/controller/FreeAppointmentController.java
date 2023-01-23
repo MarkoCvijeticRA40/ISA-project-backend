@@ -22,7 +22,6 @@ import java.util.List;
 @RequestMapping("/freeapp")
 public class FreeAppointmentController {
     private final FreeAppointmentService service;
-    private final RoleStore roleStore;
 
     @PostMapping("/create")
     public ResponseEntity<FreeAppointment> freeAppointment(@RequestBody FreeAppointment appointment) {
@@ -33,5 +32,10 @@ public class FreeAppointmentController {
     public ResponseEntity<List<FreeAppointment>> getByDate(@PathVariable String dateString, Pageable pageable) {
         LocalDateTime date = LocalDateTime.parse(dateString);
         return new ResponseEntity<>(service.getByDate(date , pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("center/{centerId}")
+    public ResponseEntity<List<FreeAppointment>> get(@PathVariable Long centerId) {
+        return new ResponseEntity<>(service.get(centerId), HttpStatus.OK);
     }
 }

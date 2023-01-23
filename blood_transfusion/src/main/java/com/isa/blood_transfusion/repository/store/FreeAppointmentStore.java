@@ -12,4 +12,9 @@ public interface FreeAppointmentStore {
     List<FreeAppointment> findAll();
     List<FreeAppointment> findAll(Pageable pageable);
     List<FreeAppointment> getByDate(LocalDateTime date, Pageable pageable);
+    List<FreeAppointment> get(Long centerId);
+    FreeAppointment getById(Long id);
+
+    void delete(FreeAppointment freeAppointment);
+
 }

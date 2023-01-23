@@ -35,7 +35,7 @@ public class BloodDonorInfoEntity {
     private String profession;
     @Column(name = "number_of_blood_donations", nullable = false)
     private Integer numberOfBloodDonations;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private AddressEntity address;
     @Column(name = "gender", nullable = false)
@@ -54,6 +54,9 @@ public class BloodDonorInfoEntity {
     private Boolean hasChronicDisease;
     @Column(name = "is_feeling_healthy", nullable = false)
     private Boolean isFeelingHealthy;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "registered_user_id")
+    private RegisteredUserEntity registeredUser;
 
 
 }

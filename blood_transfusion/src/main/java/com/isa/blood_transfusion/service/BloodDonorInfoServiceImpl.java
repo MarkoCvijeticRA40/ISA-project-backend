@@ -18,4 +18,9 @@ public class BloodDonorInfoServiceImpl implements BloodDonorInfoService {
     public BloodDonorInfo save(BloodDonorInfo bloodDonorInfo) {
         return store.save(bloodDonorInfo);
     }
+
+    @Override
+    public Boolean isDonorInfoFilled(Long registeredUserId) {
+        return store.isDonorInfoFilled(registeredUserId);
+    }
 }

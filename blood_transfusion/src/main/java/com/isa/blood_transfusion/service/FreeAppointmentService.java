@@ -12,4 +12,5 @@ public interface FreeAppointmentService {
     FreeAppointment save(FreeAppointment freeAppointment);
 
     List<FreeAppointment> getByDate(LocalDateTime date, Pageable pageable);
+    List<FreeAppointment> get(Long centerId);
 }

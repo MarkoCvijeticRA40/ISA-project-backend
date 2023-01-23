@@ -6,9 +6,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ScheduledAppointmentRepository extends JpaRepository<ScheduledAppointmentEntity, Long> {
 
 
-
-
-
-
-
 }
