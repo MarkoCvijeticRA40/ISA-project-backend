@@ -22,4 +22,9 @@ public class BloodDonorInfoController {
     public ResponseEntity<BloodDonorInfo> save(@RequestBody BloodDonorInfo bloodDonorInfo) {
         return new ResponseEntity<>(service.save(bloodDonorInfo), HttpStatus.CREATED);
     }
+
+    @GetMapping("/isFilled/{registeredUserId}")
+    public Boolean isDonorInfoFilled(@PathVariable Long registeredUserId) {
+        return service.isDonorInfoFilled(registeredUserId);
+    }
 }

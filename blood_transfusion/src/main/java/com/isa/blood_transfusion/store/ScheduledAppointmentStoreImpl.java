@@ -17,8 +17,6 @@ public class ScheduledAppointmentStoreImpl implements ScheduledAppointmentStore{
 
     @Override
     public ScheduledAppointment save(ScheduledAppointment scheduledAppointment) {
-        UserCategory uc = new UserCategory();
-        scheduledAppointment.getRegisteredUser().setUserCategory(uc);
         repository.save(converter.toEntity(scheduledAppointment));
         return scheduledAppointment;
     }
