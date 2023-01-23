@@ -29,7 +29,7 @@ public class RegisteredUserController {
 
     @PutMapping("/saveChanges")
     public ResponseEntity<RegisteredUser> saveChanges(@RequestBody RegisteredUser user) {
-        return new ResponseEntity<>(registeredUserService.saveChanges(user), HttpStatus.OK);
+        return new ResponseEntity<>(registeredUserService.save(user), HttpStatus.OK);
     }
 
 

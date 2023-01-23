@@ -1,6 +1,8 @@
 package com.isa.blood_transfusion.service;
 
+import com.isa.blood_transfusion.entity.RegisteredUserEntity;
 import com.isa.blood_transfusion.model.RegisteredUser;
+import com.isa.blood_transfusion.repository.RegisteredUserRepository;
 import com.isa.blood_transfusion.store.RegisteredUserStore;
 import com.isa.blood_transfusion.store.RoleStore;
 import com.isa.blood_transfusion.store.UserCategoryStore;
@@ -24,6 +26,7 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
     private final RoleStore roleStore;
     private final UserCategoryStore userCategoryStore;
     private final PasswordEncoder passwordEncoder;
+    private final RegisteredUserRepository registeredUserRepository;
 
     @Override
     public RegisteredUser save(RegisteredUser user) {
@@ -37,7 +40,6 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
 
     @Override
     public RegisteredUser saveChanges(RegisteredUser user) {
-        user.setRole(roleStore.find("REGISTERED_USER"));
         return store.save(user);
     }
 

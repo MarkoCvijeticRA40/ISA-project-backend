@@ -26,12 +26,34 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
 
     @Override
     public FreeAppointment save(FreeAppointment freeAppointment) {
-        return store.save(freeAppointment);
+
+        if (isDateValid(freeAppointment) == true)
+        {
+            freeAppointment.setDate(freeAppointment.getDate().minusHours(1));
+            return store.save(freeAppointment);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     @Override
     public List<FreeAppointment> getByDate(LocalDateTime date, Pageable pageable) {
         return store.getByDate(date, pageable);
+    }
+
+    public boolean isDateValid(FreeAppointment freeAppointment) {
+
+        List<FreeAppointment> freeAppointments = store.findAll();
+        freeAppointment.setDate(freeAppointment.getDate().plusHours(1));
+
+        for(FreeAppointment freeApp : freeAppointments) {
+            if(freeAppointment.getDate().toString().equals(freeApp.getDate().toString())){
+                return  false;
+            }
+        }
+        return true;
     }
 
 
