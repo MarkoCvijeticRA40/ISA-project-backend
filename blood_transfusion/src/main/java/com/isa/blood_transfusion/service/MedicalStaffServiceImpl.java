@@ -32,8 +32,6 @@ public class MedicalStaffServiceImpl implements MedicalStaffService {
     public MedicalStaff saveStaff(MedicalStaff medicalStaff) {
         medicalStaff.setRole(roleStore.find("MEDICAL_STAFF"));
         medicalStaff.setPassword(passwordEncoder.encode(medicalStaff.getPassword()));
-
-
         return store.save(medicalStaff);
     }
 
