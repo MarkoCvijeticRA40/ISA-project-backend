@@ -1,8 +1,8 @@
 package com.isa.blood_transfusion.service;
 
 import com.isa.blood_transfusion.model.SystemAdministrator;
-import com.isa.blood_transfusion.store.RoleStore;
-import com.isa.blood_transfusion.store.SystemAdministratorStore;
+import com.isa.blood_transfusion.repository.store.RoleStore;
+import com.isa.blood_transfusion.repository.store.SystemAdministratorStore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

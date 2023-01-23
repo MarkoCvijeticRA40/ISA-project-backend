@@ -11,5 +11,6 @@ public interface MedicalStaffService {
     MedicalStaff getById(Long id);
 
     MedicalStaff saveStaff(MedicalStaff medicalStaff);
+    boolean isPasswordChanged(String email,String password);
 
 }

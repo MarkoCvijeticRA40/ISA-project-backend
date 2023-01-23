@@ -2,7 +2,7 @@ package com.isa.blood_transfusion.service;
 
 
 import com.isa.blood_transfusion.model.ScheduledAppointment;
-import com.isa.blood_transfusion.store.ScheduledAppointmentStore;
+import com.isa.blood_transfusion.repository.store.ScheduledAppointmentStore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

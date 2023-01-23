@@ -15,5 +15,6 @@ public interface RegisteredUserService {
     RegisteredUser activate(String email);
     RegisteredUser find(String email);
     RegisteredUser saveChanges(RegisteredUser user);
+    boolean isPasswordChanged(String email,String password);
 
 }

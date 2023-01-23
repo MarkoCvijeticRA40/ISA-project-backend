@@ -1,7 +1,7 @@
 package com.isa.blood_transfusion.service;
 
 import com.isa.blood_transfusion.model.AppUser;
-import com.isa.blood_transfusion.store.AppUserStore;
+import com.isa.blood_transfusion.repository.store.AppUserStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
