@@ -1,4 +1,4 @@
-package com.isa.blood_transfusion.repository.store;
+package com.isa.blood_transfusion.store;
 
 import com.isa.blood_transfusion.converter.MedicalStaffConverter;
 import com.isa.blood_transfusion.model.MedicalStaff;
