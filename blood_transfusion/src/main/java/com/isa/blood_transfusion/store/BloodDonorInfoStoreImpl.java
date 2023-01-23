@@ -1,6 +1,7 @@
 package com.isa.blood_transfusion.store;
 
 import com.isa.blood_transfusion.converter.BloodDonorInfoConverter;
+import com.isa.blood_transfusion.entity.BloodDonorInfoEntity;
 import com.isa.blood_transfusion.model.BloodDonorInfo;
 import com.isa.blood_transfusion.repository.BloodDonorInfoRepository;
 import lombok.AllArgsConstructor;
@@ -16,5 +17,17 @@ public class BloodDonorInfoStoreImpl implements BloodDonorInfoStore {
     public BloodDonorInfo save(BloodDonorInfo bloodDonorInfo) {
         repository.save(converter.toEntity(bloodDonorInfo));
         return bloodDonorInfo;
+    }
+
+    @Override
+    public BloodDonorInfo getByRegisteredUserId(Long registeredUserId) {
+        return converter.toModel(repository.findBloodDonorInfoEntityByRegisteredUserId(registeredUserId));
+    }
+
+    @Override
+    public Boolean isDonorInfoFilled(Long registeredUserId) {
+        if (getByRegisteredUserId(registeredUserId) == null)
+            return false;
+        return true;
     }
 }

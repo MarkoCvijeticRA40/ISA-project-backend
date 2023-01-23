@@ -32,4 +32,5 @@ public class BloodDonorInfo {
     private Boolean hasSomeAllergies;
     private Boolean hasChronicDisease;
     private Boolean isFeelingHealthy;
+    private Long registeredUserId;
 }

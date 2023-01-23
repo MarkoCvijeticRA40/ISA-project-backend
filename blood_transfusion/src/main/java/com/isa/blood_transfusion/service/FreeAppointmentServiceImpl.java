@@ -34,7 +34,10 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
         return store.getByDate(date, pageable);
     }
 
-
+    @Override
+    public List<FreeAppointment> get(Long centerId) {
+        return store.get(centerId);
+    }
 
 
 }

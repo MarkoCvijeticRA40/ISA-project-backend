@@ -50,5 +50,10 @@ public class RegisteredUserStoreImpl implements RegisteredUserStore {
         return converter.toModel(repository.findByEmail(email));
     }
 
+    @Override
+    public RegisteredUser getById(Long id) {
+        return converter.toModel(repository.getById(id));
+    }
+
 
 }

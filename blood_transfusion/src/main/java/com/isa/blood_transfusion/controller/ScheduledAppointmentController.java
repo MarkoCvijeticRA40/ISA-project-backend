@@ -2,7 +2,9 @@ package com.isa.blood_transfusion.controller;
 
 import com.isa.blood_transfusion.model.FreeAppointment;
 import com.isa.blood_transfusion.model.ScheduledAppointment;
+import com.isa.blood_transfusion.service.BloodDonorInfoService;
 import com.isa.blood_transfusion.service.FreeAppointmentService;
+import com.isa.blood_transfusion.service.PerformedAppointmentService;
 import com.isa.blood_transfusion.service.ScheduledAppointmentService;
 import com.isa.blood_transfusion.store.RoleStore;
 import com.isa.blood_transfusion.store.ScheduledAppointmentStore;
@@ -22,11 +24,19 @@ import org.springframework.web.bind.annotation.*;
 public class ScheduledAppointmentController {
 
     private final ScheduledAppointmentService service;
-    private final ScheduledAppointmentStore roleStore;
+    private final BloodDonorInfoService bloodDonorInfoService;
+    private final PerformedAppointmentService performedAppointmentService;
 
     @PostMapping("/create")
     public ResponseEntity<ScheduledAppointment> scheduledAppointment(@RequestBody ScheduledAppointment appointment) {
         return new ResponseEntity<>(service.save(appointment), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/create/{freeAppointmentId}/{registeredUserId}")
+    public ResponseEntity<ScheduledAppointment> schedule(@PathVariable Long freeAppointmentId, @PathVariable Long registeredUserId) {
+        if (bloodDonorInfoService.isDonorInfoFilled(registeredUserId) && !performedAppointmentService.hasDonatedBloodInLastSixMonths(registeredUserId))
+            return new ResponseEntity<>(service.create(freeAppointmentId, registeredUserId), HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
     }
 
 }
