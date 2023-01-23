@@ -42,16 +42,24 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
         List<FreeAppointment> freeAppointments = store.findAll();
         freeAppointment.setDate(freeAppointment.getDate().plusHours(1));
 
+        LocalDateTime freeAppointmentEnd;
+        freeAppointmentEnd = freeAppointment.getDate().plusMinutes(freeAppointment.getDuration());
+
         for(FreeAppointment freeApp : freeAppointments) {
-            if(freeAppointment.getDate().toString().equals(freeApp.getDate().toString())){
-                return  false;
+
+            LocalDateTime freeAppEnd;
+            freeAppEnd = freeApp.getDate().plusMinutes(freeApp.getDuration());
+
+            if(isDateOverlapping(freeAppointment.getDate(),freeAppointmentEnd,freeApp.getDate(),freeAppEnd) == true) {
+
+                return false;
             }
         }
         return true;
     }
 
-
-
-
+    public boolean isDateOverlapping(LocalDateTime start1, LocalDateTime end1, LocalDateTime start2, LocalDateTime end2) {
+        return start2.isBefore(end1) && end2.isAfter(start1);
+    }
 }
 
