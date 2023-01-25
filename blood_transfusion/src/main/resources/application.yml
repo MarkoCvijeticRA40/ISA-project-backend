@@ -5,9 +5,9 @@ spring:
   datasource:
     platform: postgres
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/ISADb
+    url: jdbc:postgresql://localhost:5432/ISADB
     username: postgres
-    password: marko
+    password: andjela
   jpa:
     hibernate:
       ddl-auto: update

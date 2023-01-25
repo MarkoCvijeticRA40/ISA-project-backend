@@ -11,6 +11,8 @@ import com.isa.blood_transfusion.store.ScheduledAppointmentStore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Getter
@@ -23,6 +25,7 @@ public class ScheduledAppointmentServiceImpl implements  ScheduledAppointmentSer
     private final FreeAppointmentStore freeAppointmentStore;
     private final RegisteredUserStore registeredUserStore;
     private final BloodDonorInfoStore bloodDonorInfoStore;
+    private final QrCodeGeneratorService qrCodeGeneratorService;
 
     @Override
     public ScheduledAppointment save(ScheduledAppointment scheduledAppointment) {
@@ -35,6 +38,10 @@ public class ScheduledAppointmentServiceImpl implements  ScheduledAppointmentSer
         RegisteredUser registeredUser = registeredUserStore.getById(registeredUserId);
         BloodDonorInfo bloodDonorInfo = bloodDonorInfoStore.getByRegisteredUserId(registeredUserId);
         ScheduledAppointment scheduledAppointment = new ScheduledAppointment(0L, freeAppointment.getDate(), freeAppointment.getDuration(), freeAppointment.getCenter(), freeAppointment.getMedicalStaff(), bloodDonorInfo, registeredUser);
+        String qrCodeContent = "Your appointment is scheduled for " + scheduledAppointment.getDate().toString() + ". Duration of appointment is " + scheduledAppointment.getDuration() + ". Appointment will be performed in " + scheduledAppointment.getCenter().getName() + "center.";
+        if (qrCodeGeneratorService.generateQrCode(qrCodeContent, "C:\\Users\\KORISNIK\\Desktop\\ISA-backend\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + ".png", 400, 400)) {
+            System.out.println("QR code generated!");
+        }
         freeAppointmentStore.delete(freeAppointment);
         return store.save(scheduledAppointment);
 

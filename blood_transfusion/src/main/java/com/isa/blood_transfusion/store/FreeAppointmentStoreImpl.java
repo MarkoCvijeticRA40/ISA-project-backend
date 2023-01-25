@@ -53,4 +53,14 @@ public class FreeAppointmentStoreImpl implements FreeAppointmentStore {
     public void delete(FreeAppointment freeAppointment) {
         repository.delete(converter.toEntity(freeAppointment));
     }
+
+    @Override
+    public List<FreeAppointment> findByDateAsc() {
+    return converter.toModel(repository.findByOrderByDateAsc());
+    }
+
+    @Override
+    public List<FreeAppointment> findByDateDesc() {
+        return converter.toModel(repository.findByOrderByDateDesc());
+    }
 }
