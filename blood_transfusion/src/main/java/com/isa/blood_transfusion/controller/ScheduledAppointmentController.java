@@ -1,5 +1,6 @@
 package com.isa.blood_transfusion.controller;
 
+import com.isa.blood_transfusion.model.AppUser;
 import com.isa.blood_transfusion.model.ScheduledAppointment;
 import com.isa.blood_transfusion.service.BloodDonorInfoService;
 import com.isa.blood_transfusion.service.PerformedAppointmentService;
@@ -10,6 +11,8 @@ import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,4 +38,9 @@ public class ScheduledAppointmentController {
         return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
     }
 
+    @GetMapping
+    public ResponseEntity<List<ScheduledAppointment>> findAll() {
+
+        return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
+    }
 }

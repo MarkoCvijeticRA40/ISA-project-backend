@@ -7,6 +7,9 @@ import com.isa.blood_transfusion.repository.ScheduledAppointmentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 @AllArgsConstructor
 public class ScheduledAppointmentStoreImpl implements ScheduledAppointmentStore{
@@ -18,6 +21,11 @@ public class ScheduledAppointmentStoreImpl implements ScheduledAppointmentStore{
     public ScheduledAppointment save(ScheduledAppointment scheduledAppointment) {
         repository.save(converter.toEntity(scheduledAppointment));
         return scheduledAppointment;
+    }
+
+    @Override
+    public List<ScheduledAppointment> findAll() {
+        return converter.toModel(repository.findAll().stream().collect(Collectors.toSet())).stream().toList();
     }
 
 }
