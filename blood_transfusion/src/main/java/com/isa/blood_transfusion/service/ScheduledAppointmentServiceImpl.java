@@ -43,11 +43,12 @@ public class ScheduledAppointmentServiceImpl implements  ScheduledAppointmentSer
         ScheduledAppointment scheduledAppointment = new ScheduledAppointment(0L, freeAppointment.getDate(), freeAppointment.getDuration(), freeAppointment.getCenter(), freeAppointment.getMedicalStaff(), bloodDonorInfo, registeredUser);
         String qrCodeContent = "Your appointment is scheduled for " + scheduledAppointment.getDate().toString() + ". Duration of appointment is " + scheduledAppointment.getDuration() + " minutes. Appointment will be performed in " + scheduledAppointment.getCenter().getName()  + " " + "center(" + scheduledAppointment.getCenter().getAddress().getStreet() + " " + scheduledAppointment.getCenter().getAddress().getNumber() + ").";
         folderService.createFolder("C:\\Users\\KORISNIK\\Desktop\\ISA-backend\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId());
-        if (qrCodeGeneratorService.generateQrCode(qrCodeContent, "C:\\Users\\KORISNIK\\Desktop\\ISA-backend\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + "\\" + LocalDateTime.now().toString().replace(":", "-")  +".png", 400, 400)) {
+        String currentTime = LocalDateTime.now().toString().replace(":", "-");
+        if (qrCodeGeneratorService.generateQrCode(qrCodeContent, "C:\\Users\\KORISNIK\\Desktop\\ISA-backend\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + "\\" + currentTime  +".png", 400, 400)) {
             System.out.println("QR code generated!");
         }
         try {
-            emailService.sendEmail(scheduledAppointment.getRegisteredUser().getEmail(), "Notification about your appointment", "Scan this QR code in order to get information about your appointment.", "C:\\Users\\KORISNIK\\Desktop\\ISA-backend\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + "\\" + LocalDateTime.now()  +".png");
+            emailService.sendEmail(scheduledAppointment.getRegisteredUser().getEmail(), "Notification about your appointment", "Scan this QR code in order to get information about your appointment.", "C:\\Users\\KORISNIK\\Desktop\\ISA-backend\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + "\\" + currentTime  +".png");
         }
         catch ( MessagingException m) {
             System.out.println(m.getMessage());
