@@ -19,5 +19,7 @@ public interface FreeAppointmentStore {
     void delete(FreeAppointment freeAppointment);
     FreeAppointment getByDateAndCenter(LocalDateTime date,Long centerId);
     MedicalStaff getEmployedMedicalStaff(Long centerId);
+    List<FreeAppointment> findByDateAsc();
+    List<FreeAppointment> findByDateDesc();
 
 }

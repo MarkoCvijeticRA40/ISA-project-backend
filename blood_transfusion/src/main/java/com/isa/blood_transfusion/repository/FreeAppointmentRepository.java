@@ -22,6 +22,8 @@ public interface FreeAppointmentRepository extends JpaRepository<FreeAppointment
     default FreeAppointmentEntity getById(Long id) {
         return findById(id).orElse(null);
     }
+    List<FreeAppointmentEntity> findByOrderByDateAsc();
+    List<FreeAppointmentEntity> findByOrderByDateDesc();
 
 }
 

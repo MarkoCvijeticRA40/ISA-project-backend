@@ -85,6 +85,12 @@ public class FreeAppointmentStoreImpl implements FreeAppointmentStore {
         return null;
     }
 
+    public List<FreeAppointment> findByDateAsc() {
+    return converter.toModel(repository.findByOrderByDateAsc());
+    }
 
-
+    @Override
+    public List<FreeAppointment> findByDateDesc() {
+        return converter.toModel(repository.findByOrderByDateDesc());
+    }
 }

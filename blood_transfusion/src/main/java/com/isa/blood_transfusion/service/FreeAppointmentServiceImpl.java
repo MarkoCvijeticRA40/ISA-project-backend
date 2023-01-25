@@ -43,6 +43,15 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
     }
 
     @Override
+    public List<FreeAppointment> findByDateAsc() {
+        return store.findByDateAsc();
+    }
+
+    @Override
+    public List<FreeAppointment> findByDateDesc() {
+        return store.findByDateDesc();
+    }
+
     public boolean isDateValid(FreeAppointment freeAppointment) {
 
         List<FreeAppointment> freeAppointments = store.findAll();
