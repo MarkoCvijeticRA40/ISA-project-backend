@@ -29,19 +29,12 @@ public class RegisteredUserEntity extends AppUserEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "center_id"))
     private Set<CenterEntity> visitedCenters;
-    @OneToMany(mappedBy = "registeredUser", fetch = FetchType.EAGER)
-    private Set<ScheduledAppointmentEntity> scheduledAppointments;
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "registered_user_id")
-    private Set<PerformedAppointmentEntity> performedAppointments;
 
-    public RegisteredUserEntity(Long id, String email, String password, String name, String surname, String phoneNum, String identityNumber, String profession, String facilityInfo, RoleEntity role, AddressEntity address, Gender gender, boolean enabled, Timestamp lastPasswordResetDate, Integer points, Integer numOfPenalties, UserCategoryEntity userCategory, Set<CenterEntity> visitedCenters, Set<ScheduledAppointmentEntity> scheduledAppointments, Set<PerformedAppointmentEntity> performedAppointments) {
+    public RegisteredUserEntity(Long id, String email, String password, String name, String surname, String phoneNum, String identityNumber, String profession, String facilityInfo, RoleEntity role, AddressEntity address, Gender gender, boolean enabled, Timestamp lastPasswordResetDate, Integer points, Integer numOfPenalties, UserCategoryEntity userCategory, Set<CenterEntity> visitedCenters) {
         super(id, email, password, name, surname, phoneNum, identityNumber, profession, facilityInfo, role, address, gender, enabled, lastPasswordResetDate);
         this.points = points;
         this.numOfPenalties = numOfPenalties;
         this.userCategory = userCategory;
         this.visitedCenters = visitedCenters;
-        this.scheduledAppointments = scheduledAppointments;
-        this.performedAppointments = performedAppointments;
     }
 }
