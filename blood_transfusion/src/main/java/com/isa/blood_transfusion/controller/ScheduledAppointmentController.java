@@ -41,5 +41,4 @@ public class ScheduledAppointmentController {
             return new ResponseEntity<>(service.specificSchedule(dateString, registeredUserId,centerId), HttpStatus.CREATED);
         return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
     }
-
 }

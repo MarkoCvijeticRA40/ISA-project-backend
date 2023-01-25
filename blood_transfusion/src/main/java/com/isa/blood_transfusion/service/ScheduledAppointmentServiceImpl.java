@@ -7,8 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -47,23 +48,18 @@ public class ScheduledAppointmentServiceImpl implements  ScheduledAppointmentSer
 
     @Override
     public ScheduledAppointment specificSchedule(String dateString,Long registeredUserId,Long centerId) {
-
         LocalDateTime date = LocalDateTime.parse(dateString);
         Center center = centerStore.getById(centerId);
         MedicalStaff medicalStaff = freeAppointmentStore.getEmployedMedicalStaff(centerId);
-
-        if(freeAppointmentService.hasCenterFreeAppointment(centerId) == true) {
-
+        if(freeAppointmentService.hasCenterFreeAppointmentInThisTerm(centerId,date) == true) {
             FreeAppointment freeAppointment = freeAppointmentStore.getByDateAndCenter(date,centerId);
             RegisteredUser registeredUser = registeredUserStore.getById(registeredUserId);
             BloodDonorInfo bloodDonorInfo = bloodDonorInfoStore.getByRegisteredUserId(registeredUserId);
-            ScheduledAppointment scheduledAppointment = new ScheduledAppointment(0L, freeAppointment.getDate(), freeAppointment.getDuration(), freeAppointment.getCenter(), freeAppointment.getMedicalStaff(), bloodDonorInfo, registeredUser);
+            ScheduledAppointment scheduledAppointment = new ScheduledAppointment(0L, date, freeAppointment.getDuration(), freeAppointment.getCenter(), freeAppointment.getMedicalStaff(), bloodDonorInfo, registeredUser);
             freeAppointmentStore.delete(freeAppointment);
             return store.save(scheduledAppointment);
         }
-
         else {
-
             RegisteredUser registeredUser = registeredUserStore.getById(registeredUserId);
             BloodDonorInfo bloodDonorInfo = bloodDonorInfoStore.getByRegisteredUserId(registeredUserId);
             ScheduledAppointment scheduledAppointment = new ScheduledAppointment(0L, date, 15, center, medicalStaff, bloodDonorInfo, registeredUser);
@@ -71,7 +67,15 @@ public class ScheduledAppointmentServiceImpl implements  ScheduledAppointmentSer
         }
     }
 
-
-
-
+    /*@Override
+    public List<ScheduledAppointment> getByUserId(int id) {
+        List<ScheduledAppointment> scheduledAppointments = store.findAll();
+        List<ScheduledAppointment> foundedScheduledAppointments = new ArrayList<>();
+        for (ScheduledAppointment scheduledAppointment:scheduledAppointments) {
+            if(scheduledAppointment.getMedicalStaff().getId() == id) {
+                foundedScheduledAppointments.add(scheduledAppointment);
+            }
+        }
+        return foundedScheduledAppointments;
+    }*/
 }
