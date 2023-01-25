@@ -43,4 +43,11 @@ public class ScheduledAppointmentController {
 
         return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
     }
+    @PostMapping("/create/{dateString}/{registeredUserId}/{centerId}")
+    public ResponseEntity<ScheduledAppointment> specificSchedule(@PathVariable String dateString,@PathVariable Long registeredUserId,@PathVariable Long centerId) {
+        if (bloodDonorInfoService.isDonorInfoFilled(registeredUserId) && !performedAppointmentService.hasDonatedBloodInLastSixMonths(registeredUserId))
+            return new ResponseEntity<>(service.specificSchedule(dateString, registeredUserId,centerId), HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+    }
+
 }

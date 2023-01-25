@@ -59,7 +59,7 @@ public class AuthenticationController {
         if (existUser != null) {
             throw new Exception("Username already exists");
         }
-        emailService.sendNotificaition(user);
+        emailService.sendActivationLink(user);
         return new ResponseEntity<>(registeredUserService.save(user), HttpStatus.CREATED);
     }
 }

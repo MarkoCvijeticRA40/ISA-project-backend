@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface ScheduledAppointmentService {
    ScheduledAppointment save(ScheduledAppointment scheduledAppointment);
-
    ScheduledAppointment create(Long freeAppointmentId, Long resisteredUserId);
 
    List<ScheduledAppointment> findAll();
 
 
+   ScheduledAppointment specificSchedule(String dateString,Long registeredUserId,Long centerId);
 }

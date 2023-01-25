@@ -1,7 +1,6 @@
 package com.isa.blood_transfusion.store;
 
 import com.isa.blood_transfusion.entity.PerformedAppointmentEntity;
-import com.isa.blood_transfusion.model.PerformedAppointment;
 import com.isa.blood_transfusion.repository.PerformedAppointmentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
