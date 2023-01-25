@@ -49,4 +49,5 @@ public class ScheduledAppointmentController {
         return new ResponseEntity<>(service.get(registeredUserId), HttpStatus.OK);
     }
 
+
 }
