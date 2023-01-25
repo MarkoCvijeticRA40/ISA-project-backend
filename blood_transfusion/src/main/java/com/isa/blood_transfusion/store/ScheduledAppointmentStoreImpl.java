@@ -27,4 +27,9 @@ public class ScheduledAppointmentStoreImpl implements ScheduledAppointmentStore{
         return converter.toModel(repository.findAll().stream().collect(Collectors.toSet())).stream().toList();
     }
 
+    @Override
+    public List<ScheduledAppointment> get(Long registeredUserId) {
+        return converter.toModel(repository.findScheduledAppointmentEntityByRegisteredUserId(registeredUserId).stream().collect(Collectors.toSet())).stream().toList();
+    }
+
 }
