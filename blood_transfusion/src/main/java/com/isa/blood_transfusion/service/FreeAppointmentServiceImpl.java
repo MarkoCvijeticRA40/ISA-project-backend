@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class FreeAppointmentServiceImpl implements FreeAppointmentService {
+
     private final FreeAppointmentStore store;
 
     @Override
@@ -37,12 +37,12 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
         return store.getByDate(date, pageable);
     }
 
-
     @Override
     public List<FreeAppointment> get(Long centerId) {
         return store.get(centerId);
     }
 
+    @Override
     public boolean isDateValid(FreeAppointment freeAppointment) {
 
         List<FreeAppointment> freeAppointments = store.findAll();
@@ -64,8 +64,26 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
         return true;
     }
 
+    @Override
     public boolean isDateOverlapping(LocalDateTime start1, LocalDateTime end1, LocalDateTime start2, LocalDateTime end2) {
         return start2.isBefore(end1) && end2.isAfter(start1);
     }
+
+    @Override
+    public boolean hasCenterFreeAppointment (Long centerId)  {
+
+        List<FreeAppointment> freeAppointments = store.get(centerId);
+
+        if (freeAppointments.size() == 0) {
+
+            return false;
+        }
+
+        return true;
+    }
+
+
+
+
 }
 

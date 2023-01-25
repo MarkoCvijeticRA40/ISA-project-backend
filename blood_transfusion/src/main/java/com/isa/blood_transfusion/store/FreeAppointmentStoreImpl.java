@@ -1,7 +1,9 @@
 package com.isa.blood_transfusion.store;
 
 import com.isa.blood_transfusion.converter.FreeAppointmentConverter;
+import com.isa.blood_transfusion.model.Center;
 import com.isa.blood_transfusion.model.FreeAppointment;
+import com.isa.blood_transfusion.model.MedicalStaff;
 import com.isa.blood_transfusion.repository.FreeAppointmentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,8 @@ public class FreeAppointmentStoreImpl implements FreeAppointmentStore {
 
     private final FreeAppointmentRepository repository;
     private final FreeAppointmentConverter converter;
+
+    private final CenterStore store;
 
     @Override
     public FreeAppointment save(FreeAppointment freeAppointment) {
@@ -53,4 +57,34 @@ public class FreeAppointmentStoreImpl implements FreeAppointmentStore {
     public void delete(FreeAppointment freeAppointment) {
         repository.delete(converter.toEntity(freeAppointment));
     }
+
+    @Override
+    public FreeAppointment getByDateAndCenter(LocalDateTime date,Long centerId) {
+
+        List<FreeAppointment> freeAppointments = findAll();
+
+        for (FreeAppointment freeappointment: freeAppointments) {
+
+            if(freeappointment.getDate().toString().equals(date.toString()) && freeappointment.getCenter().getId() == centerId) {
+
+                return freeappointment;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public MedicalStaff getEmployedMedicalStaff(Long centerId) {
+
+        Center center = store.getById(centerId);
+
+        for (MedicalStaff medicalStaff:center.getMedicalStaff()) {
+
+            return medicalStaff;
+        }
+        return null;
+    }
+
+
+
 }
