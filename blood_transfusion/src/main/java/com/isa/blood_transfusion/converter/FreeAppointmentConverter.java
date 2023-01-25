@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -40,6 +42,19 @@ public class FreeAppointmentConverter {
         }
         return freeAppointments;
     }
+
+    public List<FreeAppointment> toModel(List<FreeAppointmentEntity> freeAppointmentEntities) {
+        List<FreeAppointment> freeAppointments = new ArrayList<>();
+        for (var r : freeAppointmentEntities) {
+            freeAppointments.add(new FreeAppointment(r.getId(),
+                    r.getDate(),
+                    r.getDuration(),
+                    centerConverter.toModel(r.getCenter()),
+                    medicalStaffConverter.toModel(r.getMedicalStaff())));
+        }
+        return freeAppointments;
+    }
+
     public FreeAppointmentEntity toEntity(FreeAppointment freeAppointment) {
         return new FreeAppointmentEntity(freeAppointment.getId(),
                 freeAppointment.getDate().plusHours(1),

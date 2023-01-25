@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@DiscriminatorColumn(name = "appointment_type")
 @Entity(name = "free_appointments")
 public class FreeAppointmentEntity {
     @Id

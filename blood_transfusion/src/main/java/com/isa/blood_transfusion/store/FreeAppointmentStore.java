@@ -16,5 +16,7 @@ public interface FreeAppointmentStore {
     FreeAppointment getById(Long id);
 
     void delete(FreeAppointment freeAppointment);
+    List<FreeAppointment> findByDateAsc();
+    List<FreeAppointment> findByDateDesc();
 
 }

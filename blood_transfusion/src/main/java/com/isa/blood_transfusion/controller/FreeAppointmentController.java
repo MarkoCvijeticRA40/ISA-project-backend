@@ -41,4 +41,14 @@ public class FreeAppointmentController {
     public ResponseEntity<List<FreeAppointment>> get(@PathVariable Long centerId) {
         return new ResponseEntity<>(service.get(centerId), HttpStatus.OK);
     }
+
+    @GetMapping("getByDateAsc")
+    public ResponseEntity<List<FreeAppointment>> getByDateAsc() {
+        return new ResponseEntity<>(service.findByDateAsc(), HttpStatus.OK);
+    }
+
+    @GetMapping("getByDateDesc")
+    public ResponseEntity<List<FreeAppointment>> getByDateDesc() {
+        return new ResponseEntity<>(service.findByDateDesc(), HttpStatus.OK);
+    }
 }
