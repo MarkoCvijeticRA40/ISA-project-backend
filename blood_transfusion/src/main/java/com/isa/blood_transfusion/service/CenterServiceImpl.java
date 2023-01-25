@@ -1,17 +1,18 @@
 package com.isa.blood_transfusion.service;
 
 import com.isa.blood_transfusion.dto.CenterDto;
-import com.isa.blood_transfusion.model.Address;
-import com.isa.blood_transfusion.model.Center;
-import com.isa.blood_transfusion.model.WorkTime;
+import com.isa.blood_transfusion.model.*;
 import com.isa.blood_transfusion.store.CenterStore;
+import com.isa.blood_transfusion.store.FreeAppointmentStore;
 import com.isa.blood_transfusion.store.MedicalStaffStore;
+import com.isa.blood_transfusion.store.ScheduledAppointmentStore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,6 +22,8 @@ import java.util.List;
 public class CenterServiceImpl implements CenterService {
     private final CenterStore store;
     private final MedicalStaffStore msStore;
+    private final FreeAppointmentStore faStore;
+    private final ScheduledAppointmentStore saStore;
 
     @Override
     public Center save(Center center) {
@@ -114,4 +117,57 @@ public class CenterServiceImpl implements CenterService {
     public List<Center> getSortedByAvgGradeDesc() {
         return store.getSortedByAvgGradeDesc();
     }
+
+    @Override
+    public boolean IsCenterWorking(LocalDateTime appointmentDate,Long centerId) {
+
+    Center center = store.getById(centerId);
+    WorkTime workTime = center.getWorkTime();
+    LocalTime appointmentLocalDateTime = appointmentDate.toLocalTime();
+
+    if (!workTime.getStartTime().isBefore(appointmentLocalDateTime) || !workTime.getEndTime().isAfter(appointmentLocalDateTime)) {
+        return false;
+    }
+
+    if (!workTime.getStartTime().isBefore(appointmentLocalDateTime.plusMinutes(15)) || !workTime.getEndTime().isAfter(appointmentLocalDateTime.plusMinutes(15))) {
+        return false;
+    }
+    return true;
+    }
+
+    @Override
+    public boolean IsCenterScheduled(LocalDateTime date, Long centerId) {
+
+        List<ScheduledAppointment> scheduledAppointments = saStore.findAll();
+        Center center = store.getById(centerId);
+
+        for (ScheduledAppointment appointment:scheduledAppointments) {
+
+            if(appointment.getCenter().getId() == centerId && date.toString() ==  appointment.getDate().toString()){
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public List<Center> GetAvailableCenters(LocalDateTime date) {
+
+        List<Center> centers = store.findAll();
+        List<Center> availableCenters = new ArrayList<>();
+
+        for (Center center:centers) {
+
+            if(IsCenterScheduled(date,center.getId()) == false && IsCenterWorking(date,center.getId()) == true) {
+                availableCenters.add(center);
+            }
+        }
+       return availableCenters;
+    }
+
+
+
+
+
 }

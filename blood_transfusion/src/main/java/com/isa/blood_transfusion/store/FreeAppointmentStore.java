@@ -1,6 +1,7 @@
 package com.isa.blood_transfusion.store;
 
 import com.isa.blood_transfusion.model.FreeAppointment;
+import com.isa.blood_transfusion.model.MedicalStaff;
 import com.isa.blood_transfusion.model.RegisteredUser;
 import org.springframework.data.domain.Pageable;
 
@@ -16,6 +17,8 @@ public interface FreeAppointmentStore {
     FreeAppointment getById(Long id);
 
     void delete(FreeAppointment freeAppointment);
+    FreeAppointment getByDateAndCenter(LocalDateTime date,Long centerId);
+    MedicalStaff getEmployedMedicalStaff(Long centerId);
     List<FreeAppointment> findByDateAsc();
     List<FreeAppointment> findByDateDesc();
 
