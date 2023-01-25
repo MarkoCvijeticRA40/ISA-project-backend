@@ -28,6 +28,7 @@ public class ScheduledAppointmentServiceImpl implements  ScheduledAppointmentSer
     private final CenterRepository centerRepository;
     private final QrCodeGeneratorService qrCodeGeneratorService;
     private final EmailService emailService;
+    private final FolderService folderService;
 
     @Override
     public ScheduledAppointment save(ScheduledAppointment scheduledAppointment) {
@@ -40,12 +41,13 @@ public class ScheduledAppointmentServiceImpl implements  ScheduledAppointmentSer
         RegisteredUser registeredUser = registeredUserStore.getById(registeredUserId);
         BloodDonorInfo bloodDonorInfo = bloodDonorInfoStore.getByRegisteredUserId(registeredUserId);
         ScheduledAppointment scheduledAppointment = new ScheduledAppointment(0L, freeAppointment.getDate(), freeAppointment.getDuration(), freeAppointment.getCenter(), freeAppointment.getMedicalStaff(), bloodDonorInfo, registeredUser);
-        String qrCodeContent = "Your appointment is scheduled for " + scheduledAppointment.getDate().toString() + ". Duration of appointment is " + scheduledAppointment.getDuration() + ". Appointment will be performed in " + scheduledAppointment.getCenter().getName() + "center.";
-        if (qrCodeGeneratorService.generateQrCode(qrCodeContent, "C:\\Users\\KORISNIK\\Desktop\\ISA-backend\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + ".png", 400, 400)) {
+        String qrCodeContent = "Your appointment is scheduled for " + scheduledAppointment.getDate().toString() + ". Duration of appointment is " + scheduledAppointment.getDuration() + " minutes. Appointment will be performed in " + scheduledAppointment.getCenter().getName()  + " " + "center(" + scheduledAppointment.getCenter().getAddress().getStreet() + " " + scheduledAppointment.getCenter().getAddress().getNumber() + ").";
+        folderService.createFolder("C:\\Users\\KORISNIK\\Desktop\\ISA-backend\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId());
+        if (qrCodeGeneratorService.generateQrCode(qrCodeContent, "C:\\Users\\KORISNIK\\Desktop\\ISA-backend\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + "\\" + LocalDateTime.now().toString().replace(":", "-")  +".png", 400, 400)) {
             System.out.println("QR code generated!");
         }
         try {
-            emailService.sendEmail(scheduledAppointment.getRegisteredUser().getEmail(), "Notification about your appointment", "Scan this QR code in order to get information about your appointment.", "C:\\Users\\KORISNIK\\Desktop\\ISA-backend\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + ".png");
+            emailService.sendEmail(scheduledAppointment.getRegisteredUser().getEmail(), "Notification about your appointment", "Scan this QR code in order to get information about your appointment.", "C:\\Users\\KORISNIK\\Desktop\\ISA-backend\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + "\\" + LocalDateTime.now()  +".png");
         }
         catch ( MessagingException m) {
             System.out.println(m.getMessage());
@@ -76,15 +78,10 @@ public class ScheduledAppointmentServiceImpl implements  ScheduledAppointmentSer
         }
     }
 
-    /*@Override
-    public List<ScheduledAppointment> getByUserId(int id) {
-        List<ScheduledAppointment> scheduledAppointments = store.findAll();
-        List<ScheduledAppointment> foundedScheduledAppointments = new ArrayList<>();
-        for (ScheduledAppointment scheduledAppointment:scheduledAppointments) {
-            if(scheduledAppointment.getMedicalStaff().getId() == id) {
-                foundedScheduledAppointments.add(scheduledAppointment);
-            }
-        }
-        return foundedScheduledAppointments;
-    }*/
+
+    @Override
+    public List<ScheduledAppointment> get(Long registeredUserId) {
+        return store.get(registeredUserId);
+    }
+
 }

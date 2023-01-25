@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -41,4 +43,11 @@ public class ScheduledAppointmentController {
             return new ResponseEntity<>(service.specificSchedule(dateString, registeredUserId,centerId), HttpStatus.CREATED);
         return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
     }
+
+    @GetMapping("{registeredUserId}")
+    public ResponseEntity<List<ScheduledAppointment>> getByRegisteredUserId(@PathVariable Long registeredUserId) {
+        return new ResponseEntity<>(service.get(registeredUserId), HttpStatus.OK);
+    }
+
+
 }
