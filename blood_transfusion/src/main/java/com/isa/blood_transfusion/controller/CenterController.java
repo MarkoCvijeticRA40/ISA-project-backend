@@ -86,10 +86,20 @@ public class CenterController {
         return new ResponseEntity<>(centerService.getSortedByAvgGradeDesc(), HttpStatus.OK);
     }
 
-    @GetMapping("/available/{dateString}")
-    public ResponseEntity<List<Center>> GetAvailableCenters(@PathVariable String dateString) {
+    @GetMapping("/available/{dateString}/{ascOrDesc}")
+    public ResponseEntity<List<Center>> GetAvailableCenters(@PathVariable String dateString,@PathVariable String ascOrDesc) {
         LocalDateTime date = LocalDateTime.parse(dateString);
-        return new ResponseEntity<>(centerService.GetAvailableCenters(date),HttpStatus.OK);
+        return new ResponseEntity<>(centerService.GetAvailableCenters(date,ascOrDesc),HttpStatus.OK);
+    }
+
+    @PostMapping("/grade/list/center/asc/{centers}")
+    public ResponseEntity<List<Center>> sortListByAvgGradeAsc(@RequestBody List<Center> centers) {
+        return new ResponseEntity<>(centerService.sortCenterListASC(centers), HttpStatus.OK);
+    }
+
+    @GetMapping("/grade/list/center/desc/{centers}")
+    public ResponseEntity<List<Center>> sortListByAvgGradeDesc(@RequestBody List<Center> centers) {
+        return new ResponseEntity<>(centerService.sortCenterListDESC(centers), HttpStatus.OK);
     }
 
 
