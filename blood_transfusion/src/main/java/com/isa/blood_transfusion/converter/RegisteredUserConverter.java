@@ -15,8 +15,6 @@ public class RegisteredUserConverter {
     private AddressConverter addressConverter;
     private UserCategoryConverter userCategoryConverter;
     private CenterConverter centerConverter;
-    private ScheduledAppointmentConverter scheduledAppointmentConverter;
-    private PerformedAppointmentConverter performedAppointmentConverter;
 
     public RegisteredUser toModel(RegisteredUserEntity registeredUserEntity) {
         return new RegisteredUser(registeredUserEntity.getId(),
@@ -36,9 +34,7 @@ public class RegisteredUserConverter {
                 registeredUserEntity.getPoints(),
                 registeredUserEntity.getNumOfPenalties(),
                 userCategoryConverter.toModel(registeredUserEntity.getUserCategory()),
-                centerConverter.toModel(registeredUserEntity.getVisitedCenters()),
-                scheduledAppointmentConverter.toModel(registeredUserEntity.getScheduledAppointments()),
-                performedAppointmentConverter.toModel(registeredUserEntity.getPerformedAppointments())
+                centerConverter.toModel(registeredUserEntity.getVisitedCenters())
         );
     }
 
@@ -62,9 +58,7 @@ public class RegisteredUserConverter {
                     r.getPoints(),
                     r.getNumOfPenalties(),
                     userCategoryConverter.toModel(r.getUserCategory()),
-                    centerConverter.toModel(r.getVisitedCenters()),
-                    scheduledAppointmentConverter.toModel(r.getScheduledAppointments()),
-                    performedAppointmentConverter.toModel(r.getPerformedAppointments())
+                    centerConverter.toModel(r.getVisitedCenters())
             ));
         }
 
@@ -89,9 +83,7 @@ public class RegisteredUserConverter {
                 registeredUser.getPoints(),
                 registeredUser.getNumOfPenalties(),
                 userCategoryConverter.toEntity(registeredUser.getUserCategory()),
-                centerConverter.toEntity(registeredUser.getVisitedCenters()),
-                scheduledAppointmentConverter.toEntity(registeredUser.getScheduledAppointments()),
-                performedAppointmentConverter.toEntity(registeredUser.getPerformedAppointments())
+                centerConverter.toEntity(registeredUser.getVisitedCenters())
         );
     }
 
@@ -115,9 +107,7 @@ public class RegisteredUserConverter {
                     r.getPoints(),
                     r.getNumOfPenalties(),
                     userCategoryConverter.toEntity(r.getUserCategory()),
-                    centerConverter.toEntity(r.getVisitedCenters()),
-                    scheduledAppointmentConverter.toEntity(r.getScheduledAppointments()),
-                    performedAppointmentConverter.toEntity(r.getPerformedAppointments())
+                    centerConverter.toEntity(r.getVisitedCenters())
             ));
         }
 
