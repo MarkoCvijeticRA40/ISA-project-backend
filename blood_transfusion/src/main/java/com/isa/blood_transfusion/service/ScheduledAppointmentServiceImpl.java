@@ -8,7 +8,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.time.LocalDateTime;
+
 
 @Getter
 @Setter
@@ -24,6 +26,7 @@ public class ScheduledAppointmentServiceImpl implements  ScheduledAppointmentSer
     private final FreeAppointmentService freeAppointmentService;
     private final CenterRepository centerRepository;
     private final QrCodeGeneratorService qrCodeGeneratorService;
+    private final EmailService emailService;
 
     @Override
     public ScheduledAppointment save(ScheduledAppointment scheduledAppointment) {
@@ -39,6 +42,12 @@ public class ScheduledAppointmentServiceImpl implements  ScheduledAppointmentSer
         String qrCodeContent = "Your appointment is scheduled for " + scheduledAppointment.getDate().toString() + ". Duration of appointment is " + scheduledAppointment.getDuration() + ". Appointment will be performed in " + scheduledAppointment.getCenter().getName() + "center.";
         if (qrCodeGeneratorService.generateQrCode(qrCodeContent, "C:\\Users\\KORISNIK\\Desktop\\ISA-backend\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + ".png", 400, 400)) {
             System.out.println("QR code generated!");
+        }
+        try {
+            emailService.sendEmail(scheduledAppointment.getRegisteredUser().getEmail(), "Notification about your appointment", "Scan this QR code in order to get information about your appointment.", "C:\\Users\\KORISNIK\\Desktop\\ISA-backend\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + ".png");
+        }
+        catch ( MessagingException m) {
+            System.out.println(m.getMessage());
         }
         freeAppointmentStore.delete(freeAppointment);
         return store.save(scheduledAppointment);
