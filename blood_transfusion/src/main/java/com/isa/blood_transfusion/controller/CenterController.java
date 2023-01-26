@@ -7,7 +7,6 @@ import com.isa.blood_transfusion.service.MedicalStaffService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -87,9 +86,9 @@ public class CenterController {
     }
 
     @GetMapping("/available/{dateString}/{ascOrDesc}")
-    public ResponseEntity<List<Center>> GetAvailableCenters(@PathVariable String dateString,@PathVariable String ascOrDesc) {
+    public ResponseEntity<List<Center>> GetAvailableCenters(@PathVariable String dateString, @PathVariable String ascOrDesc) {
         LocalDateTime date = LocalDateTime.parse(dateString);
-        return new ResponseEntity<>(centerService.GetAvailableCenters(date,ascOrDesc),HttpStatus.OK);
+        return new ResponseEntity<>(centerService.GetAvailableCenters(date, ascOrDesc), HttpStatus.OK);
     }
 
     @PostMapping("/grade/list/center/asc/{centers}")

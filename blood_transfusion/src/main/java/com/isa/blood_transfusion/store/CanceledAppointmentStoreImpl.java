@@ -2,7 +2,6 @@ package com.isa.blood_transfusion.store;
 
 import com.isa.blood_transfusion.converter.CanceledAppointmentConverter;
 import com.isa.blood_transfusion.model.CanceledAppointment;
-import com.isa.blood_transfusion.model.ScheduledAppointment;
 import com.isa.blood_transfusion.repository.CanceledAppointmentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

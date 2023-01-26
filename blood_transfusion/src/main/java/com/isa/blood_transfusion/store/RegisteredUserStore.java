@@ -17,6 +17,7 @@ public interface RegisteredUserStore {
     RegisteredUser update(RegisteredUser registeredUser);
 
     RegisteredUser find(String email);
+
     RegisteredUser getById(Long id);
 
 }

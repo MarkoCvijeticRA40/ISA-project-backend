@@ -30,7 +30,7 @@ public class FreeAppointmentController {
     @GetMapping("/searchByDate/{dateString}")
     public ResponseEntity<List<FreeAppointment>> getByDate(@PathVariable String dateString, Pageable pageable) {
         LocalDateTime date = LocalDateTime.parse(dateString);
-        return new ResponseEntity<>(service.getByDate(date , pageable), HttpStatus.OK);
+        return new ResponseEntity<>(service.getByDate(date, pageable), HttpStatus.OK);
     }
 
     @GetMapping("center/{centerId}")
@@ -43,13 +43,13 @@ public class FreeAppointmentController {
         return new ResponseEntity<>(service.get(centerId, registeredUserId), HttpStatus.OK);
     }
 
-    @GetMapping("getByDateAsc")
-    public ResponseEntity<List<FreeAppointment>> getByDateAsc() {
-        return new ResponseEntity<>(service.findByDateAsc(), HttpStatus.OK);
+    @GetMapping("getByDateAsc/{centerId}/{registeredUserId}")
+    public ResponseEntity<List<FreeAppointment>> getByDateAsc(@PathVariable Long centerId, @PathVariable Long registeredUserId) {
+        return new ResponseEntity<>(service.findByDateAsc(centerId, registeredUserId), HttpStatus.OK);
     }
 
-    @GetMapping("getByDateDesc")
-    public ResponseEntity<List<FreeAppointment>> getByDateDesc() {
-        return new ResponseEntity<>(service.findByDateDesc(), HttpStatus.OK);
+    @GetMapping("getByDateDesc/{centerId}/{registeredUserId}")
+    public ResponseEntity<List<FreeAppointment>> getByDateDesc(@PathVariable Long centerId, @PathVariable Long registeredUserId) {
+        return new ResponseEntity<>(service.findByDateDesc(centerId, registeredUserId), HttpStatus.OK);
     }
 }

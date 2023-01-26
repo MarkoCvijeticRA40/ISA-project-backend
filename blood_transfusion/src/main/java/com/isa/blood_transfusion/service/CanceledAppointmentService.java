@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface CanceledAppointmentService {
     CanceledAppointment save(CanceledAppointment canceledAppointment);
+
     List<CanceledAppointment> get(Long registeredUserId);
 }

@@ -8,12 +8,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
-public class ScheduledAppointmentStoreImpl implements ScheduledAppointmentStore{
+public class ScheduledAppointmentStoreImpl implements ScheduledAppointmentStore {
 
     private final ScheduledAppointmentRepository repository;
     private final ScheduledAppointmentConverter converter;
@@ -34,6 +33,7 @@ public class ScheduledAppointmentStoreImpl implements ScheduledAppointmentStore{
     public List<ScheduledAppointment> findByCenterId(Long id) {
         return converter.toModel(repository.findByCenterId(id).stream().collect(Collectors.toSet())).stream().toList();
     }
+
     public List<ScheduledAppointment> get(Long registeredUserId) {
         return converter.toModel(repository.findScheduledAppointmentEntityByRegisteredUserId(registeredUserId).stream().collect(Collectors.toSet())).stream().toList();
     }

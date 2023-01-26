@@ -35,10 +35,10 @@ public class FreeAppointmentConverter {
         Set<FreeAppointment> freeAppointments = new HashSet<>();
         for (var r : freeAppointmentEntities) {
             freeAppointments.add(new FreeAppointment(r.getId(),
-                r.getDate(),
-                r.getDuration(),
-                centerConverter.toModel(r.getCenter()),
-                medicalStaffConverter.toModel(r.getMedicalStaff())));
+                    r.getDate(),
+                    r.getDuration(),
+                    centerConverter.toModel(r.getCenter()),
+                    medicalStaffConverter.toModel(r.getMedicalStaff())));
         }
         return freeAppointments;
     }

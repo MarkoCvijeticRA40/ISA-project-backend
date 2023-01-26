@@ -11,7 +11,7 @@ import java.io.File;
 @Setter
 @AllArgsConstructor
 @Service
-public class FolderServiceImpl implements FolderService{
+public class FolderServiceImpl implements FolderService {
     @Override
     public void createFolder(String path) {
         File folder = new File(path);

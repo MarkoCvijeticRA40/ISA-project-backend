@@ -1,13 +1,9 @@
 package com.isa.blood_transfusion.model;
 
-import com.isa.blood_transfusion.entity.BloodDonorInfoEntity;
-import com.isa.blood_transfusion.entity.RegisteredUserEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Getter
