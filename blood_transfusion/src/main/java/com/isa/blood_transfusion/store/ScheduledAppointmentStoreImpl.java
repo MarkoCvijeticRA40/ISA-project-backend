@@ -38,16 +38,6 @@ public class ScheduledAppointmentStoreImpl implements ScheduledAppointmentStore{
         return converter.toModel(repository.findScheduledAppointmentEntityByRegisteredUserId(registeredUserId).stream().collect(Collectors.toSet())).stream().toList();
     }
 
-    @Override
-    public List<ScheduledAppointment> findByCenterId(Long centerId) {
-        List<ScheduledAppointment> scheduledAppointments = findAll();
-        List<ScheduledAppointment> foundedAppointments = new ArrayList<>();
-        for (ScheduledAppointment appointment:scheduledAppointments) {
-            if(appointment.getCenter().getId() == centerId) {
-                foundedAppointments.add(appointment);
-            }
-        }
-        return foundedAppointments;
     public ScheduledAppointment delete(ScheduledAppointment scheduledAppointment) {
         repository.delete(converter.toEntity(scheduledAppointment));
         return scheduledAppointment;

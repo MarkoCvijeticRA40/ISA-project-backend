@@ -10,7 +10,6 @@ public interface ScheduledAppointmentStore {
     List<ScheduledAppointment> findAll();
     List<ScheduledAppointment> findByCenterId(Long id);
     List<ScheduledAppointment> get(Long registeredUserId);
-    List<ScheduledAppointment> findByCenterId(Long centerId);
     ScheduledAppointment delete(ScheduledAppointment scheduledAppointment);
     ScheduledAppointment getById(Long scheduledAppointmentId);
 }
