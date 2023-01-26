@@ -6,6 +6,7 @@ import com.isa.blood_transfusion.repository.ScheduledAppointmentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +38,6 @@ public class ScheduledAppointmentStoreImpl implements ScheduledAppointmentStore 
         return converter.toModel(repository.findScheduledAppointmentEntityByRegisteredUserId(registeredUserId).stream().collect(Collectors.toSet())).stream().toList();
     }
 
-    @Override
     public ScheduledAppointment delete(ScheduledAppointment scheduledAppointment) {
         repository.delete(converter.toEntity(scheduledAppointment));
         return scheduledAppointment;

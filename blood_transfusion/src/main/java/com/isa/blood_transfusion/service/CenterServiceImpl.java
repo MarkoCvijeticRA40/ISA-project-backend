@@ -142,15 +142,16 @@ public class CenterServiceImpl implements CenterService {
 
     @Override
     public boolean IsCenterScheduled(LocalDateTime date, Long centerId) {
-
-        List<ScheduledAppointment> scheduledAppointments = saStore.findAll();
+        List<ScheduledAppointment> scheduledAppointments = saStore.findByCenterId(centerId);
         Center center = store.getById(centerId);
 
         for (ScheduledAppointment appointment : scheduledAppointments) {
-
-            if (appointment.getCenter().getId() == centerId && date.toString() == appointment.getDate().toString()) {
+            if(date.toString().equals(appointment.getDate().toString())){
 
                 return true;
+            }
+            else {
+                appointment.setDate(appointment.getDate().minusHours(1));
             }
         }
         return false;

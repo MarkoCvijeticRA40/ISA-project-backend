@@ -30,4 +30,6 @@ public interface FreeAppointmentStore {
 
     List<FreeAppointment> findByDateDesc(Long centerId);
 
+    List<FreeAppointment> findByCenterId(Long centerId);
+
 }
