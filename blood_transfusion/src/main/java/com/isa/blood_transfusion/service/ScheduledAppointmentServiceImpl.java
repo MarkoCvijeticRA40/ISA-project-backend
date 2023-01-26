@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -59,6 +61,15 @@ public class ScheduledAppointmentServiceImpl implements  ScheduledAppointmentSer
     }
 
     @Override
+    public List<ScheduledAppointment> findAll() {
+        return store.findAll();
+    }
+
+    @Override
+    public List<ScheduledAppointment> findByCenterId(Long id) {
+        return store.findByCenterId(id);
+    }
+
     public ScheduledAppointment specificSchedule(String dateString,Long registeredUserId,Long centerId) {
         LocalDateTime date = LocalDateTime.parse(dateString);
         Center center = centerStore.getById(centerId);
