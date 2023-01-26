@@ -1,7 +1,9 @@
 package com.isa.blood_transfusion.service;
 
 import com.isa.blood_transfusion.model.FreeAppointment;
+import com.isa.blood_transfusion.model.ScheduledAppointment;
 import com.isa.blood_transfusion.store.FreeAppointmentStore;
+import com.isa.blood_transfusion.store.ScheduledAppointmentStore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +19,7 @@ import java.util.List;
 public class FreeAppointmentServiceImpl implements FreeAppointmentService {
 
     private final FreeAppointmentStore store;
+    private final ScheduledAppointmentStore scheduledAppointmentStore;
 
     @Override
     public FreeAppointment save(FreeAppointment freeAppointment) {
@@ -51,11 +54,13 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
 
     public boolean isDateValid(FreeAppointment freeAppointment) {
 
-        List<FreeAppointment> freeAppointments = store.findAll();
+        List<FreeAppointment> freeAppointments = store.findByCenterId(freeAppointment.getCenter().getId());
         freeAppointment.setDate(freeAppointment.getDate().plusHours(1));
 
         LocalDateTime freeAppointmentEnd;
         freeAppointmentEnd = freeAppointment.getDate().plusMinutes(freeAppointment.getDuration());
+
+        List<ScheduledAppointment> scheduledAppointments = scheduledAppointmentStore.findByCenterId(freeAppointment.getCenter().getId());
 
         for (FreeAppointment freeApp : freeAppointments) {
 
@@ -63,6 +68,17 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
             freeAppEnd = freeApp.getDate().plusMinutes(freeApp.getDuration());
 
             if (isDateOverlapping(freeAppointment.getDate(), freeAppointmentEnd, freeApp.getDate(), freeAppEnd) == true) {
+
+                return false;
+            }
+        }
+
+        for (ScheduledAppointment scheApp : scheduledAppointments) {
+
+            LocalDateTime scheAppEnd;
+            scheAppEnd = scheApp.getDate().plusMinutes(scheApp.getDuration());
+
+            if (isDateOverlapping(freeAppointment.getDate(), freeAppointmentEnd,scheApp.getDate(),scheAppEnd) == true) {
 
                 return false;
             }
@@ -89,7 +105,6 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
         }
         return false;
     }
-
 }
 
 

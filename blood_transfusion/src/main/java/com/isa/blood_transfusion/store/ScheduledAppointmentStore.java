@@ -9,4 +9,6 @@ public interface ScheduledAppointmentStore {
     ScheduledAppointment save(ScheduledAppointment scheduledAppointment);
     List<ScheduledAppointment> findAll();
     List<ScheduledAppointment> get(Long registeredUserId);
+    List<ScheduledAppointment> findByCenterId(Long centerId);
+
 }

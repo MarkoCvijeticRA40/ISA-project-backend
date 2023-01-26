@@ -2,6 +2,7 @@ package com.isa.blood_transfusion.service;
 
 import com.isa.blood_transfusion.model.ScheduledAppointment;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ScheduledAppointmentService {
@@ -9,4 +10,6 @@ public interface ScheduledAppointmentService {
    ScheduledAppointment create(Long freeAppointmentId, Long resisteredUserId);
    ScheduledAppointment specificSchedule(String dateString,Long registeredUserId,Long centerId);
    List<ScheduledAppointment> get(Long registeredUserId);
+   boolean isDateOverlapping(LocalDateTime start1, LocalDateTime end1, LocalDateTime start2, LocalDateTime end2);
+   boolean isDateValid(ScheduledAppointment scheduledAppointment);
 }

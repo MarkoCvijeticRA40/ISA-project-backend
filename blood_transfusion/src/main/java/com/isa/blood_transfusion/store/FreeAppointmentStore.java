@@ -21,5 +21,6 @@ public interface FreeAppointmentStore {
     MedicalStaff getEmployedMedicalStaff(Long centerId);
     List<FreeAppointment> findByDateAsc();
     List<FreeAppointment> findByDateDesc();
+    List<FreeAppointment> findByCenterId(Long centerId);
 
 }
