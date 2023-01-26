@@ -57,6 +57,11 @@ public class ScheduledAppointmentController {
     public ResponseEntity<List<ScheduledAppointment>> findByCenterId(@PathVariable Long id) {
         return new ResponseEntity<>(service.findByCenterId(id),HttpStatus.OK);
     }
+    
+    @GetMapping("{registeredUserId}")
+    public ResponseEntity<List<ScheduledAppointment>> getByRegisteredUserId(@PathVariable Long registeredUserId) {
+        return new ResponseEntity<>(service.get(registeredUserId), HttpStatus.OK);
+    }
 
 
 }

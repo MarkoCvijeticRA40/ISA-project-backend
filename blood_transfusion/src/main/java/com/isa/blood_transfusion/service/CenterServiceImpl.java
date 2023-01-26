@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Getter
@@ -138,8 +139,7 @@ public class CenterServiceImpl implements CenterService {
     @Override
     public boolean IsCenterScheduled(LocalDateTime date, Long centerId) {
 
-        List<ScheduledAppointment> scheduledAppointments = saStore.findAll();
-        Center center = store.getById(centerId);
+        List<ScheduledAppointment> scheduledAppointments = saStore.findAll();Center center = store.getById(centerId);
 
         for (ScheduledAppointment appointment:scheduledAppointments) {
 
@@ -152,22 +152,39 @@ public class CenterServiceImpl implements CenterService {
     }
 
     @Override
-    public List<Center> GetAvailableCenters(LocalDateTime date) {
+    public List<Center> GetAvailableCenters(LocalDateTime date,String ascOrDesc) {
 
         List<Center> centers = store.findAll();
         List<Center> availableCenters = new ArrayList<>();
-
         for (Center center:centers) {
 
             if(IsCenterScheduled(date,center.getId()) == false && IsCenterWorking(date,center.getId()) == true) {
                 availableCenters.add(center);
             }
         }
+
+        if(ascOrDesc.equals("asc")){
+            availableCenters = sortCenterListASC(availableCenters);
+        }
+
+        if(ascOrDesc.equals("desc")) {
+
+            availableCenters = sortCenterListDESC(availableCenters);
+        }
+
        return availableCenters;
     }
 
+    @Override
+    public List<Center> sortCenterListASC(List<Center> centers) {
+        centers.sort(Comparator.comparingDouble(Center::getAvgGrade));
+        return centers;
+    }
 
-
-
+    @Override
+    public List<Center> sortCenterListDESC(List<Center> centers) {
+        centers.sort(Comparator.comparingDouble(Center::getAvgGrade).reversed());
+        return centers;
+    }
 
 }

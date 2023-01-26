@@ -21,13 +21,10 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
     @Override
     public FreeAppointment save(FreeAppointment freeAppointment) {
 
-        if (isDateValid(freeAppointment) == true)
-        {
+        if (isDateValid(freeAppointment) == true) {
             freeAppointment.setDate(freeAppointment.getDate().minusHours(1));
             return store.save(freeAppointment);
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
@@ -60,12 +57,12 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
         LocalDateTime freeAppointmentEnd;
         freeAppointmentEnd = freeAppointment.getDate().plusMinutes(freeAppointment.getDuration());
 
-        for(FreeAppointment freeApp : freeAppointments) {
+        for (FreeAppointment freeApp : freeAppointments) {
 
             LocalDateTime freeAppEnd;
             freeAppEnd = freeApp.getDate().plusMinutes(freeApp.getDuration());
 
-            if(isDateOverlapping(freeAppointment.getDate(),freeAppointmentEnd,freeApp.getDate(),freeAppEnd) == true) {
+            if (isDateOverlapping(freeAppointment.getDate(), freeAppointmentEnd, freeApp.getDate(), freeAppEnd) == true) {
 
                 return false;
             }
@@ -79,20 +76,20 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
     }
 
     @Override
-    public boolean hasCenterFreeAppointment (Long centerId)  {
+    public boolean hasCenterFreeAppointmentInThisTerm(Long centerId, LocalDateTime date) {
 
         List<FreeAppointment> freeAppointments = store.get(centerId);
 
-        if (freeAppointments.size() == 0) {
+        for (FreeAppointment freeappointment : freeAppointments) {
 
-            return false;
+            if (freeappointment.getDate().toString().equals(date.toString()) && freeappointment.getCenter().getId() == centerId) {
+
+                return true;
+            }
         }
-
-        return true;
+        return false;
     }
 
-
-
-
 }
+
 

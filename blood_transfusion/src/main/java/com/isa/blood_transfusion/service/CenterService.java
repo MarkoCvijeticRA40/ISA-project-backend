@@ -30,6 +30,8 @@ public interface CenterService {
     List<Center> getSortedByAvgGradeDesc();
     boolean IsCenterWorking(LocalDateTime appointmentDate,Long centerId);
     boolean IsCenterScheduled(LocalDateTime date, Long centerId);
-    List<Center> GetAvailableCenters(LocalDateTime date);
+    List<Center> GetAvailableCenters(LocalDateTime date,String ascOrDesc);
+    List<Center> sortCenterListASC(List<Center> centers);
+    List<Center> sortCenterListDESC(List<Center> centers);
 
 }

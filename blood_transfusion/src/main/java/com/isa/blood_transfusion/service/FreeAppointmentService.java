@@ -12,7 +12,7 @@ public interface FreeAppointmentService {
     List<FreeAppointment> get(Long centerId);
     boolean isDateValid(FreeAppointment freeAppointment);
     boolean isDateOverlapping(LocalDateTime start1, LocalDateTime end1, LocalDateTime start2, LocalDateTime end2);
-    boolean hasCenterFreeAppointment (Long centerId);
+    boolean hasCenterFreeAppointmentInThisTerm (Long centerId,LocalDateTime date);
     List<FreeAppointment> findByDateAsc();
     List<FreeAppointment> findByDateDesc();
 }

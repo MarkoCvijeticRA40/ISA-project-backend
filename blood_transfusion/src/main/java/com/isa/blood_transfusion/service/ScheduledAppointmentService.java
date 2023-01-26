@@ -13,4 +13,5 @@ public interface ScheduledAppointmentService {
 
    List<ScheduledAppointment> findByCenterId(Long id);
    ScheduledAppointment specificSchedule(String dateString,Long registeredUserId,Long centerId);
+   List<ScheduledAppointment> get(Long registeredUserId);
 }

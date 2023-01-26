@@ -33,6 +33,8 @@ public class ScheduledAppointmentStoreImpl implements ScheduledAppointmentStore{
     public List<ScheduledAppointment> findByCenterId(Long id) {
         return  converter.toModel(repository.findByCenterId(id).stream().collect(Collectors.toSet())).stream().toList();
 
+    public List<ScheduledAppointment> get(Long registeredUserId) {
+        return converter.toModel(repository.findScheduledAppointmentEntityByRegisteredUserId(registeredUserId).stream().collect(Collectors.toSet())).stream().toList();
     }
 
 }
