@@ -9,14 +9,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Collection;
 import java.util.List;
 
 import java.util.List;
 
-    @Query(value ="select * from scheduled_appointments where center_id = ?1", nativeQuery = true)
-    List<ScheduledAppointmentEntity> findByCenterId(Long id);
+
 
 public interface ScheduledAppointmentRepository extends JpaRepository<ScheduledAppointmentEntity, Long> {
     List<ScheduledAppointmentEntity> findScheduledAppointmentEntityByRegisteredUserId(Long id);
 
+    @Query(value ="select * from scheduled_appointments where center_id = ?1", nativeQuery = true)
+    List<ScheduledAppointmentEntity> findByCenterId(Long id);
 }
