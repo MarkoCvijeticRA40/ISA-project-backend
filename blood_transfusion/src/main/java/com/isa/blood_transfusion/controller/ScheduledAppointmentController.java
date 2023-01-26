@@ -1,6 +1,7 @@
 package com.isa.blood_transfusion.controller;
 
 import com.isa.blood_transfusion.model.AppUser;
+import com.isa.blood_transfusion.model.Center;
 import com.isa.blood_transfusion.model.ScheduledAppointment;
 import com.isa.blood_transfusion.service.BloodDonorInfoService;
 import com.isa.blood_transfusion.service.PerformedAppointmentService;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -49,5 +51,12 @@ public class ScheduledAppointmentController {
             return new ResponseEntity<>(service.specificSchedule(dateString, registeredUserId,centerId), HttpStatus.CREATED);
         return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
     }
+
+
+    @GetMapping("/center/{id}")
+    public ResponseEntity<List<ScheduledAppointment>> findByCenterId(@PathVariable Long id) {
+        return new ResponseEntity<>(service.findByCenterId(id),HttpStatus.OK);
+    }
+
 
 }

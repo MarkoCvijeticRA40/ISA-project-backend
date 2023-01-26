@@ -60,6 +60,11 @@ public class ScheduledAppointmentServiceImpl implements  ScheduledAppointmentSer
         return store.findAll();
     }
 
+    @Override
+    public List<ScheduledAppointment> findByCenterId(Long id) {
+        return store.findByCenterId(id);
+    }
+
     public ScheduledAppointment specificSchedule(String dateString,Long registeredUserId,Long centerId) {
 
         LocalDateTime date = LocalDateTime.parse(dateString);
