@@ -38,7 +38,6 @@ public class ScheduledAppointmentServiceImpl implements ScheduledAppointmentServ
     }
 
     @Override
-    @Transactional(readOnly = false)
     public ScheduledAppointment create(Long freeAppointmentId, Long registeredUserId) {
         FreeAppointment freeAppointment = freeAppointmentStore.getById(freeAppointmentId);
         RegisteredUser registeredUser = registeredUserStore.getById(registeredUserId);

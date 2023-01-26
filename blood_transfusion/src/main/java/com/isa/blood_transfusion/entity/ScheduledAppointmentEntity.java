@@ -12,7 +12,10 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "scheduled_appointments")
+@Entity
+@Table(name = "scheduled_appointments", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"date", "center_id"})
+})
 public class ScheduledAppointmentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
