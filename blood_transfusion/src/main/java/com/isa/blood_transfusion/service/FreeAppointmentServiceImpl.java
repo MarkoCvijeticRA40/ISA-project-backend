@@ -1,7 +1,9 @@
 package com.isa.blood_transfusion.service;
 
+import com.isa.blood_transfusion.model.CanceledAppointment;
 import com.isa.blood_transfusion.model.FreeAppointment;
 import com.isa.blood_transfusion.model.ScheduledAppointment;
+import com.isa.blood_transfusion.store.CanceledAppointmentStore;
 import com.isa.blood_transfusion.store.FreeAppointmentStore;
 import com.isa.blood_transfusion.store.ScheduledAppointmentStore;
 import lombok.AllArgsConstructor;
@@ -10,6 +12,7 @@ import lombok.Setter;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,6 +23,7 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
 
     private final FreeAppointmentStore store;
     private final ScheduledAppointmentStore scheduledAppointmentStore;
+    private final CanceledAppointmentStore canceledAppointmentStore;
 
     @Override
     public FreeAppointment save(FreeAppointment freeAppointment) {
@@ -50,6 +54,21 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
     @Override
     public List<FreeAppointment> findByDateDesc() {
         return store.findByDateDesc();
+    }
+
+    @Override
+    public List<FreeAppointment> get(Long centerId, Long registeredUserId) {
+        List<FreeAppointment> freeAppointments = store.get(centerId);
+        List<FreeAppointment> retVal = new ArrayList<>(freeAppointments);
+        List<CanceledAppointment> canceledAppointments = canceledAppointmentStore.get(registeredUserId);
+        for (CanceledAppointment canceledAppointment : canceledAppointments) {
+            for (int i = 0; i < retVal.size(); i++) {
+                if (retVal.get(i).getDate().isEqual(canceledAppointment.getDate()) && retVal.get(i).getCenter().getId() == canceledAppointment.getCenter().getId())
+                    retVal.remove(i);
+            }
+        }
+
+        return retVal;
     }
 
     public boolean isDateValid(FreeAppointment freeAppointment) {

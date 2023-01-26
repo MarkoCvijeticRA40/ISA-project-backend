@@ -34,8 +34,15 @@ public class MedicalStaffServiceImpl implements MedicalStaffService {
     @Override
     public MedicalStaff saveStaff(MedicalStaff medicalStaff) {
         medicalStaff.setRole(roleStore.find("MEDICAL_STAFF"));
-        if(isPasswordChanged(medicalStaff.getEmail(), medicalStaff.getPassword()) == true) {
+
+        medicalStaff.setEnabled(true);
+        if (medicalStaff.getId() == 0) {
             medicalStaff.setPassword(passwordEncoder.encode(medicalStaff.getPassword()));
+        }else {
+
+            if (isPasswordChanged(medicalStaff.getEmail(), medicalStaff.getPassword()) == true) {
+                medicalStaff.setPassword(passwordEncoder.encode(medicalStaff.getPassword()));
+            }
         }
         return store.save(medicalStaff);
     }

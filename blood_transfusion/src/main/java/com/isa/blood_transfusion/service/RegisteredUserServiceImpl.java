@@ -29,8 +29,14 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
 
     @Override
     public RegisteredUser save(RegisteredUser user) {
-        if(isPasswordChanged(user.getEmail(), user.getPassword()) == true) {
+
+        if (user.getId() == 0) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }else{
+
+        if (isPasswordChanged(user.getEmail(), user.getPassword()) == true) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         }
         user.setRole(roleStore.find("REGISTERED_USER"));
         user.setUserCategory(userCategoryStore.find("Regular"));

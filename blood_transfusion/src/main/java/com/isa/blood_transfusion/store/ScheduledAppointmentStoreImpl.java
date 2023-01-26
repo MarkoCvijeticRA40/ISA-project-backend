@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -25,10 +26,14 @@ public class ScheduledAppointmentStoreImpl implements ScheduledAppointmentStore{
 
     @Override
     public List<ScheduledAppointment> findAll() {
+
         return converter.toModel(repository.findAll().stream().collect(Collectors.toSet())).stream().toList();
     }
 
     @Override
+    public List<ScheduledAppointment> findByCenterId(Long id) {
+        return converter.toModel(repository.findByCenterId(id).stream().collect(Collectors.toSet())).stream().toList();
+    }
     public List<ScheduledAppointment> get(Long registeredUserId) {
         return converter.toModel(repository.findScheduledAppointmentEntityByRegisteredUserId(registeredUserId).stream().collect(Collectors.toSet())).stream().toList();
     }
@@ -43,6 +48,14 @@ public class ScheduledAppointmentStoreImpl implements ScheduledAppointmentStore{
             }
         }
         return foundedAppointments;
+    public ScheduledAppointment delete(ScheduledAppointment scheduledAppointment) {
+        repository.delete(converter.toEntity(scheduledAppointment));
+        return scheduledAppointment;
+    }
+
+    @Override
+    public ScheduledAppointment getById(Long scheduledAppointmentId) {
+        return converter.toModel(repository.getById(scheduledAppointmentId));
     }
 
 }
