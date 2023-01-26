@@ -4,7 +4,6 @@ import com.isa.blood_transfusion.converter.FreeAppointmentConverter;
 import com.isa.blood_transfusion.model.Center;
 import com.isa.blood_transfusion.model.FreeAppointment;
 import com.isa.blood_transfusion.model.MedicalStaff;
-import com.isa.blood_transfusion.model.ScheduledAppointment;
 import com.isa.blood_transfusion.repository.FreeAppointmentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -87,7 +86,7 @@ public class FreeAppointmentStoreImpl implements FreeAppointmentStore {
         return null;
     }
 
-    
+
     @Override
     public List<FreeAppointment> findByDateAsc(Long centerId) {
         List<FreeAppointment> freeAppointments = converter.toModel(repository.findByOrderByDateAsc());
@@ -98,14 +97,14 @@ public class FreeAppointmentStoreImpl implements FreeAppointmentStore {
         }
 
         return retVal;
- }
- 
+    }
+
     @Override
     public List<FreeAppointment> findByCenterId(Long centerId) {
         List<FreeAppointment> freeAppointments = findAll();
         List<FreeAppointment> foundedAppointments = new ArrayList<>();
-        for (FreeAppointment freeAppointment:freeAppointments) {
-            if(freeAppointment.getCenter().getId() == centerId) {
+        for (FreeAppointment freeAppointment : freeAppointments) {
+            if (freeAppointment.getCenter().getId() == centerId) {
                 foundedAppointments.add(freeAppointment);
             }
         }

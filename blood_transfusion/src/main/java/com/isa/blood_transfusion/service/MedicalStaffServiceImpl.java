@@ -37,7 +37,7 @@ public class MedicalStaffServiceImpl implements MedicalStaffService {
         medicalStaff.setEnabled(true);
         if (medicalStaff.getId() == 0) {
             medicalStaff.setPassword(passwordEncoder.encode(medicalStaff.getPassword()));
-        }else {
+        } else {
 
             if (isPasswordChanged(medicalStaff.getEmail(), medicalStaff.getPassword()) == true) {
                 medicalStaff.setPassword(passwordEncoder.encode(medicalStaff.getPassword()));

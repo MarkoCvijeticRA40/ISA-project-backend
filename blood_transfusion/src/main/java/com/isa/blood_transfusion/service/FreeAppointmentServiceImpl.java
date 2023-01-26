@@ -118,7 +118,7 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
             LocalDateTime scheAppEnd;
             scheAppEnd = scheApp.getDate().plusMinutes(scheApp.getDuration());
 
-            if (isDateOverlapping(freeAppointment.getDate(), freeAppointmentEnd,scheApp.getDate(),scheAppEnd) == true) {
+            if (isDateOverlapping(freeAppointment.getDate(), freeAppointmentEnd, scheApp.getDate(), scheAppEnd) == true) {
 
                 return false;
             }

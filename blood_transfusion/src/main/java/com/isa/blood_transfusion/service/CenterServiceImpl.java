@@ -146,11 +146,10 @@ public class CenterServiceImpl implements CenterService {
         Center center = store.getById(centerId);
 
         for (ScheduledAppointment appointment : scheduledAppointments) {
-            if(date.toString().equals(appointment.getDate().toString())){
+            if (date.toString().equals(appointment.getDate().toString())) {
 
                 return true;
-            }
-            else {
+            } else {
                 appointment.setDate(appointment.getDate().minusHours(1));
             }
         }

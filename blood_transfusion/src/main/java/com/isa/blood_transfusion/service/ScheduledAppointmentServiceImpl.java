@@ -79,16 +79,15 @@ public class ScheduledAppointmentServiceImpl implements ScheduledAppointmentServ
             RegisteredUser registeredUser = registeredUserStore.getById(registeredUserId);
             BloodDonorInfo bloodDonorInfo = bloodDonorInfoStore.getByRegisteredUserId(registeredUserId);
             ScheduledAppointment scheduledAppointment = new ScheduledAppointment(0L, date, freeAppointment.getDuration(), freeAppointment.getCenter(), freeAppointment.getMedicalStaff(), bloodDonorInfo, registeredUser);
-            String qrCodeContent = "Your appointment is scheduled for " + scheduledAppointment.getDate().toString() + ". Duration of appointment is " + scheduledAppointment.getDuration() + " minutes. Appointment will be performed in " + scheduledAppointment.getCenter().getName()  + " " + "center(" + scheduledAppointment.getCenter().getAddress().getStreet() + " " + scheduledAppointment.getCenter().getAddress().getNumber() + ").";
+            String qrCodeContent = "Your appointment is scheduled for " + scheduledAppointment.getDate().toString() + ". Duration of appointment is " + scheduledAppointment.getDuration() + " minutes. Appointment will be performed in " + scheduledAppointment.getCenter().getName() + " " + "center(" + scheduledAppointment.getCenter().getAddress().getStreet() + " " + scheduledAppointment.getCenter().getAddress().getNumber() + ").";
             folderService.createFolder("C:\\Users\\marko\\Desktop\\ISA\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId());
             String currentTime = LocalDateTime.now().toString().replace(":", "-");
-            if (qrCodeGeneratorService.generateQrCode(qrCodeContent, "C:\\Users\\marko\\Desktop\\ISA\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + "\\" + currentTime  +".png", 400, 400)) {
+            if (qrCodeGeneratorService.generateQrCode(qrCodeContent, "C:\\Users\\marko\\Desktop\\ISA\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + "\\" + currentTime + ".png", 400, 400)) {
                 System.out.println("QR code generated!");
             }
             try {
-                emailService.sendEmail(scheduledAppointment.getRegisteredUser().getEmail(), "Notification about your appointment", "Scan this QR code in order to get information about your appointment.", "C:\\Users\\marko\\Desktop\\ISA\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + "\\" + currentTime  +".png");
-            }
-            catch ( MessagingException m) {
+                emailService.sendEmail(scheduledAppointment.getRegisteredUser().getEmail(), "Notification about your appointment", "Scan this QR code in order to get information about your appointment.", "C:\\Users\\marko\\Desktop\\ISA\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + "\\" + currentTime + ".png");
+            } catch (MessagingException m) {
                 System.out.println(m.getMessage());
             }
             freeAppointmentStore.delete(freeAppointment);
@@ -97,16 +96,15 @@ public class ScheduledAppointmentServiceImpl implements ScheduledAppointmentServ
             RegisteredUser registeredUser = registeredUserStore.getById(registeredUserId);
             BloodDonorInfo bloodDonorInfo = bloodDonorInfoStore.getByRegisteredUserId(registeredUserId);
             ScheduledAppointment scheduledAppointment = new ScheduledAppointment(0L, date, 15, center, medicalStaff, bloodDonorInfo, registeredUser);
-            String qrCodeContent = "Your appointment is scheduled for " + scheduledAppointment.getDate().toString() + ". Duration of appointment is " + scheduledAppointment.getDuration() + " minutes. Appointment will be performed in " + scheduledAppointment.getCenter().getName()  + " " + "center(" + scheduledAppointment.getCenter().getAddress().getStreet() + " " + scheduledAppointment.getCenter().getAddress().getNumber() + ").";
+            String qrCodeContent = "Your appointment is scheduled for " + scheduledAppointment.getDate().toString() + ". Duration of appointment is " + scheduledAppointment.getDuration() + " minutes. Appointment will be performed in " + scheduledAppointment.getCenter().getName() + " " + "center(" + scheduledAppointment.getCenter().getAddress().getStreet() + " " + scheduledAppointment.getCenter().getAddress().getNumber() + ").";
             folderService.createFolder("C:\\Users\\marko\\Desktop\\ISA\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId());
             String currentTime = LocalDateTime.now().toString().replace(":", "-");
-            if (qrCodeGeneratorService.generateQrCode(qrCodeContent, "C:\\Users\\marko\\Desktop\\ISA\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + "\\" + currentTime  +".png", 400, 400)) {
+            if (qrCodeGeneratorService.generateQrCode(qrCodeContent, "C:\\Users\\marko\\Desktop\\ISA\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + "\\" + currentTime + ".png", 400, 400)) {
                 System.out.println("QR code generated!");
             }
             try {
-                emailService.sendEmail(scheduledAppointment.getRegisteredUser().getEmail(), "Notification about your appointment", "Scan this QR code in order to get information about your appointment.", "C:\\Users\\marko\\Desktop\\ISA\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + "\\" + currentTime  +".png");
-            }
-            catch ( MessagingException m) {
+                emailService.sendEmail(scheduledAppointment.getRegisteredUser().getEmail(), "Notification about your appointment", "Scan this QR code in order to get information about your appointment.", "C:\\Users\\marko\\Desktop\\ISA\\ISA-project-backend\\blood_transfusion\\qrcodes\\" + scheduledAppointment.getRegisteredUser().getId() + "\\" + currentTime + ".png");
+            } catch (MessagingException m) {
                 System.out.println(m.getMessage());
             }
             return store.save(scheduledAppointment);
@@ -147,7 +145,7 @@ public class ScheduledAppointmentServiceImpl implements ScheduledAppointmentServ
     }
 
     @Override
-    public ScheduledAppointment cancelAppointment(Long scheduledAppointmentId,Long registeredUserId) {
+    public ScheduledAppointment cancelAppointment(Long scheduledAppointmentId, Long registeredUserId) {
         ScheduledAppointment scheduledAppointment = store.getById(scheduledAppointmentId);
         RegisteredUser registeredUser = registeredUserStore.getById(registeredUserId);
         CanceledAppointment canceledAppointment = new CanceledAppointment(0L, scheduledAppointment.getCenter(), scheduledAppointment.getDate(), registeredUser);

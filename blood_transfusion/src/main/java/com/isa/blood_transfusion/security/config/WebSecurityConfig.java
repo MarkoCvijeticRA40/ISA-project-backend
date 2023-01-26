@@ -65,16 +65,22 @@ public class WebSecurityConfig {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint);
+
+        // ovde se navode putanje i prava pristupa(npr. .antMatchers("/freeapp/getByDateAsc/{centerId}/{registeredUserId}").hasAuthority("REGISTERED_USER")
+        // ovim se odredjuje da samo User sa ulogo, REGISTERED_USER ima pravo pristupa zadatoj putanji. Trenutno je postavljeno tako da svaki tip korisnika
+        // ima pravo pristupa svim putanjama)
         http.authorizeRequests().antMatchers("/auth/**").permitAll()        // /auth/**
                 .antMatchers("/users/activate/**").permitAll()
                 //.antMatchers("/users/whoami").hasAuthority("REGISTERED_USER")
-                .antMatchers("/medicalstaff/**").permitAll()
-                .antMatchers("/registeredusers/**").permitAll()
-                .antMatchers("/centers/**").permitAll()
-                .antMatchers("/info/**").permitAll()
-                .antMatchers("/freeapp/**").permitAll()
+//                .antMatchers("/medicalstaff/**").permitAll()
+//                .antMatchers("/registeredusers/**").permitAll()
+//                .antMatchers("/centers/**").permitAll()
+//                .antMatchers("/info/**").permitAll()
+//                .antMatchers("/freeapp/**").permitAll()
+//                .antMatchers("/freeapp/getByDateAsc/{centerId}/{registeredUserId}").hasAuthority("REGISTERED_USER")
+//                .antMatchers("/users/**").permitAll()
                 .antMatchers("/**").permitAll()
-                .antMatchers("/administrators/**").permitAll()
+                //.antMatchers("/administrators/**").permitAll()
                 .anyRequest().authenticated().and()
                 // za development svrhe ukljuci konfiguraciju za CORS iz WebConfig klase
                 .cors().and()

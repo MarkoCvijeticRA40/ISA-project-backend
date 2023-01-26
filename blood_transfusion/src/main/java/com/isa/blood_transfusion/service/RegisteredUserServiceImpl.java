@@ -32,11 +32,11 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
 
         if (user.getId() == 0) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }else{
+        } else {
 
-        if (isPasswordChanged(user.getEmail(), user.getPassword()) == true) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
+            if (isPasswordChanged(user.getEmail(), user.getPassword()) == true) {
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+            }
         }
         user.setRole(roleStore.find("REGISTERED_USER"));
         user.setUserCategory(userCategoryStore.find("Regular"));
