@@ -146,9 +146,10 @@ public class ScheduledAppointmentServiceImpl implements  ScheduledAppointmentSer
     @Override
     public boolean isDateOverlapping(LocalDateTime start1, LocalDateTime end1, LocalDateTime start2, LocalDateTime end2) {
         return start2.isBefore(end1) && end2.isAfter(start1);
+    }
 
     @Override
-    public ScheduledAppointment cancelAppointment(Long scheduledAppointmentId, Long registeredUserId) {
+    public ScheduledAppointment cancelAppointment(Long scheduledAppointmentId,Long registeredUserId) {
         ScheduledAppointment scheduledAppointment = store.getById(scheduledAppointmentId);
         RegisteredUser registeredUser = registeredUserStore.getById(registeredUserId);
         CanceledAppointment canceledAppointment = new CanceledAppointment(0L, scheduledAppointment.getCenter(), scheduledAppointment.getDate(), registeredUser);
