@@ -15,4 +15,5 @@ public interface FreeAppointmentService {
     boolean hasCenterFreeAppointmentInThisTerm (Long centerId,LocalDateTime date);
     List<FreeAppointment> findByDateAsc();
     List<FreeAppointment> findByDateDesc();
+    List<FreeAppointment> get(Long centerId, Long registeredUserId);
 }

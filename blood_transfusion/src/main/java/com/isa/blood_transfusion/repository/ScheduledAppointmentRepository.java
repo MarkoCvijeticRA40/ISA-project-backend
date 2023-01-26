@@ -8,5 +8,8 @@ import java.util.List;
 
 public interface ScheduledAppointmentRepository extends JpaRepository<ScheduledAppointmentEntity, Long> {
     List<ScheduledAppointmentEntity> findScheduledAppointmentEntityByRegisteredUserId(Long id);
+    default ScheduledAppointmentEntity getById(Long id) {
+        return findById(id).orElse(null);
+    }
 
 }
