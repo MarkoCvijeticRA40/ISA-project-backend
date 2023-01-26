@@ -36,11 +36,14 @@ public class MedicalStaffServiceImpl implements MedicalStaffService {
         medicalStaff.setRole(roleStore.find("MEDICAL_STAFF"));
 
         medicalStaff.setEnabled(true);
-        medicalStaff.setPassword(passwordEncoder.encode(medicalStaff.getPassword()));
-        /*
-        if(isPasswordChanged(medicalStaff.getEmail(), medicalStaff.getPassword()) == true) {
+        if (medicalStaff.getId() == 0) {
             medicalStaff.setPassword(passwordEncoder.encode(medicalStaff.getPassword()));
-        }*/
+        }else {
+
+            if (isPasswordChanged(medicalStaff.getEmail(), medicalStaff.getPassword()) == true) {
+                medicalStaff.setPassword(passwordEncoder.encode(medicalStaff.getPassword()));
+            }
+        }
         return store.save(medicalStaff);
     }
 
