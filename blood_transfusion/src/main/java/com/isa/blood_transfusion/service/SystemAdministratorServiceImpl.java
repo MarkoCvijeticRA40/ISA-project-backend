@@ -32,6 +32,7 @@ public class SystemAdministratorServiceImpl implements SystemAdministratorServic
     public SystemAdministrator save(SystemAdministrator systemAdministrator) {
         systemAdministrator.setRole(roleStore.find("SYSTEM_ADMINISTRATOR"));
         systemAdministrator.setPassword(passwordEncoder.encode(systemAdministrator.getPassword()));
+        systemAdministrator.setEnabled(true);
         return store.save(systemAdministrator);
     }
 

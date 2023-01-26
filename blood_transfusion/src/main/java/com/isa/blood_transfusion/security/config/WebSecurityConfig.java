@@ -74,6 +74,7 @@ public class WebSecurityConfig {
                 .antMatchers("/info/**").permitAll()
                 .antMatchers("/freeapp/**").permitAll()
                 .antMatchers("/**").permitAll()
+                .antMatchers("/administrators/**").permitAll()
                 .anyRequest().authenticated().and()
                 // za development svrhe ukljuci konfiguraciju za CORS iz WebConfig klase
                 .cors().and()
