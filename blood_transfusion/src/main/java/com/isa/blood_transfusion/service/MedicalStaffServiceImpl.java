@@ -1,7 +1,6 @@
 package com.isa.blood_transfusion.service;
 
 import com.isa.blood_transfusion.model.MedicalStaff;
-
 import com.isa.blood_transfusion.store.MedicalStaffStore;
 import com.isa.blood_transfusion.store.RoleStore;
 import com.isa.blood_transfusion.store.UserCategoryStore;
@@ -45,11 +44,11 @@ public class MedicalStaffServiceImpl implements MedicalStaffService {
     }
 
     @Override
-    public boolean isPasswordChanged(String email,String password) {
+    public boolean isPasswordChanged(String email, String password) {
 
         MedicalStaff medicalStaff = store.find(email);
 
-        if (medicalStaff.getPassword().equals(password)){
+        if (medicalStaff.getPassword().equals(password)) {
             return false;
         }
         return true;

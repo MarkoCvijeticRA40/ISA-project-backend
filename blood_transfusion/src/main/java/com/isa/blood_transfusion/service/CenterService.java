@@ -2,6 +2,7 @@ package com.isa.blood_transfusion.service;
 
 import com.isa.blood_transfusion.dto.CenterDto;
 import com.isa.blood_transfusion.model.Center;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,10 +29,15 @@ public interface CenterService {
     List<Center> getSortedByAvgGradeAsc();
 
     List<Center> getSortedByAvgGradeDesc();
-    boolean IsCenterWorking(LocalDateTime appointmentDate,Long centerId);
+
+    boolean IsCenterWorking(LocalDateTime appointmentDate, Long centerId);
+
     boolean IsCenterScheduled(LocalDateTime date, Long centerId);
-    List<Center> GetAvailableCenters(LocalDateTime date,String ascOrDesc);
+
+    List<Center> GetAvailableCenters(LocalDateTime date, String ascOrDesc);
+
     List<Center> sortCenterListASC(List<Center> centers);
+
     List<Center> sortCenterListDESC(List<Center> centers);
 
 }

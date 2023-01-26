@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,13 +60,13 @@ public class FreeAppointmentStoreImpl implements FreeAppointmentStore {
     }
 
     @Override
-    public FreeAppointment getByDateAndCenter(LocalDateTime date,Long centerId) {
+    public FreeAppointment getByDateAndCenter(LocalDateTime date, Long centerId) {
 
         List<FreeAppointment> freeAppointments = findAll();
 
-        for (FreeAppointment freeappointment: freeAppointments) {
+        for (FreeAppointment freeappointment : freeAppointments) {
 
-            if(freeappointment.getDate().toString().equals(date.toString()) && freeappointment.getCenter().getId() == centerId) {
+            if (freeappointment.getDate().toString().equals(date.toString()) && freeappointment.getCenter().getId() == centerId) {
 
                 return freeappointment;
             }
@@ -78,19 +79,33 @@ public class FreeAppointmentStoreImpl implements FreeAppointmentStore {
 
         Center center = store.getById(centerId);
 
-        for (MedicalStaff medicalStaff:center.getMedicalStaff()) {
+        for (MedicalStaff medicalStaff : center.getMedicalStaff()) {
 
             return medicalStaff;
         }
         return null;
     }
 
-    public List<FreeAppointment> findByDateAsc() {
-    return converter.toModel(repository.findByOrderByDateAsc());
+    public List<FreeAppointment> findByDateAsc(Long centerId) {
+        List<FreeAppointment> freeAppointments = converter.toModel(repository.findByOrderByDateAsc());
+        List<FreeAppointment> retVal = new ArrayList<>();
+        for (FreeAppointment freeAppointment : freeAppointments) {
+            if (freeAppointment.getCenter().getId() == centerId)
+                retVal.add(freeAppointment);
+        }
+
+        return retVal;
     }
 
     @Override
-    public List<FreeAppointment> findByDateDesc() {
-        return converter.toModel(repository.findByOrderByDateDesc());
+    public List<FreeAppointment> findByDateDesc(Long centerId) {
+        List<FreeAppointment> freeAppointments = converter.toModel(repository.findByOrderByDateDesc());
+        List<FreeAppointment> retVal = new ArrayList<>();
+        for (FreeAppointment freeAppointment : freeAppointments) {
+            if (freeAppointment.getCenter().getId() == centerId)
+                retVal.add(freeAppointment);
+        }
+
+        return retVal;
     }
 }

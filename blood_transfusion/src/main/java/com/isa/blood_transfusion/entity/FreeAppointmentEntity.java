@@ -1,6 +1,5 @@
 package com.isa.blood_transfusion.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +10,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "free_appointments")
 public class FreeAppointmentEntity {
     @Id
@@ -27,4 +25,12 @@ public class FreeAppointmentEntity {
     @ManyToOne
     @JoinColumn(name = "medical_staff_id")
     private MedicalStaffEntity medicalStaff;
+
+    public FreeAppointmentEntity(Long id, LocalDateTime date, Integer duration, CenterEntity center, MedicalStaffEntity medicalStaff) {
+        this.id = id;
+        this.date = date;
+        this.duration = duration;
+        this.center = center;
+        this.medicalStaff = medicalStaff;
+    }
 }

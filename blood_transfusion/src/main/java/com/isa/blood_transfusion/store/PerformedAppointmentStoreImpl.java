@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Component
 @AllArgsConstructor
-public class PerformedAppointmentStoreImpl implements PerformedAppointmentStore{
+public class PerformedAppointmentStoreImpl implements PerformedAppointmentStore {
     private final PerformedAppointmentRepository repository;
 
     @Override

@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,13 +45,33 @@ public class FreeAppointmentServiceImpl implements FreeAppointmentService {
     }
 
     @Override
-    public List<FreeAppointment> findByDateAsc() {
-        return store.findByDateAsc();
+    public List<FreeAppointment> findByDateAsc(Long centerId, Long registeredUserId) {
+        List<FreeAppointment> freeAppointments = store.findByDateAsc(centerId);
+        List<FreeAppointment> retVal = new ArrayList<>(freeAppointments);
+        List<CanceledAppointment> canceledAppointments = canceledAppointmentStore.get(registeredUserId);
+        for (CanceledAppointment canceledAppointment : canceledAppointments) {
+            for (int i = 0; i < retVal.size(); i++) {
+                if (retVal.get(i).getDate().isEqual(canceledAppointment.getDate()) && retVal.get(i).getCenter().getId() == canceledAppointment.getCenter().getId())
+                    retVal.remove(i);
+            }
+        }
+
+        return retVal;
     }
 
     @Override
-    public List<FreeAppointment> findByDateDesc() {
-        return store.findByDateDesc();
+    public List<FreeAppointment> findByDateDesc(Long centerId, Long registeredUserId) {
+        List<FreeAppointment> freeAppointments = store.findByDateDesc(centerId);
+        List<FreeAppointment> retVal = new ArrayList<>(freeAppointments);
+        List<CanceledAppointment> canceledAppointments = canceledAppointmentStore.get(registeredUserId);
+        for (CanceledAppointment canceledAppointment : canceledAppointments) {
+            for (int i = 0; i < retVal.size(); i++) {
+                if (retVal.get(i).getDate().isEqual(canceledAppointment.getDate()) && retVal.get(i).getCenter().getId() == canceledAppointment.getCenter().getId())
+                    retVal.remove(i);
+            }
+        }
+
+        return retVal;
     }
 
     @Override

@@ -47,11 +47,11 @@ public class RegisteredUserServiceImpl implements RegisteredUserService {
     }
 
     @Override
-    public boolean isPasswordChanged(String email,String password) {
+    public boolean isPasswordChanged(String email, String password) {
 
         RegisteredUser registeredUser = store.find(email);
 
-        if (registeredUser.getPassword().equals(password)){
+        if (registeredUser.getPassword().equals(password)) {
             return false;
         }
         return true;

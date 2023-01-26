@@ -1,7 +1,6 @@
 package com.isa.blood_transfusion.converter;
 
 import com.isa.blood_transfusion.entity.BloodDonorInfoEntity;
-import com.isa.blood_transfusion.entity.RegisteredUserEntity;
 import com.isa.blood_transfusion.model.BloodDonorInfo;
 import com.isa.blood_transfusion.repository.RegisteredUserRepository;
 import lombok.AllArgsConstructor;
@@ -37,7 +36,7 @@ public class BloodDonorInfoConverter {
                 bloodDonorInfoEntity.getHasChronicDisease(),
                 bloodDonorInfoEntity.getIsFeelingHealthy(),
                 bloodDonorInfoEntity.getRegisteredUser().getId()
-                );
+        );
     }
 
     public Set<BloodDonorInfo> toModel(Set<BloodDonorInfoEntity> bloodDonorInfoEntities) {
@@ -63,7 +62,7 @@ public class BloodDonorInfoConverter {
                     b.getHasChronicDisease(),
                     b.getIsFeelingHealthy(),
                     b.getRegisteredUser().getId()
-                    ));
+            ));
         }
 
         return bloodDonorInfo;

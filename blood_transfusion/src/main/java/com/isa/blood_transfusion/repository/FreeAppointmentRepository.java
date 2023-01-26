@@ -1,6 +1,5 @@
 package com.isa.blood_transfusion.repository;
 
-import com.isa.blood_transfusion.entity.CenterEntity;
 import com.isa.blood_transfusion.entity.FreeAppointmentEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,7 +21,9 @@ public interface FreeAppointmentRepository extends JpaRepository<FreeAppointment
     default FreeAppointmentEntity getById(Long id) {
         return findById(id).orElse(null);
     }
+
     List<FreeAppointmentEntity> findByOrderByDateAsc();
+
     List<FreeAppointmentEntity> findByOrderByDateDesc();
 
 }
