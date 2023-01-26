@@ -31,6 +31,7 @@ public class ScheduledAppointmentServiceImpl implements  ScheduledAppointmentSer
     private final QrCodeGeneratorService qrCodeGeneratorService;
     private final EmailService emailService;
     private final FolderService folderService;
+    private final CanceledAppointmentStore canceledAppointmentStore;
 
     @Override
     public ScheduledAppointment save(ScheduledAppointment scheduledAppointment) {
@@ -94,6 +95,23 @@ public class ScheduledAppointmentServiceImpl implements  ScheduledAppointmentSer
     @Override
     public List<ScheduledAppointment> get(Long registeredUserId) {
         return store.get(registeredUserId);
+    }
+
+    @Override
+    public ScheduledAppointment cancelAppointment(Long scheduledAppointmentId, Long registeredUserId) {
+        ScheduledAppointment scheduledAppointment = store.getById(scheduledAppointmentId);
+        RegisteredUser registeredUser = registeredUserStore.getById(registeredUserId);
+        CanceledAppointment canceledAppointment = new CanceledAppointment(0L, scheduledAppointment.getCenter(), scheduledAppointment.getDate(), registeredUser);
+        FreeAppointment freeAppointment = new FreeAppointment(0L, scheduledAppointment.getDate(), scheduledAppointment.getDuration(), scheduledAppointment.getCenter(), scheduledAppointment.getMedicalStaff());
+        freeAppointmentStore.save(freeAppointment);
+        canceledAppointmentStore.save(canceledAppointment);
+        return store.delete(scheduledAppointment);
+    }
+
+    @Override
+    public Boolean isAppointmentInNext24Hours(Long scheduledAppointmentId) {
+        ScheduledAppointment scheduledAppointment = store.getById(scheduledAppointmentId);
+        return scheduledAppointment.getDate().minusDays(1).isBefore(LocalDateTime.now());
     }
 
 }

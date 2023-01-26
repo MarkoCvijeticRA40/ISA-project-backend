@@ -25,3 +25,4 @@ spring:
       mail.smtp.starttls.enable: true
       mail.smtp.auth: true
       mail.smtp.ssl.trust: smtp.gmail.com
+

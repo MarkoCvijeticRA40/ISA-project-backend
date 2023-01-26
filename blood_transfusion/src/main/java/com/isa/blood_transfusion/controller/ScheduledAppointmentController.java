@@ -63,5 +63,12 @@ public class ScheduledAppointmentController {
         return new ResponseEntity<>(service.get(registeredUserId), HttpStatus.OK);
     }
 
+    @PostMapping("/cancelAppointment/{scheduledAppointmentId}/{registeredUserId}")
+    public ResponseEntity<ScheduledAppointment> cancelAppointment(@PathVariable Long scheduledAppointmentId, @PathVariable Long registeredUserId) {
+        if(!service.isAppointmentInNext24Hours(scheduledAppointmentId))
+            return new ResponseEntity<>(service.cancelAppointment(scheduledAppointmentId, registeredUserId), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+    }
+
 
 }

@@ -14,4 +14,6 @@ public interface ScheduledAppointmentService {
    List<ScheduledAppointment> findByCenterId(Long id);
    ScheduledAppointment specificSchedule(String dateString,Long registeredUserId,Long centerId);
    List<ScheduledAppointment> get(Long registeredUserId);
+   ScheduledAppointment cancelAppointment(Long scheduledAppointmentId, Long registeredUserId);
+   Boolean isAppointmentInNext24Hours(Long scheduledAppointmentId);
 }
